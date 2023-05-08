@@ -33,12 +33,8 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //create background
-        Tilemap tilemap = new Tilemap(layerPane);
-        //create game with enemies and weapons
-        Game game = new Game(layerPane);
-
-        //todo: create gui
+        GUI gui = new GUI(layerPane);
+        gui.drawGui(layerPane);
     }
 
     

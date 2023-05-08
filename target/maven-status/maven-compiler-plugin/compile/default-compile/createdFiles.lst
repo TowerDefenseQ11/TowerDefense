@@ -1,6 +1,8 @@
 com/towerdefense/SecondaryController.class
+com/towerdefense/GUI$1.class
 com/towerdefense/PrimaryController.class
 com/towerdefense/Demo$1.class
 module-info.class
 com/towerdefense/App.class
 com/towerdefense/Demo$2.class
+com/towerdefense/GUI.class
