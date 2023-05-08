@@ -1,0 +1,49 @@
+Process
+=======
+compile
+
+Command Line
+============
+/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/bin/native-image -Djdk.internal.lambda.eagerlyInitialize=false --no-server -H:+SharedLibrary -H:+AddAllCharsets -H:+ReportExceptionStackTraces -H:-DeadlockWatchdogExitOnTimeout -H:DeadlockWatchdogInterval=0 -H:+RemoveSaturatedTypeFlows -H:+ExitAfterRelocatableImageWrite --features=org.graalvm.home.HomeFinderFeature -H:TempDirectory=/Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/tmp -H:EnableURLProtocols=http,https -H:ReflectionConfigurationFiles=/Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/reflectionconfig-x86_64-darwin.json -H:JNIConfigurationFiles=/Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/jniconfig-x86_64-darwin.json -H:ResourceConfigurationFiles=/Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/resourceconfig-x86_64-darwin.json -H:IncludeResourceBundles=com/sun/javafx/scene/control/skin/resources/controls,com/sun/javafx/scene/control/skin/resources/controls-nt,com.sun.javafx.tk.quantum.QuantumMessagesBundle -Dsvm.platform=org.graalvm.nativeimage.Platform$MACOS_AMD64 -cp /Users/pixelmission/.m2/repository/com/gluonhq/substrate/0.0.58/substrate-0.0.58.jar:/Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/tmp/classpathJar.jar com.towerdefense.App
+
+Output
+======
+Warning: Ignoring server-mode native-image argument --no-server.
+========================================================================================================================
+GraalVM Native Image: Generating 'com.towerdefense.app' (shared library)...
+========================================================================================================================
+[1/7] Initializing...                                                                                   (10,6s @ 0,27GB)
+ Version info: 'GraalVM 22.3.1 Java 17 CE'
+ Java version info: '17.0.6+10-jvmci-22.3-b13'
+ C compiler: cc (apple, x86_64, 14.0.3)
+ Garbage collector: Serial GC
+ 1 user-specific feature(s)
+ - org.graalvm.home.HomeFinderFeature: Finds GraalVM paths and its version number
+[2/7] Performing analysis...  [**********]                                                              (77,8s @ 0,89GB)
+  11.729 (89,38%) of 13.122 classes reachable
+  20.437 (66,68%) of 30.648 fields reachable
+  55.828 (60,75%) of 91.903 methods reachable
+     659 classes,   189 fields, and 2.581 methods registered for reflection
+     116 classes,   107 fields, and   193 methods registered for JNI access
+       5 native libraries: -framework CoreServices, -framework Foundation, dl, pthread, z
+[3/7] Building universe...                                                                              (19,2s @ 1,33GB)
+[4/7] Parsing methods...      [*****]                                                                   (28,3s @ 0,75GB)
+[5/7] Inlining methods...     [****]                                                                     (6,6s @ 1,00GB)
+[6/7] Compiling methods...    [*********]                                                               (77,1s @ 1,91GB)
+
+------------------------------------------------------------------------------------------------------------------------
+                        25,1s (9,8% of total time) in 44 GCs | Peak RSS: 3,08GB | CPU load: 3,71
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/towerdefense/com.towerdefense.app.build_artifacts.txt (txt)
+ /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/towerdefense/com.towerdefense.app.h (header)
+ /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/towerdefense/com.towerdefense.app_dynamic.h (header)
+ /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/towerdefense/graal_isolate.h (header)
+ /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/towerdefense/graal_isolate_dynamic.h (header)
+========================================================================================================================
+Finished generating 'com.towerdefense.app' in 4m 14s.
+
+
+Result
+======
+result: 0

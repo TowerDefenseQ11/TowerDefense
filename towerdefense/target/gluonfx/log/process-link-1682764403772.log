@@ -1,0 +1,24 @@
+Process
+=======
+link
+
+Command Line
+============
+gcc /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/towerdefense/AppDelegate.o /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/towerdefense/launcher.o /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/gvm/tmp/SVM-1682764146530/com.towerdefense.app.o -ljava -lnio -lzip -lnet -lprefs -lj2pkcs11 -lfdlibm -lextnet -ljvm -llibchelper -ldarwin -lpthread -lz -ldl -lstdc++ -mmacosx-version-min=10.12 -lobjc -Wl,-framework,Foundation -Wl,-framework,AppKit -Wl,-framework,ApplicationServices -Wl,-framework,OpenGL -Wl,-framework,QuartzCore -Wl,-framework,Security -Wl,-framework,Accelerate -Wl,-force_load,/Users/pixelmission/.gluon/substrate/javafxStaticSdk/21-ea+9.1/darwin-x86_64/sdk/lib/libglass.a -Wl,-force_load,/Users/pixelmission/.gluon/substrate/javafxStaticSdk/21-ea+9.1/darwin-x86_64/sdk/lib/libjavafx_font.a -Wl,-force_load,/Users/pixelmission/.gluon/substrate/javafxStaticSdk/21-ea+9.1/darwin-x86_64/sdk/lib/libjavafx_iio.a -Wl,-force_load,/Users/pixelmission/.gluon/substrate/javafxStaticSdk/21-ea+9.1/darwin-x86_64/sdk/lib/libprism_es2.a -o /Users/pixelmission/Documents/TowerDefense/towerdefense/target/gluonfx/x86_64-darwin/towerdefense -L/Users/pixelmission/.gluon/substrate/javafxStaticSdk/21-ea+9.1/darwin-x86_64/sdk/lib -L/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64 -L/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/static/darwin-amd64
+
+Output
+======
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/liblibchelper.a(codeSynchronization.o)) was built for newer macOS version (10.13) than being linked (10.12)
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/liblibchelper.a(cSunMiscSignal.o)) was built for newer macOS version (10.13) than being linked (10.12)
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/liblibchelper.a(cpuid.o)) was built for newer macOS version (10.13) than being linked (10.12)
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/libjvm.a(JvmFuncs.o)) was built for newer macOS version (10.13) than being linked (10.12)
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/libdarwin.a(foundation.o)) was built for newer macOS version (10.13) than being linked (10.12)
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/libjvm.a(JvmFuncsFallbacks.o)) was built for newer macOS version (10.13) than being linked (10.12)
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/liblibchelper.a(timeZone.o)) was built for newer macOS version (10.13) than being linked (10.12)
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/liblibchelper.a(getEnviron.o)) was built for newer macOS version (10.13) than being linked (10.12)
+ld: warning: object file (/Users/pixelmission/Documents/graalvm-ce-java17-22.3.1/Contents/Home/lib/svm/clibraries/darwin-amd64/liblibchelper.a(macrosAsFunctions.o)) was built for newer macOS version (10.13) than being linked (10.12)
+
+
+Result
+======
+result: 0
