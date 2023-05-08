@@ -30,7 +30,7 @@ public class EnemyManager {
     /*
      * update position of each enemy smoothly in new thread -> gameLoop
      */
-    void updateMove() { 
+    public void updateMove() {
 
         // seek attractor location, apply force to get towards it
         allEnemies.forEach(vehicle -> { //todo: fix java.util.ConcurrentModificationException
