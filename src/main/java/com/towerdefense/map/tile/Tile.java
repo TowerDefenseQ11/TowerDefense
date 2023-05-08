@@ -1,4 +1,4 @@
-package com.towerdefense;
+package com.towerdefense.map.tile;
 
 import javafx.scene.image.Image;
 

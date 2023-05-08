@@ -1,5 +1,9 @@
-package com.towerdefense;
+package com.towerdefense.enemy;
 
+import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.engine.Layer;
+import com.towerdefense.Settings;
+import com.towerdefense.engine.Vector2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 

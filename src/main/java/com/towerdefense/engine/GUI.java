@@ -1,5 +1,6 @@
-package com.towerdefense;
+package com.towerdefense.engine;
 
+import com.towerdefense.map.Map;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.*;
@@ -34,7 +35,7 @@ public class GUI
             @Override public void handle(ActionEvent e) {
                  
             //create background
-            Tilemap tilemap = new Tilemap(layerPane);
+            Map tilemap = new Map(layerPane);
         
             //create game with enemies and weapons
             Game game = new Game(layerPane);

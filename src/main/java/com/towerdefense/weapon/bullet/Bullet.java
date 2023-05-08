@@ -1,5 +1,8 @@
-package com.towerdefense;
+package com.towerdefense.weapon.bullet;
 
+import com.towerdefense.engine.Layer;
+import com.towerdefense.Settings;
+import com.towerdefense.engine.Vector2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

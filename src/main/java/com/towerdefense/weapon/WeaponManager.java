@@ -1,4 +1,7 @@
-package com.towerdefense;
+package com.towerdefense.weapon;
+
+import com.towerdefense.engine.Layer;
+import com.towerdefense.weapon.Weapon;
 
 import java.util.List;
 import java.util.ArrayList;

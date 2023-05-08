@@ -1,5 +1,6 @@
 package com.towerdefense;
 
+import com.towerdefense.engine.GUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

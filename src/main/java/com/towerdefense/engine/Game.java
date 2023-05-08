@@ -1,5 +1,9 @@
-package com.towerdefense;
+package com.towerdefense.engine;
 
+import com.towerdefense.Settings;
+import com.towerdefense.weapon.Weapon;
+import com.towerdefense.weapon.WeaponManager;
+import com.towerdefense.enemy.manager.EnemyManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -10,7 +14,6 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /*
  * spawn enemies and weapons

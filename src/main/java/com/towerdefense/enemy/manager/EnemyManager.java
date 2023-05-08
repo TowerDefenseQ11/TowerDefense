@@ -1,5 +1,8 @@
-package com.towerdefense;
+package com.towerdefense.enemy.manager;
 
+import com.towerdefense.engine.Layer;
+import com.towerdefense.engine.Vector2D;
+import com.towerdefense.enemy.Enemy;
 import javafx.scene.Scene;
 
 import java.util.List;

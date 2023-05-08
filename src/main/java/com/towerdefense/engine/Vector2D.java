@@ -1,4 +1,4 @@
-package com.towerdefense;
+package com.towerdefense.engine;
 
 
 public class Vector2D { 

@@ -1,7 +1,9 @@
-package com.towerdefense;
+package com.towerdefense.map;
 
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import com.towerdefense.engine.Layer;
+import com.towerdefense.Settings;
+import com.towerdefense.map.tile.Tile;
+import com.towerdefense.weapon.Weapon;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,8 +14,6 @@ import javafx.scene.layout.Pane;
 
 import java.lang.Math;
 
-import java.io.IOException;
-
 import javafx.geometry.Pos;
 
 import javafx.scene.input.MouseEvent;
@@ -22,7 +22,7 @@ import javafx.event.EventHandler;
 /*
  * create tilemap background with correct borders of path
  */
-public class Tilemap {
+public class Map {
 
     private Tile[] tiles;
     private int size = 10;
@@ -41,7 +41,7 @@ public class Tilemap {
     private TilePane tilePane;
 
 
-    public Tilemap(Pane layerPane){
+    public Map(Pane layerPane){
 
         initTilemap();
         drawMap(layerPane);

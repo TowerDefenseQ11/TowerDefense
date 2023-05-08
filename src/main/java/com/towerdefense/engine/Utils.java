@@ -1,4 +1,4 @@
-package com.towerdefense;
+package com.towerdefense.engine;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
