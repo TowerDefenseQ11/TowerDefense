@@ -68,11 +68,11 @@ public class Map {
     }
 
     private void initTilemap(){
-        int size = 15;
-        tiles = new Tile[size];
+        int s = 30;
+        tiles = new Tile[s];
 
         try {
-            for(int i=0; i<size; i++){
+            for(int i=0; i<s; i++){
                 String name = "";
                 switch(i){
                     case 0: {
@@ -134,16 +134,47 @@ public class Map {
 
 
                     case 14: { //not used yet
-                        name = "a_empty";
+                        name = "simple_d_left_right";
+                        break;
+                    }
+
+                    case 20: {
+                        name = "simple_a_empty";
+                        break;
+                    }
+                    case 21: {
+                        name = "simple_d_bottom_right";
+                        break;
+                    }
+                    case 22: {
+                        name = "simple_d_bottom_left";
+                        break;
+                    }
+                    case 23: {
+                        name = "simple_d_left_top";
+                        break;
+                    }
+                    case 24: {
+                        name = "simple_d_right_top";
+                        break;
+                    }
+                    case 25: {
+                        name = "simple_d_left_right";
+                        break;
+                    }
+                    case 26: {
+                        name = "simple_d_top_bottom";
                         break;
                     }
                     
                     
                 }
-
-                tiles[i] = new Tile();
-                //System.out.println(name);
-                tiles[i].image = new Image(name+".png");
+                if(name != ""){
+                    System.out.println(name);
+                    tiles[i] = new Tile();
+                    //System.out.println(name);
+                    tiles[i].image = new Image(name+".png", 64, 64, false, false);
+                }
             }
             
 
@@ -161,7 +192,7 @@ public class Map {
         tilePane.setPrefColumns(size);
         tilePane.setPrefRows(size);
 
-        updateMapBorders();
+        updateMapBorders_Simple();
 
         
 
@@ -262,6 +293,79 @@ public class Map {
                     }
                 }
 
+            }
+        }
+    }
+
+    private void updateMapBorders_Simple(){
+        if(tilePane == null){
+            return;
+        }
+
+        for(int y=0; y<size; y++){
+            for(int x=0; x<size; x++){
+                
+                if(world[y][x] == 1){ //find each path cell
+                    //set neighbours
+
+                    int left = getWorldTile(x-1, y);
+                    int right = getWorldTile(x+1, y);
+                    int bottom = getWorldTile(x, y+1);
+                    int top = getWorldTile(x, y-1);
+
+                    if(left == 0 && right == 0){
+                        world[y][x] = 26; //botom top
+                    }
+                    else if(top == 0 && bottom == 0){
+                        world[y][x] = 25; //left right
+                    }
+
+                    else if(bottom == 0 && right == 0){
+                        world[y][x] = 24; //left top
+                    }
+                    else if(bottom == 0 && left == 0){
+                        world[y][x] = 23; //right top
+                    }
+
+                    else if(top == 0 && left == 0){
+                        world[y][x] = 21; //bottom right
+                    }
+                    else if(top == 0 && right == 0){
+                        world[y][x] = 22; //bottom left
+                    }
+
+                }
+
+            }
+        }
+        
+        updateBackgroundTiles_Simple();
+    }
+
+    /*
+     * returns tile index of given position
+     */
+    private int getWorldTile(int x, int y){
+        int tile = 0;
+        if( 
+            x > 0 &&
+            x < size &&
+            y > 0 &&
+            y < size
+
+        ){
+            tile = world[y][x];
+        }
+        
+        return tile;
+    }
+
+    private void updateBackgroundTiles_Simple(){
+        for(int y=0; y<size; y++){
+            for(int x=0; x<size; x++){
+                if(world[y][x] == 0){
+                    world[y][x] = 20;
+                }
             }
         }
     }

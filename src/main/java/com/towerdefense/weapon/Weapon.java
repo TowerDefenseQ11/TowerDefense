@@ -35,12 +35,18 @@ public class Weapon {
 
         location = new Vector2D(x, y);
 
-        image = new Image("weapon_1.png");
+        Image background = new Image("Tower1Base.png", 64, 64, false, false);
+        ImageView backgroundView = new ImageView(background);
+        backgroundView.relocate(x, y);
+
+        image = new Image("Tower1Top.png", 64, 64, false, false); //weapon_1
         imageView = new ImageView(image);
         imageView.relocate(x, y);
         imageView.setRotate(angle);
 
+        layer.getChildren().add(backgroundView);
         layer.getChildren().add(imageView);
+        
 
         spawnBullets();
     }

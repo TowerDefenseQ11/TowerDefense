@@ -67,7 +67,7 @@ public class Enemy extends Region {
 
     public Node createView() {
         // Utils.createArrowImageView( (int) width);
-        return new ImageView(new Image("enemy_1.png"));
+        return new ImageView(new Image("EnemyTest.png", 64, 64, false, false)); //enemy_1
     }
 
     public void applyForce(Vector2D force) {

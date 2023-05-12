@@ -46,10 +46,13 @@ public class Bullet {
     }
 
     private void checkEnemy(){
-        /*imageView.getBoundsInParent();
-        if (imageView.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
-            boolean collisionDetected = true;
+        /*var bound = imageView.getBoundsInParent();
+        for (iterable_type iterable_element : iterable) {
+            if (imageView.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+                boolean collisionDetected = true;
+            }
         }*/
+
     }
 
     private void move(){
