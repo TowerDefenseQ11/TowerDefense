@@ -21,6 +21,7 @@ public class Settings {
     public static double BULLET_MAX_SPEED = 10;
     public static double BULLET_SPAWN_TIME = 1;
     public static double BULLET_MAX_DISTANCE = 64 * 3;
+    public static int BULLET_Damage = 10;
 
     //money to buy and upgade towers
     public static int MONEY = 100;

@@ -57,7 +57,7 @@ public class Map {
                     int x = (int) Math.floor(event.getX() / 64.0) * 64;
                     int y = (int) Math.floor(event.getY() / 64.0) * 64;
                     
-                    Weapon weapon = new Weapon(x, y, (Layer) layerPane.getChildren().get(1));
+                    //Weapon weapon = new Weapon(x, y, (Layer) layerPane.getChildren().get(1));
                     
                     Settings.MONEY -= Settings.TOWER_COST;
                 }

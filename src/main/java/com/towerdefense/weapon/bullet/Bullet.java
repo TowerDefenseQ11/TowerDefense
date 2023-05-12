@@ -2,6 +2,8 @@ package com.towerdefense.weapon.bullet;
 
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
+import com.towerdefense.enemy.Enemy;
+import com.towerdefense.enemy.manager.EnemyManager;
 import com.towerdefense.engine.Vector2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,10 +19,12 @@ public class Bullet {
     private AnimationTimer loop;
     private Layer playerfield;
     private int angle;
+    private EnemyManager enemyManager;
 
-    public Bullet(int x, int y, int angle, Layer layer){
+    public Bullet(int x, int y, int angle, Layer layer, EnemyManager enemyManager){
         this.playerfield = layer;
         this.angle = angle;
+        this.enemyManager = enemyManager;
 
         location = new Vector2D(x, y);
         startLocation = new Vector2D(x, y);
@@ -46,6 +50,13 @@ public class Bullet {
     }
 
     private void checkEnemy(){
+        for(Enemy enemy : enemyManager.getAllEnemies()){
+            if (imageView.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
+                System.out.println("bullet hit enemy");
+                enemy.damage(Settings.BULLET_Damage);
+                destroy();
+            }                
+        }
         /*var bound = imageView.getBoundsInParent();
         for (iterable_type iterable_element : iterable) {
             if (imageView.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {

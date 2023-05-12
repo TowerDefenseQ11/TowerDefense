@@ -49,8 +49,10 @@ public class EnemyManager {
      * enemy finished path or died
      */
     public void destroyEnemy(Enemy enemy){
-        playfield.getChildren().remove(enemy);
-        allEnemies.remove(enemy);
+       if(allEnemies.contains(enemy)){
+            playfield.getChildren().remove(enemy);
+            allEnemies.remove(enemy);
+        }
     }
 
     /**
@@ -83,12 +85,20 @@ public class EnemyManager {
             Vector2D desired = Vector2D.subtract(weaponPos, allEnemies.get(i).getLocation());
             // The distance is the magnitude of the vector pointing from location to target.
             double distance = desired.magnitude();
-            if(nearestDistance == 0 || distance < nearestDistance){
+            if(
+                (nearestDistance == 0 || distance < nearestDistance) &&
+                allEnemies.get(i) != null 
+            
+            ){
                 nearestDistance = distance;
                 nearestEnemy = allEnemies.get(i);
             }
         }
         return nearestEnemy;
+    }
+
+    public List<Enemy> getAllEnemies(){
+        return allEnemies;
     }
 }
 

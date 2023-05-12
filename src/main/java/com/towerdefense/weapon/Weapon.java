@@ -1,6 +1,7 @@
 package com.towerdefense.weapon;
 
 import com.towerdefense.Settings;
+import com.towerdefense.enemy.manager.EnemyManager;
 import com.towerdefense.weapon.bullet.Bullet;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.engine.Vector2D;
@@ -29,8 +30,11 @@ public class Weapon {
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
 
-    public Weapon(int x, int y, Layer layer){
+    private EnemyManager enemyManager;
+
+    public Weapon(int x, int y, Layer layer, EnemyManager enemyManager){
         this.playerfield = layer;
+        this.enemyManager = enemyManager;
         damage = 10;
 
         location = new Vector2D(x, y);
@@ -89,7 +93,7 @@ public class Weapon {
 
             @Override
             public void handle(ActionEvent event) {
-                new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield);
+                new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield, enemyManager);
             }
         }));
         bulletSpawnTimeline.setCycleCount(Timeline.INDEFINITE);

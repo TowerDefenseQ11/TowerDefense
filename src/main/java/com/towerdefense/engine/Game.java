@@ -3,6 +3,7 @@ package com.towerdefense.engine;
 import com.towerdefense.Settings;
 import com.towerdefense.weapon.Weapon;
 import com.towerdefense.weapon.WeaponManager;
+import com.towerdefense.enemy.Enemy;
 import com.towerdefense.enemy.manager.EnemyManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -59,7 +60,7 @@ public class Game {
         enemyManager.addEnemy();
 
         //add demo weapons
-        weaponManager = new WeaponManager(playfield);
+        weaponManager = new WeaponManager(playfield, enemyManager);
         weaponManager.addWeapon(0, 5);
         weaponManager.addWeapon(1, 5);
         weaponManager.addWeapon(2, 5);
@@ -89,9 +90,11 @@ public class Game {
                 for(int i=0; i<weapons.size(); i++){
                     Weapon weapon = weapons.get(i);
                     //get nearest enemy of weapon to rotate to
-                    Vector2D target = enemyManager.getNearestEnemy(weapon.getLocation()).getLocation();
-                    if(weapon != null){
-                        weapon.rotateTo(target);
+                    Enemy target = enemyManager.getNearestEnemy(weapon.getLocation()); 
+                    if(target != null){
+                        if(weapon != null){
+                            weapon.rotateTo(target.getLocation());
+                        }
                     }
                 }
 
