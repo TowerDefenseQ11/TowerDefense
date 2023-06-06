@@ -26,6 +26,7 @@ public class Weapon {
     private Vector2D velocity = new Vector2D(0, 0);
     private double angle = 0;
     private Layer playerfield;
+    private boolean isShooting;
 
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
@@ -59,6 +60,7 @@ public class Weapon {
      * rotate weapon image to enemy / target smoothly
      */
     public void rotateTo(Vector2D target){
+        isShooting = true;
         Vector2D desired = Vector2D.subtract(target, location); 
         angle = desired.heading2D();
 
@@ -93,10 +95,18 @@ public class Weapon {
 
             @Override
             public void handle(ActionEvent event) {
+                //check if enemy is reached
+                if(!isShooting){
+                    return;
+                }
                 new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield, enemyManager);
             }
         }));
         bulletSpawnTimeline.setCycleCount(Timeline.INDEFINITE);
         bulletSpawnTimeline.play();
+    }
+
+    public void setShooting(boolean isShooting){
+        this.isShooting = isShooting;
     }
 }

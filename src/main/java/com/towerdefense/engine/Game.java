@@ -91,10 +91,13 @@ public class Game {
                     Weapon weapon = weapons.get(i);
                     //get nearest enemy of weapon to rotate to
                     Enemy target = enemyManager.getNearestEnemy(weapon.getLocation()); 
-                    if(target != null){
-                        if(weapon != null){
-                            weapon.rotateTo(target.getLocation());
-                        }
+                    if(
+                        target != null && 
+                        Vector2D.subtract(target.getLocation(), weapon.getLocation() ).magnitude() > Settings.BULLET_MAX_DISTANCE
+                    ){
+                        weapon.rotateTo(target.getLocation());
+                    }else{
+                        weapon.setShooting(false);
                     }
                 }
 

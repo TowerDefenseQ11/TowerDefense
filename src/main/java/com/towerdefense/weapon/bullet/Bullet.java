@@ -82,7 +82,7 @@ public class Bullet {
         Vector2D subtract = Vector2D.subtract(location, startLocation);
         double distance = subtract.magnitude();
         if(distance > Settings.BULLET_MAX_DISTANCE){
-            destroy();
+            //destroy();
         }
     }
 

@@ -1,9 +1,13 @@
 com/towerdefense/engine/Game$1.class
 com/towerdefense/map/Map$1.class
 com/towerdefense/engine/Utils.class
+com/towerdefense/engine/Vector2D.class
 com/towerdefense/weapon/bullet/Bullet.class
 com/towerdefense/engine/Game.class
+com/towerdefense/Settings.class
+com/towerdefense/engine/Test.class
 com/towerdefense/SecondaryController.class
+com/towerdefense/engine/Layer.class
 com/towerdefense/engine/GUI.class
 com/towerdefense/weapon/bullet/Bullet$1.class
 com/towerdefense/PrimaryController.class
@@ -12,8 +16,11 @@ com/towerdefense/weapon/WeaponManager.class
 module-info.class
 com/towerdefense/engine/GUI$1.class
 com/towerdefense/App.class
+com/towerdefense/engine/GameState.class
+com/towerdefense/enemy/Enemy.class
 com/towerdefense/weapon/Weapon.class
 com/towerdefense/map/Map$2.class
 com/towerdefense/weapon/Weapon$1.class
+com/towerdefense/enemy/manager/EnemyManager.class
 com/towerdefense/map/Map.class
 com/towerdefense/engine/Game$2.class

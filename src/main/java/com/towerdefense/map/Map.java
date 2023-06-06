@@ -321,10 +321,10 @@ public class Map {
                     }
 
                     else if(bottom == 0 && right == 0){
-                        world[y][x] = 24; //left top
+                        world[y][x] = 23; //left top
                     }
                     else if(bottom == 0 && left == 0){
-                        world[y][x] = 23; //right top
+                        world[y][x] = 24; //right top
                     }
 
                     else if(top == 0 && left == 0){
