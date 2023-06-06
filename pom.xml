@@ -154,7 +154,7 @@
             <id>android</id>
             <properties>
                 <gluonfx.target>android</gluonfx.target>
-                <app.identifier>com.gluonhq.samples.hellogluon</app.identifier>
+                <app.identifier>com.manuel.towerdefense</app.identifier>
                 <version.code>${env.GITHUB_RUN_NUMBER}</version.code>
                 <provided.keystore.path>${env.GLUON_ANDROID_KEYSTOREPATH}</provided.keystore.path>
                 <provided.keystore.password>${env.GLUON_ANDROID_KEYSTORE_PASSWORD}</provided.keystore.password>
