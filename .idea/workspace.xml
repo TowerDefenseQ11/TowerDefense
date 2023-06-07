@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3dc38861-6d13-4289-9e02-235f262e0646" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/towerdefense/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/towerdefense/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/towerdefense/engine/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/towerdefense/engine/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/towerdefense/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/towerdefense/map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/towerdefense/weapon/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/towerdefense/weapon/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/towerdefense/weapon/bullet/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/towerdefense/weapon/bullet/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weapon_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TileTower.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Tower1Base.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Tower1Base.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/towerdefense/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/towerdefense/Settings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/towerdefense/engine/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/towerdefense/engine/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/towerdefense/engine/Game$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/towerdefense/engine/Game$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/towerdefense/engine/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/towerdefense/engine/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/towerdefense/map/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/towerdefense/map/Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/towerdefense/weapon/Weapon$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/towerdefense/weapon/Weapon$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/towerdefense/weapon/Weapon.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/towerdefense/weapon/Weapon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/towerdefense/weapon/bullet/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/towerdefense/weapon/bullet/Bullet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/simple_d_left_top.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/simple_d_left_top.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/simple_d_right_top.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/simple_d_right_top.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/weapon_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QpfYBYPAclSHaFobLeusfong6y" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/pixelmission/TowerDefense"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="TowerDefense" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="TowerDefense" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3dc38861-6d13-4289-9e02-235f262e0646" name="Changes" comment="" />
+      <created>1686055489020</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686055489020</updated>
+    </task>
+    <servers />
+  </component>
+</project>
