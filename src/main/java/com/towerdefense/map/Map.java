@@ -39,9 +39,11 @@ public class Map {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
     private TilePane tilePane;
+    private Pane layerPane;
 
 
     public Map(Pane layerPane){
+        this.layerPane = layerPane;
 
         initTilemap();
         drawMap(layerPane);
@@ -63,6 +65,8 @@ public class Map {
                 }
             }
         });
+
+        updateResponsiveSize();
        
        
     }
@@ -369,4 +373,20 @@ public class Map {
             }
         }
     }
+
+    private void updateResponsiveSize(){
+        double availableWidth = layerPane.getWidth();
+        double availableHeight = layerPane.getHeight();
+        int numColumns = tilePane.getPrefColumns();
+        int numRows = tilePane.getPrefRows();
+        double tileWidth = availableWidth / numColumns;
+        double tileHeight = availableHeight / numRows;
+
+        tilePane.getChildren().forEach(tile -> {
+            ImageView imageView = (ImageView) tile; // Annahme: Die Tiles sind vom Typ ImageView
+            imageView.setFitWidth(tileWidth);
+            imageView.setFitHeight(tileHeight);
+        });
+    }
+
 }
