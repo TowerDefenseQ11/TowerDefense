@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['map_0',['Map',['../classcom_1_1towerdefense_1_1map_1_1Map.html',1,'com::towerdefense::map']]]
+  ['secondarycontroller_0',['SecondaryController',['../classcom_1_1towerdefense_1_1SecondaryController.html',1,'com::towerdefense']]],
+  ['settings_1',['Settings',['../classcom_1_1towerdefense_1_1Settings.html',1,'com::towerdefense']]]
 ];

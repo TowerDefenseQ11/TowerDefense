@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['secondarycontroller_0',['SecondaryController',['../classcom_1_1towerdefense_1_1SecondaryController.html',1,'com::towerdefense']]],
-  ['settings_1',['Settings',['../classcom_1_1towerdefense_1_1Settings.html',1,'com::towerdefense']]]
+  ['utils_0',['Utils',['../classcom_1_1towerdefense_1_1engine_1_1Utils.html',1,'com::towerdefense::engine']]]
 ];
