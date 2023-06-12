@@ -37,3 +37,5 @@ jobs:
         # Change the directory if changes in Doxyfile
         publish_dir: ./html
         publish_branch: gh-pages  # default: gh-pages
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
