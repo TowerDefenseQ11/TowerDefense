@@ -41,6 +41,9 @@ public class Map {
     private TilePane tilePane;
     private Pane layerPane;
 
+    private double tileWidth;
+    private double tileHeight;
+
 
     public Map(Pane layerPane){
         this.layerPane = layerPane;
@@ -68,6 +71,13 @@ public class Map {
 
         updateResponsiveSize();
        
+        this.layerPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+            updateResponsiveSize();
+        });
+
+        this.layerPane.heightProperty().addListener((obs, oldVal, newVal) -> {
+            updateResponsiveSize();
+        });
        
     }
 
@@ -375,12 +385,20 @@ public class Map {
     }
 
     private void updateResponsiveSize(){
+        System.out.println("updateResponsiveSize");
         double availableWidth = layerPane.getWidth();
         double availableHeight = layerPane.getHeight();
         int numColumns = tilePane.getPrefColumns();
         int numRows = tilePane.getPrefRows();
-        double tileWidth = availableWidth / numColumns;
-        double tileHeight = availableHeight / numRows;
+        tileWidth = availableWidth / numColumns;
+        tileHeight = availableHeight / numRows;
+
+        if(tileWidth > tileHeight){
+            tileWidth = tileHeight;
+        }
+        else if(tileHeight > tileWidth){
+            tileHeight = tileWidth;
+        }
 
         tilePane.getChildren().forEach(tile -> {
             ImageView imageView = (ImageView) tile; // Annahme: Die Tiles sind vom Typ ImageView
