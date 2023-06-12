@@ -23,7 +23,7 @@ public class Settings {
     public static double BULLET_MAX_DISTANCE = 64 * 3;
     public static int BULLET_Damage = 10;
 
-    //money to buy and upgade towers
+    //money to buy and upgrade towers
     public static int MONEY = 100;
     public static int TOWER_COST = 0;
 
