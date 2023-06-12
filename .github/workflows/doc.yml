@@ -36,4 +36,4 @@ jobs:
         # Default Doxyfile build documentation to html directory. 
         # Change the directory if changes in Doxyfile
         publish_dir: ./html
-        publish_branch: main  # default: gh-pages
+        publish_branch: gh-pages  # default: gh-pages
