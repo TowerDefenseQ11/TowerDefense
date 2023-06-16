@@ -2,6 +2,7 @@ package com.towerdefense.map;
 
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
+import com.towerdefense.enemy.Enemy;
 import com.towerdefense.map.tile.Tile;
 import com.towerdefense.weapon.Weapon;
 
@@ -214,6 +215,7 @@ public class Map {
             for(int x=0; x<size; x++){
                 ImageView img = getTile(world[y][x]);
                 tilePane.getChildren().add(img);
+                //tilePane.getChildren().add(new Weapon(x, y, null, null));
                 img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
                     @Override
