@@ -57,14 +57,19 @@ public class Game {
         Map tilemap = new Map(layerPane);
 
         //create new game layer
+
         playfield = new Layer( Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(playfield);
 
-        //add first enemy
+        /*
+        add first enemy
+        */
         enemyManager = new EnemyManager(playfield, mapPos);
         enemyManager.addEnemy();
 
-        //add demo weapons
+        /*
+        add demo weapons
+        */
         weaponManager = new WeaponManager(playfield, enemyManager);
         
         weaponManager.addWeapon(0, 5);
@@ -131,5 +136,11 @@ public class Game {
 
         
 
+    }
+
+    void loseGame()
+    {
+        endGUI endGui = new endGUI();
+        GuiHandler.switchGui(endGui);
     }
 }
