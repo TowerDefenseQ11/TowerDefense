@@ -14,7 +14,6 @@ com/towerdefense/PrimaryController.class
 com/towerdefense/map/tile/Tile.class
 com/towerdefense/weapon/WeaponManager.class
 module-info.class
-com/towerdefense/engine/GUI$1.class
 com/towerdefense/App.class
 com/towerdefense/engine/GameState.class
 com/towerdefense/enemy/Enemy.class
