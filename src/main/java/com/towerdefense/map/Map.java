@@ -5,6 +5,7 @@ import com.towerdefense.Settings;
 import com.towerdefense.enemy.Enemy;
 import com.towerdefense.map.tile.Tile;
 import com.towerdefense.weapon.Weapon;
+import com.towerdefense.weapon.WeaponManager;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,6 +45,8 @@ public class Map {
 
     private double tileWidth;
     private double tileHeight;
+
+    private WeaponManager weaponManager;
 
 
     public Map(Pane layerPane){
@@ -227,6 +230,14 @@ public class Map {
             }
         }
 
+        /* 
+        int targetIndex = 1;
+        tilePane.getChildren().remove(targetIndex);
+        tilePane.getChildren().add(targetIndex, new Weapon(targetIndex, targetIndex, null, null));
+        */
+
+
+
         tilePane.setTileAlignment(Pos.TOP_LEFT);
         tilePane.setHgap(0);
         tilePane.setVgap(0);
@@ -401,12 +412,21 @@ public class Map {
         else if(tileHeight > tileWidth){
             tileHeight = tileWidth;
         }
+        Settings.responsiveTileWidth = tileWidth;
 
         tilePane.getChildren().forEach(tile -> {
             ImageView imageView = (ImageView) tile; // Annahme: Die Tiles sind vom Typ ImageView
             imageView.setFitWidth(tileWidth);
             imageView.setFitHeight(tileHeight);
         });
+
+        if(weaponManager != null){
+            weaponManager.updateResponsiveSize();
+        }
+    }
+
+    public void setWeaponManager(WeaponManager weaponManager){
+        this.weaponManager = weaponManager;
     }
 
 }

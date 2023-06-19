@@ -42,8 +42,7 @@ public class GUI
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                  
-            //create background
-            Map tilemap = new Map(layerPane);
+            
         
             //create game with enemies and weapons
             Game game = new Game(layerPane);

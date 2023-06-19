@@ -31,22 +31,27 @@ public class Weapon {
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
 
+    private int x, y;
+
     private EnemyManager enemyManager;
 
     public Weapon(int x, int y, Layer layer, EnemyManager enemyManager){
+        this.x = x;
+        this.y = y;
+
         this.playerfield = layer;
         this.enemyManager = enemyManager;
         damage = 10;
 
-        location = new Vector2D(x, y);
+        location = new Vector2D(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
 
         Image background = new Image("Tower1Base.png", 64, 64, false, false);
         ImageView backgroundView = new ImageView(background);
-        backgroundView.relocate(x, y);
+        backgroundView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
 
         image = new Image("Tower1Top.png", 64, 64, false, false); //weapon_1
         imageView = new ImageView(image);
-        imageView.relocate(x, y);
+        imageView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
         imageView.setRotate(angle);
 
         layer.getChildren().add(backgroundView);
@@ -85,10 +90,19 @@ public class Weapon {
     }
 
     /*
+     * fit size and position to cell width
+     */
+    public void updateResponsiveSize(){
+        imageView.setFitWidth(Settings.responsiveTileWidth);
+        imageView.setFitHeight(Settings.responsiveTileWidth);
+        imageView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
+    }
+
+    /*
      * spawn bullet every x seconds
      */
     private void spawnBullets(){
-        
+
         Timeline bulletSpawnTimeline = new Timeline(
                  new KeyFrame(Duration.seconds(Settings.BULLET_SPAWN_TIME), 
                  new EventHandler<ActionEvent>() {

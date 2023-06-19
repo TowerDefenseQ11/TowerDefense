@@ -5,6 +5,8 @@ import com.towerdefense.weapon.Weapon;
 import com.towerdefense.weapon.WeaponManager;
 import com.towerdefense.enemy.Enemy;
 import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.map.Map;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -51,6 +53,9 @@ public class Game {
     private Layer playfield;
 
     public Game(Pane layerPane){
+        //create background
+        Map tilemap = new Map(layerPane);
+
         //create new game layer
         playfield = new Layer( Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(playfield);
@@ -61,6 +66,7 @@ public class Game {
 
         //add demo weapons
         weaponManager = new WeaponManager(playfield, enemyManager);
+        
         weaponManager.addWeapon(0, 5);
         weaponManager.addWeapon(1, 5);
         weaponManager.addWeapon(2, 5);
@@ -69,6 +75,8 @@ public class Game {
         weaponManager.addWeapon(5, 5);
         weaponManager.addWeapon(5, 6);
         weaponManager.addWeapon(5, 7);
+
+        tilemap.setWeaponManager(weaponManager);
 
         //start game loop
         startGame();

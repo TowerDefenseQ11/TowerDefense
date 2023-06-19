@@ -27,4 +27,5 @@ public class Settings {
     public static int MONEY = 100;
     public static int TOWER_COST = 0;
 
+    public static double responsiveTileWidth = 64;
 }

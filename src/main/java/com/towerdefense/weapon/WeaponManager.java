@@ -5,6 +5,7 @@ import com.towerdefense.engine.Layer;
 import com.towerdefense.weapon.Weapon;
 
 import java.util.List;
+
 import java.util.ArrayList;
 
 /*
@@ -22,8 +23,8 @@ public class WeaponManager {
 
     public void addWeapon(int x, int y) {
         // create sprite and add to layer
-        x *= 64;
-        y *= 64;
+        //x *= 64;
+        //y *= 64;
         Weapon weapon = new Weapon(x, y, playfield, enemyManager);
 
         // register vehicle
@@ -35,5 +36,14 @@ public class WeaponManager {
     }
     public List<Weapon> getAllWeapons(){
         return allWeapons;
+    }
+
+    /*
+     * updates size and position of all weapons
+     */
+    public void updateResponsiveSize(){
+        allWeapons.forEach(weapon -> {
+            weapon.updateResponsiveSize();
+        });
     }
 }
