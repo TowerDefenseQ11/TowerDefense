@@ -11,7 +11,7 @@ public class Settings {
     public static double SCENE_HEIGHT = 640;
 
     public static double ENEMY_MAX_SPEED = 3;
-    public static double ENEMY_MAX_FORCE = 0.1;
+    public static double ENEMY_MAX_FORCE = 0.2;
     public static double ENEMY_SPAWN_TIME = 3;
     public static double ENEMY_SLOW_DOWN_DISTANCE = 32;
 
