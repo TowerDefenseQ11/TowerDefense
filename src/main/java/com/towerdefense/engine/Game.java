@@ -111,7 +111,7 @@ public class Game {
                     ){
                         weapon.rotateTo(target.getLocation());
                     }else{
-                        //weapon.setShooting(false);
+                        weapon.setShooting(false);
                     }
                 }
 

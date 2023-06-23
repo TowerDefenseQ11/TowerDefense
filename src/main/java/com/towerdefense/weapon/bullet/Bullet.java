@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Bounds;
 
 public class Bullet {
     private Image image;
@@ -51,21 +52,27 @@ public class Bullet {
 
     private void checkEnemy(){
         for(Enemy enemy : enemyManager.getAllEnemies()){
-            if (imageView.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
+            /*if (imageView.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
                 //System.out.println("bullet hit enemy");
                 //enemy.damage(Settings.BULLET_Damage);
                 //destroy();
-            }       
+            }*/       
             
-            Vector2D subtract = Vector2D.subtract(location, enemy.getLocation());
-            double distance = subtract.magnitude();
-            new Vector2D(
-                imageView.getBoundsInParent().getCenterX(), 
-                imageView.getBoundsInParent().getCenterY()
+           
+            Vector2D locationMitte = new Vector2D(location.x, location.y);
+            locationMitte.add(
+                new Vector2D(
+                    Settings.responsiveTileWidth,
+                    Settings.responsiveTileWidth
+                )
             );
+
+            Vector2D subtract = Vector2D.subtract(locationMitte, enemy.getLocation());
+            double distance = subtract.magnitude();
             
-            if(distance < 10){
-                //destroy();
+            if(distance < Settings.responsiveTileWidth*0.8){
+                System.out.println(distance);
+                destroy();
             }
         }
         /*var bound = imageView.getBoundsInParent();

@@ -19,7 +19,7 @@ public class Enemy extends Region {
     private double maxForce = Settings.ENEMY_MAX_FORCE;
     private double maxSpeed = Settings.ENEMY_MAX_SPEED;
 
-    private ImageView imageView;
+    public ImageView imageView;
 
     // view dimensions
     private double width;
