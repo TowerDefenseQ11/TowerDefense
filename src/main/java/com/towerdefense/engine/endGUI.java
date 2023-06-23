@@ -14,47 +14,17 @@ public class endGUI extends GUI{
         super();
     }
 
-<<<<<<< HEAD
+
     @Override
     void drawGui()
     {
-        
         Text endText = new Text("Game Over");
         endText.setFont(Font.font("Arial", 20));
     
     
-        Button startAgainButton = new Button("");
-
-        startAgainButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                 
-                /*@Override public void handle(ActionEvent e) {
-                StartGUI.drawStartGUI(Pane layerPane); //this.getLayer()
-
-
-                }*/
-            }
-        });
-=======
-@Override
-  void drawGui(Pane layerPane)
-    {
-        Text endText = new Text("Game Over");
-        endText.setFont("Arial", 20);
-    
-    
-    Button startAgainButton = new Button("");
-    startAgainButton.setOnAction(new EventHandler <ActionEvent>)
-    {
-            @Override public void handle(ActionEvent e) {
-                StartGUI.drawStartGUI(Pane layerPane);
-
-
-                }
-            });
-        }
->>>>>>> c180babed2ee087dbf8e1b914141578c97ef040c
+        //Button startAgainButton = new Button("");
     }
+    
            
 
 }
