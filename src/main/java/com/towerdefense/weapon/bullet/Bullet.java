@@ -29,7 +29,7 @@ public class Bullet {
         location = new Vector2D(x, y);
         startLocation = new Vector2D(x, y);
 
-        image = new Image("bullet.png");
+        image = new Image("bullet.png", (int) Settings.responsiveTileWidth, (int) Settings.responsiveTileWidth, false, false);
         imageView = new ImageView(image);
         imageView.relocate(x, y);
         imageView.setRotate(angle);
@@ -52,10 +52,21 @@ public class Bullet {
     private void checkEnemy(){
         for(Enemy enemy : enemyManager.getAllEnemies()){
             if (imageView.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
-                System.out.println("bullet hit enemy");
-                enemy.damage(Settings.BULLET_Damage);
-                destroy();
-            }                
+                //System.out.println("bullet hit enemy");
+                //enemy.damage(Settings.BULLET_Damage);
+                //destroy();
+            }       
+            
+            Vector2D subtract = Vector2D.subtract(location, enemy.getLocation());
+            double distance = subtract.magnitude();
+            new Vector2D(
+                imageView.getBoundsInParent().getCenterX(), 
+                imageView.getBoundsInParent().getCenterY()
+            );
+            
+            if(distance < 10){
+                //destroy();
+            }
         }
         /*var bound = imageView.getBoundsInParent();
         for (iterable_type iterable_element : iterable) {

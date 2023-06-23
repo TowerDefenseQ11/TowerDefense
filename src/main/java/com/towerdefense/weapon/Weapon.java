@@ -20,6 +20,7 @@ import javafx.animation.KeyFrame;
 public class Weapon {
     private Image image;
     private ImageView imageView;
+    private ImageView backgroundView;
     private int damage;
     private Vector2D location;
     private Vector2D lastTarget;
@@ -46,7 +47,7 @@ public class Weapon {
         location = new Vector2D(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
 
         Image background = new Image("Tower1Base.png", 64, 64, false, false);
-        ImageView backgroundView = new ImageView(background);
+        backgroundView = new ImageView(background);
         backgroundView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
 
         image = new Image("Tower1Top.png", 64, 64, false, false); //weapon_1
@@ -96,6 +97,12 @@ public class Weapon {
         imageView.setFitWidth(Settings.responsiveTileWidth);
         imageView.setFitHeight(Settings.responsiveTileWidth);
         imageView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
+
+        backgroundView.setFitWidth(Settings.responsiveTileWidth);
+        backgroundView.setFitHeight(Settings.responsiveTileWidth);
+        backgroundView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
+
+        location = new Vector2D(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
     }
 
     /*

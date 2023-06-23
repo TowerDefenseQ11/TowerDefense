@@ -1,4 +1,4 @@
-package com.towerdefense.engine;
+package com.towerdefense;
 
 public enum GameState {
     startScreen,
