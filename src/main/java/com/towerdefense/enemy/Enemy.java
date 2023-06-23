@@ -19,7 +19,7 @@ public class Enemy extends Region {
     private double maxForce = Settings.ENEMY_MAX_FORCE;
     private double maxSpeed = Settings.ENEMY_MAX_SPEED;
 
-    private Node view;
+    public ImageView imageView;
 
     // view dimensions
     private double width;
@@ -43,31 +43,29 @@ public class Enemy extends Region {
         this.mapPos = mapPos;
         this.playerfield = layer;
 
-        this.location = new Vector2D(mapPos[0][0] * 64 + 32, mapPos[0][1] * 64 + 32);
+        this.location = new Vector2D(
+            mapPos[0][0] * (int) Settings.getResponsiveTileWidth() + (int) Settings.getResponsiveTileWidth()/2, 
+            mapPos[0][1] * (int) Settings.getResponsiveTileWidth() + (int) Settings.getResponsiveTileWidth()/2
+        );
         this.velocity = new Vector2D(0, 0);
         this.acceleration = new Vector2D(0, 0);
-        this.width = 50;
-        this.height = 25;
+        this.width = Settings.getResponsiveTileWidth();
+        this.height = Settings.getResponsiveTileWidth();
         this.centerX = width / 2;
         this.centerY = height / 2;
 
-        health = 100;
+        health = Settings.ENEMY_MAX_HEALTH;
 
-        this.view = createView();
+        imageView = new ImageView(new Image("EnemyTest.png", (int) Settings.getResponsiveTileWidth(), (int) Settings.getResponsiveTileWidth(), false, false));
 
         setPrefSize(width, height);
 
         // add view to this node
-        getChildren().add(view);
+        getChildren().add(imageView);
 
         // add this node to layer
         layer.getChildren().add(this);
 
-    }
-
-    public Node createView() {
-        // Utils.createArrowImageView( (int) width);
-        return new ImageView(new Image("EnemyTest.png", 64, 64, false, false)); //enemy_1
     }
 
     public void applyForce(Vector2D force) {
@@ -101,8 +99,8 @@ public class Enemy extends Region {
             enemyManager.destroyEnemy(this);
             return;
         }
-        int x = mapPos[posIndex][0] * 64 + 32;
-        int y = mapPos[posIndex][1] * 64 + 32;
+        int x = mapPos[posIndex][0] * (int) Settings.getResponsiveTileWidth() + (int) Settings.getResponsiveTileWidth()/2;
+        int y = mapPos[posIndex][1] * (int) Settings.getResponsiveTileWidth() + (int) Settings.getResponsiveTileWidth()/2;
 
         Vector2D target = new Vector2D(x, y);
 
@@ -162,6 +160,19 @@ public class Enemy extends Region {
         if (health <= 0) {
             enemyManager.destroyEnemy(this);
         }
+    }
+
+    /*
+     * fit size and position to cell width
+     */
+    public void updateResponsiveSize(){
+        imageView.setFitWidth(Settings.getResponsiveTileWidth());
+        imageView.setFitHeight(Settings.getResponsiveTileWidth());
+
+        this.width = Settings.getResponsiveTileWidth();
+        this.height = Settings.getResponsiveTileWidth();
+        this.centerX = width / 2;
+        this.centerY = height / 2;
     }
 
     

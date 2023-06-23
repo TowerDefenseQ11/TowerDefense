@@ -20,6 +20,7 @@ import javafx.animation.KeyFrame;
 public class Weapon {
     private Image image;
     private ImageView imageView;
+    private ImageView backgroundView;
     private int damage;
     private Vector2D location;
     private Vector2D lastTarget;
@@ -43,15 +44,15 @@ public class Weapon {
         this.enemyManager = enemyManager;
         damage = 10;
 
-        location = new Vector2D(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
+        location = new Vector2D(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
 
         Image background = new Image("Tower1Base.png", 64, 64, false, false);
-        ImageView backgroundView = new ImageView(background);
-        backgroundView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
+        backgroundView = new ImageView(background);
+        backgroundView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
 
         image = new Image("Tower1Top.png", 64, 64, false, false); //weapon_1
         imageView = new ImageView(image);
-        imageView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
+        imageView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
         imageView.setRotate(angle);
 
         layer.getChildren().add(backgroundView);
@@ -93,9 +94,15 @@ public class Weapon {
      * fit size and position to cell width
      */
     public void updateResponsiveSize(){
-        imageView.setFitWidth(Settings.responsiveTileWidth);
-        imageView.setFitHeight(Settings.responsiveTileWidth);
-        imageView.relocate(x*Settings.responsiveTileWidth, y*Settings.responsiveTileWidth);
+        imageView.setFitWidth(Settings.getResponsiveTileWidth());
+        imageView.setFitHeight(Settings.getResponsiveTileWidth());
+        imageView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+
+        backgroundView.setFitWidth(Settings.getResponsiveTileWidth());
+        backgroundView.setFitHeight(Settings.getResponsiveTileWidth());
+        backgroundView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+
+        location = new Vector2D(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
     }
 
     /*

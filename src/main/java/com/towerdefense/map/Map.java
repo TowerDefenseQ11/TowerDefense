@@ -3,6 +3,7 @@ package com.towerdefense.map;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.Enemy;
+import com.towerdefense.enemy.manager.EnemyManager;
 import com.towerdefense.map.tile.Tile;
 import com.towerdefense.weapon.Weapon;
 import com.towerdefense.weapon.WeaponManager;
@@ -47,6 +48,9 @@ public class Map {
     private double tileHeight;
 
     private WeaponManager weaponManager;
+    private EnemyManager enemyManager;
+
+    private String mapName = "pixel";
 
 
     public Map(Pane layerPane){
@@ -150,38 +154,39 @@ public class Map {
                         break;
                     }
 
-
                     case 14: { //not used yet
                         name = "simple_d_left_right";
                         break;
                     }
 
+
+
                     case 20: {
-                        name = "simple_a_empty";
+                        name = mapName+"_a_empty";
                         break;
                     }
                     case 21: {
-                        name = "simple_d_bottom_right";
+                        name = mapName+"_d_bottom_right";
                         break;
                     }
                     case 22: {
-                        name = "simple_d_bottom_left";
+                        name = mapName+"_d_bottom_left";
                         break;
                     }
                     case 23: {
-                        name = "simple_d_left_top";
+                        name = mapName+"_d_left_top";
                         break;
                     }
                     case 24: {
-                        name = "simple_d_right_top";
+                        name = mapName+"_d_right_top";
                         break;
                     }
                     case 25: {
-                        name = "simple_d_left_right";
+                        name = mapName+"_d_left_right";
                         break;
                     }
                     case 26: {
-                        name = "simple_d_top_bottom";
+                        name = mapName+"_d_top_bottom";
                         break;
                     }
                     
@@ -412,7 +417,7 @@ public class Map {
         else if(tileHeight > tileWidth){
             tileHeight = tileWidth;
         }
-        Settings.responsiveTileWidth = tileWidth;
+        Settings.setResponsiveTileWidth(tileWidth);
 
         tilePane.getChildren().forEach(tile -> {
             ImageView imageView = (ImageView) tile; // Annahme: Die Tiles sind vom Typ ImageView
@@ -423,10 +428,16 @@ public class Map {
         if(weaponManager != null){
             weaponManager.updateResponsiveSize();
         }
+        if(enemyManager != null){
+            enemyManager.updateResponsiveSize();
+        }
     }
 
     public void setWeaponManager(WeaponManager weaponManager){
         this.weaponManager = weaponManager;
+    }
+    public void setEnemyManager(EnemyManager enemyManager){
+        this.enemyManager = enemyManager;
     }
 
 }
