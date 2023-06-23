@@ -417,7 +417,7 @@ public class Map {
         else if(tileHeight > tileWidth){
             tileHeight = tileWidth;
         }
-        Settings.responsiveTileWidth = tileWidth;
+        Settings.setResponsiveTileWidth(tileWidth);
 
         tilePane.getChildren().forEach(tile -> {
             ImageView imageView = (ImageView) tile; // Annahme: Die Tiles sind vom Typ ImageView

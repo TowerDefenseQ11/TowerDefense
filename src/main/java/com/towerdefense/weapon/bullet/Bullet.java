@@ -30,7 +30,7 @@ public class Bullet {
         location = new Vector2D(x, y);
         startLocation = new Vector2D(x, y);
 
-        image = new Image("bullet.png", (int) Settings.responsiveTileWidth, (int) Settings.responsiveTileWidth, false, false);
+        image = new Image("bullet.png", (int) Settings.getResponsiveTileWidth(), (int) Settings.getResponsiveTileWidth(), false, false);
         imageView = new ImageView(image);
         imageView.relocate(x, y);
         imageView.setRotate(angle);
@@ -62,15 +62,15 @@ public class Bullet {
             Vector2D locationMitte = new Vector2D(location.x, location.y);
             locationMitte.add(
                 new Vector2D(
-                    Settings.responsiveTileWidth,
-                    Settings.responsiveTileWidth
+                    Settings.getResponsiveTileWidth(),
+                    Settings.getResponsiveTileWidth()
                 )
             );
 
             Vector2D subtract = Vector2D.subtract(locationMitte, enemy.getLocation());
             double distance = subtract.magnitude();
             
-            if(distance < Settings.responsiveTileWidth*0.8){
+            if(distance < Settings.getResponsiveTileWidth()*0.8){
                 System.out.println(distance);
                 destroy();
             }

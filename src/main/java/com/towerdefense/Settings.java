@@ -19,7 +19,7 @@ public class Settings {
     public static double WEAPON_MAX_SPEED = 2;
     public static double WEAPON_MAX_FORCE = 0.05;
 
-    public static double BULLET_MAX_SPEED = 1;
+    public static double BULLET_MAX_SPEED = 3;
     public static double BULLET_SPAWN_TIME = 3;
     public static double BULLET_MAX_DISTANCE = 64 * 30;
     public static int BULLET_Damage = 1;
@@ -28,5 +28,15 @@ public class Settings {
     public static int MONEY = 100;
     public static int TOWER_COST = 0;
 
-    public static double responsiveTileWidth = 64;
+    private static double responsiveTileWidth = 64;
+
+    public static void setResponsiveTileWidth(double width){
+        responsiveTileWidth = width;
+        ENEMY_SLOW_DOWN_DISTANCE = width / 2;
+
+    }
+    public static double getResponsiveTileWidth(){
+        return responsiveTileWidth;
+
+    }
 }

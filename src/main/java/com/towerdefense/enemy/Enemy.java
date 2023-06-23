@@ -44,19 +44,19 @@ public class Enemy extends Region {
         this.playerfield = layer;
 
         this.location = new Vector2D(
-            mapPos[0][0] * (int) Settings.responsiveTileWidth + (int) Settings.responsiveTileWidth/2, 
-            mapPos[0][1] * (int) Settings.responsiveTileWidth + (int) Settings.responsiveTileWidth/2
+            mapPos[0][0] * (int) Settings.getResponsiveTileWidth() + (int) Settings.getResponsiveTileWidth()/2, 
+            mapPos[0][1] * (int) Settings.getResponsiveTileWidth() + (int) Settings.getResponsiveTileWidth()/2
         );
         this.velocity = new Vector2D(0, 0);
         this.acceleration = new Vector2D(0, 0);
-        this.width = Settings.responsiveTileWidth;
-        this.height = Settings.responsiveTileWidth;
+        this.width = Settings.getResponsiveTileWidth();
+        this.height = Settings.getResponsiveTileWidth();
         this.centerX = width / 2;
         this.centerY = height / 2;
 
         health = Settings.ENEMY_MAX_HEALTH;
 
-        imageView = new ImageView(new Image("EnemyTest.png", (int) Settings.responsiveTileWidth, (int) Settings.responsiveTileWidth, false, false));
+        imageView = new ImageView(new Image("EnemyTest.png", (int) Settings.getResponsiveTileWidth(), (int) Settings.getResponsiveTileWidth(), false, false));
 
         setPrefSize(width, height);
 
@@ -99,8 +99,8 @@ public class Enemy extends Region {
             enemyManager.destroyEnemy(this);
             return;
         }
-        int x = mapPos[posIndex][0] * (int) Settings.responsiveTileWidth + (int) Settings.responsiveTileWidth/2;
-        int y = mapPos[posIndex][1] * (int) Settings.responsiveTileWidth + (int) Settings.responsiveTileWidth/2;
+        int x = mapPos[posIndex][0] * (int) Settings.getResponsiveTileWidth() + (int) Settings.getResponsiveTileWidth()/2;
+        int y = mapPos[posIndex][1] * (int) Settings.getResponsiveTileWidth() + (int) Settings.getResponsiveTileWidth()/2;
 
         Vector2D target = new Vector2D(x, y);
 
@@ -166,11 +166,11 @@ public class Enemy extends Region {
      * fit size and position to cell width
      */
     public void updateResponsiveSize(){
-        imageView.setFitWidth(Settings.responsiveTileWidth);
-        imageView.setFitHeight(Settings.responsiveTileWidth);
+        imageView.setFitWidth(Settings.getResponsiveTileWidth());
+        imageView.setFitHeight(Settings.getResponsiveTileWidth());
 
-        this.width = Settings.responsiveTileWidth;
-        this.height = Settings.responsiveTileWidth;
+        this.width = Settings.getResponsiveTileWidth();
+        this.height = Settings.getResponsiveTileWidth();
         this.centerX = width / 2;
         this.centerY = height / 2;
     }
