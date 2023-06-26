@@ -1,8 +1,7 @@
 package com.towerdefense.weapon;
 
-import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.engine.Layer;
-import com.towerdefense.weapon.Weapon;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -10,12 +9,12 @@ import java.util.ArrayList;
 /*
  * handle all weapons and rotate smoothly
  */
-public class WeaponManager {
+public class WeaponHandler {
     private Layer playfield;
     private List<Weapon> allWeapons = new ArrayList<>();
-    private EnemyManager enemyManager;
+    private EnemyHandler enemyManager;
 
-    public WeaponManager(Layer playfield, EnemyManager enemyManager){
+    public WeaponHandler(Layer playfield, EnemyHandler enemyManager){
         this.playfield = playfield;
         this.enemyManager = enemyManager;
     }

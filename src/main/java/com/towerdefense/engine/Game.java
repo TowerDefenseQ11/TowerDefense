@@ -2,9 +2,9 @@ package com.towerdefense.engine;
 
 import com.towerdefense.Settings;
 import com.towerdefense.weapon.Weapon;
-import com.towerdefense.weapon.WeaponManager;
+import com.towerdefense.weapon.WeaponHandler;
 import com.towerdefense.enemy.Enemy;
-import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.enemy.handler.EnemyHandler;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -46,8 +46,8 @@ public class Game {
         
     };
 
-    private EnemyManager enemyManager;
-    private WeaponManager weaponManager;
+    private EnemyHandler enemyManager;
+    private WeaponHandler weaponHandler;
     private Layer playfield;
 
     public Game(Pane layerPane){
@@ -56,19 +56,19 @@ public class Game {
         layerPane.getChildren().addAll(playfield);
 
         //add first enemy
-        enemyManager = new EnemyManager(playfield, mapPos);
+        enemyManager = new EnemyHandler(playfield, mapPos);
         enemyManager.addEnemy();
 
         //add demo weapons
-        weaponManager = new WeaponManager(playfield, enemyManager);
-        weaponManager.addWeapon(0, 5);
-        weaponManager.addWeapon(1, 5);
-        weaponManager.addWeapon(2, 5);
-        weaponManager.addWeapon(3, 5);
+        weaponHandler = new WeaponHandler(playfield, enemyManager);
+        weaponHandler.addWeapon(0, 5);
+        weaponHandler.addWeapon(1, 5);
+        weaponHandler.addWeapon(2, 5);
+        weaponHandler.addWeapon(3, 5);
 
-        weaponManager.addWeapon(5, 5);
-        weaponManager.addWeapon(5, 6);
-        weaponManager.addWeapon(5, 7);
+        weaponHandler.addWeapon(5, 5);
+        weaponHandler.addWeapon(5, 6);
+        weaponHandler.addWeapon(5, 7);
 
         //start game loop
         startGame();
@@ -86,7 +86,7 @@ public class Game {
                 enemyManager.updateMove(); 
                 
                 //rotate all weapons 
-                List<Weapon> weapons = weaponManager.getAllWeapons();
+                List<Weapon> weapons = weaponHandler.getAllWeapons();
                 for(int i=0; i<weapons.size(); i++){
                     Weapon weapon = weapons.get(i);
                     //get nearest enemy of weapon to rotate to

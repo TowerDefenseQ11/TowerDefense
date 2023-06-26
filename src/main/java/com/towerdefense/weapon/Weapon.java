@@ -1,7 +1,7 @@
 package com.towerdefense.weapon;
 
 import com.towerdefense.Settings;
-import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.weapon.bullet.Bullet;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.engine.Vector2D;
@@ -31,9 +31,9 @@ public class Weapon {
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
 
-    private EnemyManager enemyManager;
+    private EnemyHandler enemyManager;
 
-    public Weapon(int x, int y, Layer layer, EnemyManager enemyManager){
+    public Weapon(int x, int y, Layer layer, EnemyHandler enemyManager){
         this.playerfield = layer;
         this.enemyManager = enemyManager;
         damage = 10;

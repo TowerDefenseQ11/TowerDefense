@@ -1,6 +1,7 @@
 package com.towerdefense.enemy;
 
-import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.enemy.handler.EnemyHandler;
+import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.engine.Vector2D;
@@ -15,10 +16,6 @@ public class Enemy extends Region {
     private Vector2D location;
     private Vector2D velocity;
     private Vector2D acceleration;
-
-    private double maxForce = Settings.ENEMY_MAX_FORCE;
-    private double maxSpeed = Settings.ENEMY_MAX_SPEED;
-
     private Node view;
 
     // view dimensions
@@ -26,22 +23,25 @@ public class Enemy extends Region {
     private double height;
     private double centerX;
     private double centerY;
-    private double radius;
-
     private double angle;
-
-    private EnemyManager enemyManager;
-
-    private int health;
-
+    private double radius;
     private int[][] mapPos;
+
     private int posIndex = 0;
+
+    private EnemyHandler enemyManager;
+
+    private EnemyType enemyType;
+    private double maxForce;
+    private double maxSpeed;
+    private int health;
     private Layer playerfield;
 
-    public Enemy(Layer layer, EnemyManager enemyManager, int[][] mapPos) {
+    public Enemy(Layer layer, EnemyHandler enemyManager, int[][] mapPos, EnemyType enemyType) {
         this.enemyManager = enemyManager;
         this.mapPos = mapPos;
         this.playerfield = layer;
+        this.enemyType = enemyType;
 
         this.location = new Vector2D(mapPos[0][0] * 64 + 32, mapPos[0][1] * 64 + 32);
         this.velocity = new Vector2D(0, 0);
@@ -50,10 +50,12 @@ public class Enemy extends Region {
         this.height = 25;
         this.centerX = width / 2;
         this.centerY = height / 2;
-
+        this.maxForce = enemyType.getStartForce();
+        this.maxSpeed = enemyType.getStartSpeed();
         health = 100;
 
         this.view = createView();
+        this.enemyType = EnemyType.ENEMY_1;
 
         setPrefSize(width, height);
 
@@ -163,7 +165,4 @@ public class Enemy extends Region {
             enemyManager.destroyEnemy(this);
         }
     }
-
-    
-
 }
