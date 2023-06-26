@@ -1,6 +1,7 @@
 package com.towerdefense.enemy;
 
-import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.enemy.handler.EnemyHandler;
+import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.engine.Vector2D;
@@ -16,10 +17,8 @@ public class Enemy extends Region {
     private Vector2D velocity;
     private Vector2D acceleration;
 
-    private double maxForce = Settings.ENEMY_MAX_FORCE;
-    private double maxSpeed = Settings.ENEMY_MAX_SPEED;
-
     private Node view;
+    public ImageView imageView;
 
     // view dimensions
     private double width;
@@ -27,22 +26,25 @@ public class Enemy extends Region {
     private double centerX;
     private double centerY;
     private double radius;
-
     private double angle;
-
-    private EnemyManager enemyManager;
-
-    private int health;
-
     private int[][] mapPos;
     private int posIndex = 0;
     private Layer playerfield;
 
-    public Enemy(Layer layer, EnemyManager enemyManager, int[][] mapPos) {
-        this.enemyManager = enemyManager;
+    private EnemyHandler enemyHandler;
+    private EnemyType enemyType;
+    private double maxForce;
+    private double maxSpeed;
+    private double health;
+
+
+    public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
+        this.enemyHandler = enemyHandler;
+        this.maxSpeed = enemyType.getStartSpeed();
+        this.maxForce = enemyType.getStartForce();
+        this.enemyType = enemyType;
         this.mapPos = mapPos;
         this.playerfield = layer;
-
         this.location = new Vector2D(mapPos[0][0] * 64 + 32, mapPos[0][1] * 64 + 32);
         this.velocity = new Vector2D(0, 0);
         this.acceleration = new Vector2D(0, 0);
@@ -51,23 +53,18 @@ public class Enemy extends Region {
         this.centerX = width / 2;
         this.centerY = height / 2;
 
-        health = 100;
+        health = enemyType.getStartHealth();
 
         this.view = createView();
-
         setPrefSize(width, height);
-
         // add view to this node
         getChildren().add(view);
-
         // add this node to layer
         layer.getChildren().add(this);
-
     }
 
     public Node createView() {
-        // Utils.createArrowImageView( (int) width);
-        return new ImageView(new Image("EnemyTest.png", 64, 64, false, false)); //enemy_1
+        return new ImageView(new Image(this.enemyType.getEnemyImage(), 64, 64, false, false));
     }
 
     public void applyForce(Vector2D force) {
@@ -75,7 +72,6 @@ public class Enemy extends Region {
     }
 
     public void move() {
-
         // set velocity depending on acceleration
         velocity.add(acceleration);
 
@@ -96,20 +92,18 @@ public class Enemy extends Region {
      * Move sprite towards next target
      */
     public void seek() {
-
         if (posIndex >= mapPos.length) {
-            enemyManager.destroyEnemy(this);
+            this.enemyHandler.destroyEnemy(this);
             return;
         }
+
         int x = mapPos[posIndex][0] * 64 + 32;
         int y = mapPos[posIndex][1] * 64 + 32;
 
         Vector2D target = new Vector2D(x, y);
-
         Vector2D desired = Vector2D.subtract(target, location);
 
         // The distance is the magnitude of the vector pointing from location to target.
-
         double d = desired.magnitude();
         desired.normalize();
 
@@ -123,20 +117,15 @@ public class Enemy extends Region {
         // The usual steering = desired - velocity
         Vector2D steer = Vector2D.subtract(desired, velocity);
         steer.limit(maxForce);
-
         applyForce(steer);
-
     }
 
     /**
      * Update node position
      */
     public void display() {
-
         relocate(location.x - centerX, location.y - centerY);
-
         setRotate(Math.toDegrees(angle));
-
     }
 
     public Vector2D getVelocity() {
@@ -160,10 +149,24 @@ public class Enemy extends Region {
     public void damage(int hit) {
         health -= hit;
         if (health <= 0) {
-            enemyManager.destroyEnemy(this);
+            this.enemyHandler.destroyEnemy(this);
         }
     }
 
-    
+    public EnemyType getEnemyType() {
+        return enemyType;
+    }
 
+    /*
+     * fit size and position to cell width
+     */
+    public void updateResponsiveSize() {
+        imageView.setFitWidth(Settings.getResponsiveTileWidth());
+        imageView.setFitHeight(Settings.getResponsiveTileWidth());
+
+        this.width = Settings.getResponsiveTileWidth();
+        this.height = Settings.getResponsiveTileWidth();
+        this.centerX = width / 2;
+        this.centerY = height / 2;
+    }
 }

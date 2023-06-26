@@ -18,7 +18,6 @@ public class EnemyHandler {
     private Layer playfield;
     static Random random = new Random();
     private List<Enemy> allEnemies = new ArrayList<>();
-    private Scene scene;
     private int[][] mapPos;
 
     public EnemyHandler(Layer playfield, int[][] mapPos) {
@@ -31,7 +30,6 @@ public class EnemyHandler {
      * update position of each enemy smoothly in new thread -> gameLoop
      */
     public void updateMove() {
-
         // seek attractor location, apply force to get towards it
         allEnemies.forEach(vehicle -> { //todo: fix java.util.ConcurrentModificationException
             vehicle.seek();
@@ -64,7 +62,6 @@ public class EnemyHandler {
 
         // register vehicle
         allEnemies.add(enemy);
-
     }
 
     /*
@@ -104,10 +101,8 @@ public class EnemyHandler {
     /*
      * updates size and position of all weapons
      */
-    public void updateResponsiveSize(){
-        allEnemies.forEach(enemy -> {
-            enemy.updateResponsiveSize();
-        });
+    public void updateResponsiveSize() {
+        allEnemies.forEach(Enemy::updateResponsiveSize);
     }
 }
 

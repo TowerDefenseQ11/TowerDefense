@@ -23,37 +23,37 @@ import java.util.List;
 public class Game {
 
     private int[][] mapPos = { //path for enemies to follow 
-        {-1, 4},
-        {0, 4},
-        {1, 4},
-        {2, 4},
-        {3, 4},
-        {3, 3},
-        {3, 2},
-        {3, 1},
-        {4, 1},
-        {5, 1},
-        {6, 1},
-        {6, 2},
-        {6, 3},
-        {6, 4},
-        {6, 5},
-        {6, 6},
-        {6, 7},
-        {7, 7},
-        {8, 7},
-        {9, 7},
-        {10, 7},
-        
+            {-1, 4},
+            {0, 4},
+            {1, 4},
+            {2, 4},
+            {3, 4},
+            {3, 3},
+            {3, 2},
+            {3, 1},
+            {4, 1},
+            {5, 1},
+            {6, 1},
+            {6, 2},
+            {6, 3},
+            {6, 4},
+            {6, 5},
+            {6, 6},
+            {6, 7},
+            {7, 7},
+            {8, 7},
+            {9, 7},
+            {10, 7},
+
     };
 
     private EnemyHandler enemyManager;
     private WeaponHandler weaponHandler;
     private Layer playfield;
 
-    public Game(Pane layerPane){
+    public Game(Pane layerPane) {
         //create new game layer
-        playfield = new Layer( Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        playfield = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(playfield);
 
         //add first enemy
@@ -84,20 +84,20 @@ public class Game {
             @Override
             public void handle(long now) {
                 //move enemies smoothly
-                enemyManager.updateMove(); 
-                
+                enemyManager.updateMove();
+
                 //rotate all weapons 
                 List<Weapon> weapons = weaponHandler.getAllWeapons();
-                for(int i=0; i<weapons.size(); i++){
+                for (int i = 0; i < weapons.size(); i++) {
                     Weapon weapon = weapons.get(i);
                     //get nearest enemy of weapon to rotate to
-                    Enemy target = enemyManager.getNearestEnemy(weapon.getLocation()); 
-                    if(
-                        target != null && 
-                        Vector2D.subtract(target.getLocation(), weapon.getLocation() ).magnitude() > Settings.BULLET_MAX_DISTANCE
-                    ){
+                    Enemy target = enemyManager.getNearestEnemy(weapon.getLocation());
+                    if (
+                            target != null &&
+                                    Vector2D.subtract(target.getLocation(), weapon.getLocation()).magnitude() > Settings.BULLET_MAX_DISTANCE
+                    ) {
                         weapon.rotateTo(target.getLocation());
-                    }else{
+                    } else {
                         weapon.setShooting(false);
                     }
                 }
@@ -107,22 +107,17 @@ public class Game {
         };
 
         gameLoop.start();
-        
-        Timeline enemySpawnTimeline = new Timeline(
-                 new KeyFrame(Duration.seconds(Settings.ENEMY_SPAWN_TIME), 
-                 new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent event) {
-                //spawn new enemy
-                enemyManager.addEnemy(EnemyType.ENEMY_2);
-            }
-        }));
+        Timeline enemySpawnTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(Settings.ENEMY_SPAWN_TIME),
+                        new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                //spawn new enemy
+                                enemyManager.addEnemy(EnemyType.ENEMY_2);
+                            }
+                        }));
         enemySpawnTimeline.setCycleCount(Timeline.INDEFINITE);
         enemySpawnTimeline.play();
-
-
-        
-
     }
 }
