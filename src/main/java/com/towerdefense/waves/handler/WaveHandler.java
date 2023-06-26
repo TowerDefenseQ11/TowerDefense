@@ -1,4 +1,7 @@
-package com.towerdefense.waves;
+package com.towerdefense.waves.handler;
+
+import com.towerdefense.waves.types.EnemySpawningGroup;
+import com.towerdefense.waves.types.WaveTypes;
 
 public class WaveHandler {
 

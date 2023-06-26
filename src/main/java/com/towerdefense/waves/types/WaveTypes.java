@@ -1,4 +1,4 @@
-package com.towerdefense.waves;
+package com.towerdefense.waves.types;
 
 import com.towerdefense.enemy.type.EnemyType;
 
