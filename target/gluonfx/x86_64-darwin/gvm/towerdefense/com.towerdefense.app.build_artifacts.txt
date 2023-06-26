@@ -1,6 +1,0 @@
-[HEADER]
-com.towerdefense.app.h
-graal_isolate.h
-com.towerdefense.app_dynamic.h
-graal_isolate_dynamic.h
-
