@@ -1,6 +1,7 @@
 package com.towerdefense;
 
-import com.towerdefense.engine.GUI;
+import com.towerdefense.engine.*;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,8 +32,13 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-        GUI gui = new GUI(layerPane);
-        gui.drawGui(layerPane);
+    
+         //start & create Game
+        //Game game = new Game(layerPane);
+        GuiHandler.setLayerPane(layerPane);
+        StartGUI startGui = new StartGUI();
+        GuiHandler.switchGui(startGui);
+
     }
 
     

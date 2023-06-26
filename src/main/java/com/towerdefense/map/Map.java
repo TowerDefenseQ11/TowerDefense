@@ -2,8 +2,11 @@ package com.towerdefense.map;
 
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
+import com.towerdefense.enemy.Enemy;
+import com.towerdefense.enemy.manager.EnemyManager;
 import com.towerdefense.map.tile.Tile;
 import com.towerdefense.weapon.Weapon;
+import com.towerdefense.weapon.WeaponManager;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,6 +47,11 @@ public class Map {
     private double tileWidth;
     private double tileHeight;
 
+    private WeaponManager weaponManager;
+    private EnemyManager enemyManager;
+
+    private String mapName = "pixel";
+
 
     public Map(Pane layerPane){
         this.layerPane = layerPane;
@@ -69,6 +77,7 @@ public class Map {
             }
         });
 
+        /*
         updateResponsiveSize();
        
         this.layerPane.widthProperty().addListener((obs, oldVal, newVal) -> {
@@ -78,6 +87,7 @@ public class Map {
         this.layerPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
+        */
        
     }
 
@@ -146,38 +156,39 @@ public class Map {
                         break;
                     }
 
-
                     case 14: { //not used yet
                         name = "simple_d_left_right";
                         break;
                     }
 
+
+
                     case 20: {
-                        name = "simple_a_empty";
+                        name = mapName+"_a_empty";
                         break;
                     }
                     case 21: {
-                        name = "simple_d_bottom_right";
+                        name = mapName+"_d_bottom_right";
                         break;
                     }
                     case 22: {
-                        name = "simple_d_bottom_left";
+                        name = mapName+"_d_bottom_left";
                         break;
                     }
                     case 23: {
-                        name = "simple_d_left_top";
+                        name = mapName+"_d_left_top";
                         break;
                     }
                     case 24: {
-                        name = "simple_d_right_top";
+                        name = mapName+"_d_right_top";
                         break;
                     }
                     case 25: {
-                        name = "simple_d_left_right";
+                        name = mapName+"_d_left_right";
                         break;
                     }
                     case 26: {
-                        name = "simple_d_top_bottom";
+                        name = mapName+"_d_top_bottom";
                         break;
                     }
                     
@@ -214,6 +225,7 @@ public class Map {
             for(int x=0; x<size; x++){
                 ImageView img = getTile(world[y][x]);
                 tilePane.getChildren().add(img);
+                //tilePane.getChildren().add(new Weapon(x, y, null, null));
                 img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
                     @Override
@@ -224,6 +236,14 @@ public class Map {
                });
             }
         }
+
+        /* 
+        int targetIndex = 1;
+        tilePane.getChildren().remove(targetIndex);
+        tilePane.getChildren().add(targetIndex, new Weapon(targetIndex, targetIndex, null, null));
+        */
+
+
 
         tilePane.setTileAlignment(Pos.TOP_LEFT);
         tilePane.setHgap(0);
@@ -399,12 +419,27 @@ public class Map {
         else if(tileHeight > tileWidth){
             tileHeight = tileWidth;
         }
+        Settings.setResponsiveTileWidth(tileWidth);
 
         tilePane.getChildren().forEach(tile -> {
             ImageView imageView = (ImageView) tile; // Annahme: Die Tiles sind vom Typ ImageView
             imageView.setFitWidth(tileWidth);
             imageView.setFitHeight(tileHeight);
         });
+
+        if(weaponManager != null){
+            weaponManager.updateResponsiveSize();
+        }
+        if(enemyManager != null){
+            enemyManager.updateResponsiveSize();
+        }
+    }
+
+    public void setWeaponManager(WeaponManager weaponManager){
+        this.weaponManager = weaponManager;
+    }
+    public void setEnemyManager(EnemyManager enemyManager){
+        this.enemyManager = enemyManager;
     }
 
 }

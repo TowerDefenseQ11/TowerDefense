@@ -19,3 +19,6 @@ GUI Struktur:
     - tile pane (background)
     - player pane (enemies / objects)
     - ui pane (ui buttons)
+
+Konzeption:
+[UML](umlDiagram.pdf)

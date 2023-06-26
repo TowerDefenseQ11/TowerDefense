@@ -100,6 +100,15 @@ public class EnemyHandler {
     public List<Enemy> getAllEnemies() {
         return allEnemies;
     }
+
+    /*
+     * updates size and position of all weapons
+     */
+    public void updateResponsiveSize(){
+        allEnemies.forEach(enemy -> {
+            enemy.updateResponsiveSize();
+        });
+    }
 }
 
 
