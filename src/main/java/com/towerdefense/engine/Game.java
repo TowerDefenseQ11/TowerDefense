@@ -1,6 +1,7 @@
 package com.towerdefense.engine;
 
 import com.towerdefense.Settings;
+import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.weapon.Weapon;
 import com.towerdefense.weapon.WeaponHandler;
 import com.towerdefense.enemy.Enemy;
@@ -57,7 +58,7 @@ public class Game {
 
         //add first enemy
         enemyManager = new EnemyHandler(playfield, mapPos);
-        enemyManager.addEnemy();
+        enemyManager.addEnemy(EnemyType.ENEMY_1);
 
         //add demo weapons
         weaponHandler = new WeaponHandler(playfield, enemyManager);
@@ -114,7 +115,7 @@ public class Game {
             @Override
             public void handle(ActionEvent event) {
                 //spawn new enemy
-                enemyManager.addEnemy();
+                enemyManager.addEnemy(EnemyType.ENEMY_2);
             }
         }));
         enemySpawnTimeline.setCycleCount(Timeline.INDEFINITE);
