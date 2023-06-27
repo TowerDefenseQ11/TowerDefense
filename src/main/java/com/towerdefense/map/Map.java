@@ -77,6 +77,7 @@ public class Map {
             }
         });
 
+        /*
         updateResponsiveSize();
        
         this.layerPane.widthProperty().addListener((obs, oldVal, newVal) -> {
@@ -86,6 +87,7 @@ public class Map {
         this.layerPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
+        */
        
     }
 

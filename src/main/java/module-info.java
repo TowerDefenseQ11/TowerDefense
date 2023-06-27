@@ -12,10 +12,12 @@ module com.towerdefense {
     opens com.towerdefense.weapon.bullet to javafx.fxml;
     exports com.towerdefense.enemy;
     opens com.towerdefense.enemy to javafx.fxml;
-    exports com.towerdefense.enemy.manager;
-    opens com.towerdefense.enemy.manager to javafx.fxml;
+    exports com.towerdefense.enemy.handler;
+    opens com.towerdefense.enemy.handler to javafx.fxml;
     exports com.towerdefense.engine;
     opens com.towerdefense.engine to javafx.fxml;
     exports com.towerdefense.weapon;
     opens com.towerdefense.weapon to javafx.fxml;
+    exports com.towerdefense.enemy.type;
+    opens com.towerdefense.enemy.type to javafx.fxml;
 }

@@ -22,9 +22,6 @@ public class App extends Application {
     // entire game as layers = root
     private Pane layerPane;
 
-
-    
-
     @Override
     public void start(Stage stage) throws IOException {
         

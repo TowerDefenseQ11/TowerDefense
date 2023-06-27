@@ -3,7 +3,7 @@ package com.towerdefense.weapon.bullet;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.Enemy;
-import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.engine.Vector2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,9 +20,9 @@ public class Bullet {
     private AnimationTimer loop;
     private Layer playerfield;
     private int angle;
-    private EnemyManager enemyManager;
+    private EnemyHandler enemyManager;
 
-    public Bullet(int x, int y, int angle, Layer layer, EnemyManager enemyManager){
+    public Bullet(int x, int y, int angle, Layer layer, EnemyHandler enemyManager){
         this.playerfield = layer;
         this.angle = angle;
         this.enemyManager = enemyManager;

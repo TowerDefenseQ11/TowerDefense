@@ -1,7 +1,7 @@
 package com.towerdefense.weapon;
 
 import com.towerdefense.Settings;
-import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.weapon.bullet.Bullet;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.engine.Vector2D;
@@ -20,7 +20,6 @@ import javafx.animation.KeyFrame;
 public class Weapon {
     private Image image;
     private ImageView imageView;
-    private ImageView backgroundView;
     private int damage;
     private Vector2D location;
     private Vector2D lastTarget;
@@ -32,27 +31,22 @@ public class Weapon {
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
 
-    private int x, y;
+    private EnemyHandler enemyManager;
 
-    private EnemyManager enemyManager;
-
-    public Weapon(int x, int y, Layer layer, EnemyManager enemyManager){
-        this.x = x;
-        this.y = y;
-
+    public Weapon(int x, int y, Layer layer, EnemyHandler enemyManager){
         this.playerfield = layer;
         this.enemyManager = enemyManager;
         damage = 10;
 
-        location = new Vector2D(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+        location = new Vector2D(x, y);
 
         Image background = new Image("Tower1Base.png", 64, 64, false, false);
-        backgroundView = new ImageView(background);
-        backgroundView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+        ImageView backgroundView = new ImageView(background);
+        backgroundView.relocate(x, y);
 
         image = new Image("Tower1Top.png", 64, 64, false, false); //weapon_1
         imageView = new ImageView(image);
-        imageView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+        imageView.relocate(x, y);
         imageView.setRotate(angle);
 
         layer.getChildren().add(backgroundView);
@@ -91,25 +85,10 @@ public class Weapon {
     }
 
     /*
-     * fit size and position to cell width
-     */
-    public void updateResponsiveSize(){
-        imageView.setFitWidth(Settings.getResponsiveTileWidth());
-        imageView.setFitHeight(Settings.getResponsiveTileWidth());
-        imageView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
-
-        backgroundView.setFitWidth(Settings.getResponsiveTileWidth());
-        backgroundView.setFitHeight(Settings.getResponsiveTileWidth());
-        backgroundView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
-
-        location = new Vector2D(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
-    }
-
-    /*
      * spawn bullet every x seconds
      */
     private void spawnBullets(){
-
+        
         Timeline bulletSpawnTimeline = new Timeline(
                  new KeyFrame(Duration.seconds(Settings.BULLET_SPAWN_TIME), 
                  new EventHandler<ActionEvent>() {
