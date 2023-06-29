@@ -22,12 +22,11 @@ public class GuiHandler {
             Layer lastLayer = currentGUI.getLayer();
             layerPane.getChildren().remove(lastLayer);
         }
+        currentGUI = newGUI;
 
         Layer guiLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(guiLayer);
         newGUI.setLayer(guiLayer);
-
-        currentGUI = newGUI;
     }
 
     public static GUI getGUI(){

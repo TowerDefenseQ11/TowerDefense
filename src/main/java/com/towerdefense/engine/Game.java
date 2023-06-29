@@ -94,7 +94,7 @@ public class Game {
                     Enemy target = enemyManager.getNearestEnemy(weapon.getLocation());
                     if (
                             target != null &&
-                                    Vector2D.subtract(target.getLocation(), weapon.getLocation()).magnitude() > Settings.BULLET_MAX_DISTANCE
+                            Vector2D.subtract(target.getLocation(), weapon.getLocation()).magnitude() < Settings.BULLET_MAX_DISTANCE
                     ) {
                         weapon.rotateTo(target.getLocation());
                     } else {

@@ -12,6 +12,7 @@ public class GameGUI extends GUI{
 
     void drawGui(){
         healthbar = new HealthBar(this.getLayer()); 
+        Game game = new Game(GuiHandler.getLayerPane());
     }
     
     public HealthBar getHealthBar(){

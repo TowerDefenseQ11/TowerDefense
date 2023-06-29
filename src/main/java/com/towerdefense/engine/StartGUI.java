@@ -71,7 +71,6 @@ public class StartGUI extends GUI
             */
             GameGUI gameGUI = new GameGUI();
             GuiHandler.switchGui(gameGUI);
-            Game game = new Game(GuiHandler.getLayerPane());
             }
         });
     
@@ -90,7 +89,6 @@ public class StartGUI extends GUI
             {
                 skillTreeGUI skillTree = new skillTreeGUI(GuiHandler.getLayerPane());
                 GuiHandler.switchGui(skillTree);
-                skillTree.drawGui();
             }
         });
         /*

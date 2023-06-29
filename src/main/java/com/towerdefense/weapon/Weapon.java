@@ -1,5 +1,7 @@
 package com.towerdefense.weapon;
 
+import java.util.Random;
+
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.weapon.bullet.Bullet;
@@ -28,6 +30,8 @@ public class Weapon {
     private double angle = 0;
     private Layer playerfield;
     private boolean isShooting;
+    private Random random = new Random();
+    private Timeline bulletSpawnTimeline;
 
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
@@ -96,8 +100,8 @@ public class Weapon {
      */
     private void spawnBullets(){
         
-        Timeline bulletSpawnTimeline = new Timeline(
-                 new KeyFrame(Duration.seconds(Settings.BULLET_SPAWN_TIME), 
+        bulletSpawnTimeline = new Timeline(
+                 new KeyFrame(Duration.seconds(Settings.BULLET_SPAWN_TIME + Math.random() * 1.0), 
                  new EventHandler<ActionEvent>() {
 
             @Override
@@ -106,6 +110,7 @@ public class Weapon {
                 if(!isShooting){
                     return;
                 }
+                
                 new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield, enemyManager);
             }
         }));
