@@ -6,9 +6,13 @@ import com.towerdefense.engine.Vector2D;
 import com.towerdefense.enemy.Enemy;
 import javafx.scene.Scene;
 
+import java.util.Collections;
+import java.util.Random;
+
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Iterator; 
+import java.util.concurrent.CopyOnWriteArrayList; 
 
 /*
  * handle all enemies and update position smoothly
@@ -17,7 +21,9 @@ public class EnemyHandler {
 
     private Layer playfield;
     static Random random = new Random();
-    private List<Enemy> allEnemies = new ArrayList<>();
+    //fixes java.util.ConcurrentModificationException
+    private CopyOnWriteArrayList<Enemy> allEnemies = new CopyOnWriteArrayList<Enemy>(); 
+    private List<Enemy> synlist = Collections.synchronizedList( allEnemies ); 
     private int[][] mapPos;
 
     public EnemyHandler(Layer playfield, int[][] mapPos) {
@@ -26,13 +32,28 @@ public class EnemyHandler {
         this.mapPos = mapPos;
     }
 
+    public void syncEnemies(){
+        synchronized(synlist) 
+        { 
+        // Call iterator() method to iterate the ArrayList. 
+            Iterator<Enemy> itr = synlist.iterator(); 
+            while(itr.hasNext())
+            { 
+                Enemy enemy = itr.next(); 
+                System.out.println(enemy); 
+            } 
+        } 
+    }
+
     /*
      * update position of each enemy smoothly in new thread -> gameLoop
      */
     public void updateMove() {
         // seek attractor location, apply force to get towards it
-        allEnemies.forEach(vehicle -> { //todo: fix java.util.ConcurrentModificationException
-            vehicle.seek();
+        allEnemies.forEach(vehicle -> { 
+            if(vehicle != null){
+                vehicle.seek();
+            }
         });
 
         // move sprite

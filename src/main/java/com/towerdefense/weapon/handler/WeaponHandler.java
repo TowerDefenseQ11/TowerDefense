@@ -1,5 +1,6 @@
 package com.towerdefense.weapon.handler;
 
+import com.towerdefense.Settings;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.weapon.Weapon;
@@ -25,6 +26,8 @@ public class WeaponHandler {
         // create sprite and add to layer
         //x *= 64;
         //y *= 64;
+        x *= Settings.getResponsiveTileWidth();
+        y *= Settings.getResponsiveTileWidth();
         Weapon weapon = new Weapon(x, y, playfield, enemyManager);
 
         // register vehicle
@@ -43,7 +46,7 @@ public class WeaponHandler {
      */
     public void updateResponsiveSize(){
         allWeapons.forEach(weapon -> {
-            //weapon.updateResponsiveSize();
+            weapon.updateResponsiveSize();
         });
     }
 }

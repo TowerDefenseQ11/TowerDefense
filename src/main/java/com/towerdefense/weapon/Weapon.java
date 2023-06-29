@@ -20,6 +20,7 @@ import javafx.animation.KeyFrame;
 public class Weapon {
     private Image image;
     private ImageView imageView;
+    private ImageView backgroundView;
     private int damage;
     private Vector2D location;
     private Vector2D lastTarget;
@@ -31,9 +32,15 @@ public class Weapon {
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
 
+    private int x, y;
+
+
     private EnemyHandler enemyManager;
 
     public Weapon(int x, int y, Layer layer, EnemyHandler enemyManager){
+        this.x = x;
+        this.y = y;
+
         this.playerfield = layer;
         this.enemyManager = enemyManager;
         damage = 10;
@@ -41,7 +48,7 @@ public class Weapon {
         location = new Vector2D(x, y);
 
         Image background = new Image("Tower1Base.png", 64, 64, false, false);
-        ImageView backgroundView = new ImageView(background);
+        backgroundView = new ImageView(background);
         backgroundView.relocate(x, y);
 
         image = new Image("Tower1Top.png", 64, 64, false, false); //weapon_1
@@ -109,4 +116,20 @@ public class Weapon {
     public void setShooting(boolean isShooting){
         this.isShooting = isShooting;
     }
+
+    /*
+     * fit size and position to cell width
+     */
+    public void updateResponsiveSize(){
+        imageView.setFitWidth(Settings.getResponsiveTileWidth());
+        imageView.setFitHeight(Settings.getResponsiveTileWidth());
+        imageView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+
+        backgroundView.setFitWidth(Settings.getResponsiveTileWidth());
+        backgroundView.setFitHeight(Settings.getResponsiveTileWidth());
+        backgroundView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+
+        location = new Vector2D(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+    }
+
 }
