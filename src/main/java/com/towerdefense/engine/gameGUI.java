@@ -2,15 +2,19 @@ package com.towerdefense.engine;
 
 import javafx.scene.layout.Pane;
 
-public class gameGUI extends GUI{
+public class GameGUI extends GUI{
 
-    public gameGUI() {
+    private HealthBar healthbar;
+
+    public GameGUI() {
         super();
-        //TODO Auto-generated constructor stub
     }
 
     void drawGui(){
-        
+        healthbar = new HealthBar(this.getLayer()); 
     }
     
+    public HealthBar getHealthBar(){
+        return healthbar;
+    }
 }
