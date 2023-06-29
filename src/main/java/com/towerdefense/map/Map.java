@@ -3,10 +3,10 @@ package com.towerdefense.map;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.Enemy;
-import com.towerdefense.enemy.manager.EnemyManager;
+import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.map.tile.Tile;
 import com.towerdefense.weapon.Weapon;
-import com.towerdefense.weapon.WeaponManager;
+import com.towerdefense.weapon.handler.WeaponHandler;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,8 +47,8 @@ public class Map {
     private double tileWidth;
     private double tileHeight;
 
-    private WeaponManager weaponManager;
-    private EnemyManager enemyManager;
+    private WeaponHandler weaponHandler;
+    private EnemyHandler enemyHandler;
 
     private String mapName = "pixel";
 
@@ -427,19 +427,19 @@ public class Map {
             imageView.setFitHeight(tileHeight);
         });
 
-        if(weaponManager != null){
-            weaponManager.updateResponsiveSize();
+        if(weaponHandler != null){
+            weaponHandler.updateResponsiveSize();
         }
-        if(enemyManager != null){
-            enemyManager.updateResponsiveSize();
+        if(enemyHandler != null){
+            enemyHandler.updateResponsiveSize();
         }
     }
 
-    public void setWeaponManager(WeaponManager weaponManager){
-        this.weaponManager = weaponManager;
+    public void setWeaponHandler(WeaponHandler weaponHandler){
+        this.weaponHandler = weaponHandler;
     }
-    public void setEnemyManager(EnemyManager enemyManager){
-        this.enemyManager = enemyManager;
+    public void setEnemyHandler(EnemyHandler enemyHandler){
+        this.enemyHandler = enemyHandler;
     }
 
 }

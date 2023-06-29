@@ -1,7 +1,8 @@
-package com.towerdefense.weapon;
+package com.towerdefense.weapon.handler;
 
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.engine.Layer;
+import com.towerdefense.weapon.Weapon;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class WeaponHandler {
      */
     public void updateResponsiveSize(){
         allWeapons.forEach(weapon -> {
-            weapon.updateResponsiveSize();
+            //weapon.updateResponsiveSize();
         });
     }
 }

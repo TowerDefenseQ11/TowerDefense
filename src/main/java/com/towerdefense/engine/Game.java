@@ -3,7 +3,7 @@ package com.towerdefense.engine;
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.weapon.Weapon;
-import com.towerdefense.weapon.WeaponHandler;
+import com.towerdefense.weapon.handler.WeaponHandler;
 import com.towerdefense.enemy.Enemy;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import javafx.animation.KeyFrame;
