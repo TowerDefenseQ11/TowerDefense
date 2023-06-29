@@ -29,4 +29,8 @@ public class GuiHandler {
 
         currentGUI = newGUI;
     }
+
+    public static GUI getGUI(){
+        return currentGUI;
+    }
 }

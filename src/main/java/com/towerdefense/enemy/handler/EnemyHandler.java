@@ -1,6 +1,8 @@
 package com.towerdefense.enemy.handler;
 
 import com.towerdefense.enemy.type.EnemyType;
+import com.towerdefense.engine.GameGUI;
+import com.towerdefense.engine.GuiHandler;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.engine.Vector2D;
 import com.towerdefense.enemy.Enemy;
@@ -83,6 +85,10 @@ public class EnemyHandler {
 
         // register vehicle
         allEnemies.add(enemy);
+
+        //todo: debug test healthbar
+        GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+        gameGUI.getHealthBar().updateHealthBar();
     }
 
     /*

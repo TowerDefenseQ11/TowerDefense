@@ -69,9 +69,9 @@ public class StartGUI extends GUI
             /*
             create game with enemies and weapons
             */
-            Game game = new Game(GuiHandler.getLayerPane());
             GameGUI gameGUI = new GameGUI();
             GuiHandler.switchGui(gameGUI);
+            Game game = new Game(GuiHandler.getLayerPane());
             }
         });
     

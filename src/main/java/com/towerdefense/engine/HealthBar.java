@@ -21,7 +21,7 @@ public class HealthBar {
 
     public void updateHealthBar(){
         health--;
-        int width = health/100 * maxHealthPixel;
+        int width = (int) (health/100.0 * maxHealthPixel);
         foreground.setWidth(width);
     }
 }
