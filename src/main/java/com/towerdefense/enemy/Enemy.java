@@ -2,6 +2,8 @@ package com.towerdefense.enemy;
 
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.enemy.type.EnemyType;
+import com.towerdefense.engine.GameGUI;
+import com.towerdefense.engine.GuiHandler;
 import com.towerdefense.engine.HealthBar;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
@@ -98,6 +100,12 @@ public class Enemy extends Pane {
      */
     public void seek() {
         if (posIndex >= mapPos.length) {
+            //end of path reached
+            GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+            HealthBar healthBar = gameGUI.getHealthBar();
+            if(healthBar != null){
+                healthBar.updateHealthBar();
+            }
             this.enemyHandler.destroyEnemy(this);
             return;
         }

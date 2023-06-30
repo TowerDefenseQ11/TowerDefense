@@ -86,13 +86,6 @@ public class EnemyHandler {
 
         // register vehicle
         allEnemies.add(enemy);
-
-        //todo: debug test healthbar
-        GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
-        HealthBar healthBar = gameGUI.getHealthBar();
-        if(healthBar != null){
-            healthBar.updateHealthBar();
-        }
     }
 
     /*

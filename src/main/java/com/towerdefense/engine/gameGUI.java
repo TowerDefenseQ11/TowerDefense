@@ -18,6 +18,7 @@ public class GameGUI extends GUI{
         topLayer.setPickOnBounds(false);
         GuiHandler.getLayerPane().getChildren().addAll(topLayer);
         healthbar = new HealthBar(topLayer); 
+        healthbar.setStartHealth(5);
     }
     
     public HealthBar getHealthBar(){

@@ -70,7 +70,7 @@ public class Bullet {
             Vector2D subtract = Vector2D.subtract(locationMitte, enemy.getLocation());
             double distance = subtract.magnitude();
             
-            if(distance < Settings.getResponsiveTileWidth()*0.8){
+            if(distance < Settings.getResponsiveTileWidth()/2){
                 enemy.damage(Settings.BULLET_Damage);
                 destroy();
             }

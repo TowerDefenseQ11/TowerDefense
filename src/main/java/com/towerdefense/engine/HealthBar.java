@@ -49,15 +49,16 @@ public class HealthBar {
         guiLayer.getChildren().add(foreground);
     }
 
+    public void setStartHealth(double startHealth){
+        this.startHealth = startHealth;
+        this.health = startHealth;
+    }
 
     public void updateHealthBar(){
         health--;
-        int width = (int) (health/100.0 * maxHealthPixel);
+        System.out.println(health + " / " + startHealth);
+        int width = (int) (health/startHealth * maxHealthPixel);
         foreground.setWidth(width);
-    }
-
-    public void setStartHealth(double startHealth){
-        this.startHealth = startHealth;
     }
 
     public void updateHealthBar(double health){
