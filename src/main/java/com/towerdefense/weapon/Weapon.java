@@ -1,5 +1,7 @@
 package com.towerdefense.weapon;
 
+import java.util.Random;
+
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.weapon.bullet.Bullet;
@@ -20,6 +22,7 @@ import javafx.animation.KeyFrame;
 public class Weapon {
     private Image image;
     private ImageView imageView;
+    private ImageView backgroundView;
     private int damage;
     private Vector2D location;
     private Vector2D lastTarget;
@@ -27,13 +30,21 @@ public class Weapon {
     private double angle = 0;
     private Layer playerfield;
     private boolean isShooting;
+    private Random random = new Random();
+    private Timeline bulletSpawnTimeline;
 
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
 
+    private int x, y;
+
+
     private EnemyHandler enemyManager;
 
     public Weapon(int x, int y, Layer layer, EnemyHandler enemyManager){
+        this.x = x;
+        this.y = y;
+
         this.playerfield = layer;
         this.enemyManager = enemyManager;
         damage = 10;
@@ -41,7 +52,7 @@ public class Weapon {
         location = new Vector2D(x, y);
 
         Image background = new Image("Tower1Base.png", 64, 64, false, false);
-        ImageView backgroundView = new ImageView(background);
+        backgroundView = new ImageView(background);
         backgroundView.relocate(x, y);
 
         image = new Image("Tower1Top.png", 64, 64, false, false); //weapon_1
@@ -89,8 +100,8 @@ public class Weapon {
      */
     private void spawnBullets(){
         
-        Timeline bulletSpawnTimeline = new Timeline(
-                 new KeyFrame(Duration.seconds(Settings.BULLET_SPAWN_TIME), 
+        bulletSpawnTimeline = new Timeline(
+                 new KeyFrame(Duration.seconds(Settings.BULLET_SPAWN_TIME + Math.random() * Settings.BULLET_RANDOM_SPAWN_TIME), 
                  new EventHandler<ActionEvent>() {
 
             @Override
@@ -99,6 +110,7 @@ public class Weapon {
                 if(!isShooting){
                     return;
                 }
+                
                 new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield, enemyManager);
             }
         }));
@@ -109,4 +121,20 @@ public class Weapon {
     public void setShooting(boolean isShooting){
         this.isShooting = isShooting;
     }
+
+    /*
+     * fit size and position to cell width
+     */
+    public void updateResponsiveSize(){
+        imageView.setFitWidth(Settings.getResponsiveTileWidth());
+        imageView.setFitHeight(Settings.getResponsiveTileWidth());
+        imageView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+
+        backgroundView.setFitWidth(Settings.getResponsiveTileWidth());
+        backgroundView.setFitHeight(Settings.getResponsiveTileWidth());
+        backgroundView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+
+        location = new Vector2D(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+    }
+
 }

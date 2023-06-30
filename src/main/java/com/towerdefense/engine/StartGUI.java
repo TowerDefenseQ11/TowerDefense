@@ -2,7 +2,7 @@ package com.towerdefense.engine;
 
 import com.towerdefense.map.Map;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+//import javafx.scene.layout.Pane;
 import javafx.scene.text.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -60,17 +60,11 @@ public class StartGUI extends GUI
         */
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                 
-            /*
-            create background
-            */
-            Map tilemap = new Map(GuiHandler.getLayerPane());
         
             /*
             create game with enemies and weapons
             */
-            Game game = new Game(GuiHandler.getLayerPane());
-            gameGUI gameGUI = new gameGUI();
+            GameGUI gameGUI = new GameGUI();
             GuiHandler.switchGui(gameGUI);
             }
         });
@@ -90,7 +84,6 @@ public class StartGUI extends GUI
             {
                 skillTreeGUI skillTree = new skillTreeGUI(GuiHandler.getLayerPane());
                 GuiHandler.switchGui(skillTree);
-                skillTree.drawGui();
             }
         });
         /*

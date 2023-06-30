@@ -1,10 +1,12 @@
-package com.towerdefense.weapon;
+package com.towerdefense.weapon.handler;
 
+import com.towerdefense.Settings;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.engine.Layer;
+import com.towerdefense.weapon.Weapon;
 
 import java.util.List;
-
+import java.util.Random;
 import java.util.ArrayList;
 
 /*
@@ -24,6 +26,8 @@ public class WeaponHandler {
         // create sprite and add to layer
         //x *= 64;
         //y *= 64;
+        x *= Settings.getResponsiveTileWidth();
+        y *= Settings.getResponsiveTileWidth();
         Weapon weapon = new Weapon(x, y, playfield, enemyManager);
 
         // register vehicle

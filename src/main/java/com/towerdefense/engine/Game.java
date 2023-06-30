@@ -2,10 +2,12 @@ package com.towerdefense.engine;
 
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.type.EnemyType;
+import com.towerdefense.map.Map;
 import com.towerdefense.weapon.Weapon;
-import com.towerdefense.weapon.WeaponHandler;
+import com.towerdefense.weapon.handler.WeaponHandler;
 import com.towerdefense.enemy.Enemy;
 import com.towerdefense.enemy.handler.EnemyHandler;
+import com.towerdefense.engine.CreateWeaponPopup;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.util.Duration;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.Pane;
 
+import java.io.Serial;
 import java.util.List;
 
 /*
@@ -50,11 +53,15 @@ public class Game {
     private EnemyHandler enemyManager;
     private WeaponHandler weaponHandler;
     private Layer playfield;
+    private Layer popupLayer;
 
     public Game(Pane layerPane) {
+        Map tilemap = new Map(layerPane, this);
+
         //create new game layer
         playfield = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(playfield);
+        playfield.setPickOnBounds(false);
 
         //add first enemy
         enemyManager = new EnemyHandler(playfield, mapPos);
@@ -62,6 +69,7 @@ public class Game {
 
         //add demo weapons
         weaponHandler = new WeaponHandler(playfield, enemyManager);
+        /* 
         weaponHandler.addWeapon(0, 5);
         weaponHandler.addWeapon(1, 5);
         weaponHandler.addWeapon(2, 5);
@@ -70,10 +78,33 @@ public class Game {
         weaponHandler.addWeapon(5, 5);
         weaponHandler.addWeapon(5, 6);
         weaponHandler.addWeapon(5, 7);
+        */
+        
+        popupLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        layerPane.getChildren().addAll(popupLayer);
+        popupLayer.setPickOnBounds(false);
+
+
 
         //start game loop
         startGame();
 
+    }
+
+    public void OpenCreateWeaponPopup(int x, int y){
+        popupLayer.setPickOnBounds(true);
+        popupLayer.getChildren().clear();
+        CreateWeaponPopup popup = new CreateWeaponPopup(x, y, popupLayer, this);
+    }
+
+    public void createWeapon(int x, int y){
+        System.out.println(x + "; " + y);
+        popupLayer.setPickOnBounds(false);
+        popupLayer.getChildren().clear();
+        weaponHandler.addWeapon(x, y);
+        Settings.MONEY -= Settings.TOWER_COST;
+        GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+        gameGUI.updateMoney();
     }
 
     void startGame() {
@@ -94,7 +125,7 @@ public class Game {
                     Enemy target = enemyManager.getNearestEnemy(weapon.getLocation());
                     if (
                             target != null &&
-                                    Vector2D.subtract(target.getLocation(), weapon.getLocation()).magnitude() > Settings.BULLET_MAX_DISTANCE
+                            Vector2D.subtract(target.getLocation(), weapon.getLocation()).magnitude() < Settings.BULLET_MAX_DISTANCE
                     ) {
                         weapon.rotateTo(target.getLocation());
                     } else {

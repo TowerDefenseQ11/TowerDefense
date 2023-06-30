@@ -2,16 +2,20 @@ package com.towerdefense.enemy;
 
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.enemy.type.EnemyType;
+import com.towerdefense.engine.GameGUI;
+import com.towerdefense.engine.GuiHandler;
+import com.towerdefense.engine.HealthBar;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.engine.Vector2D;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Enemy extends Region {
+public class Enemy extends Pane {
 
     private Vector2D location;
     private Vector2D velocity;
@@ -36,6 +40,7 @@ public class Enemy extends Region {
     private double maxForce;
     private double maxSpeed;
     private double health;
+    private HealthBar healthBar;
 
 
     public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
@@ -54,6 +59,8 @@ public class Enemy extends Region {
         this.centerY = height / 2;
 
         health = enemyType.getStartHealth();
+        healthBar = new HealthBar(this);
+        healthBar.setStartHealth(health);
 
         this.view = createView();
         setPrefSize(width, height);
@@ -93,6 +100,12 @@ public class Enemy extends Region {
      */
     public void seek() {
         if (posIndex >= mapPos.length) {
+            //end of path reached
+            GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+            HealthBar healthBar = gameGUI.getHealthBar();
+            if(healthBar != null){
+                healthBar.updateHealthBar();
+            }
             this.enemyHandler.destroyEnemy(this);
             return;
         }
@@ -148,6 +161,7 @@ public class Enemy extends Region {
 
     public void damage(int hit) {
         health -= hit;
+        healthBar.updateHealthBar(health);
         if (health <= 0) {
             this.enemyHandler.destroyEnemy(this);
         }
