@@ -26,8 +26,8 @@ public class Settings {
     public static int BULLET_Damage = 1;
 
     //money to buy and upgrade towers
-    public static int MONEY = 100;
-    public static int TOWER_COST = 0;
+    public static int MONEY = 30;
+    public static int TOWER_COST = 10;
 
     private static double responsiveTileWidth = 64;
 

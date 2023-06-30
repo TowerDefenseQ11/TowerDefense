@@ -102,6 +102,9 @@ public class Game {
         popupLayer.setPickOnBounds(false);
         popupLayer.getChildren().clear();
         weaponHandler.addWeapon(x, y);
+        Settings.MONEY -= Settings.TOWER_COST;
+        GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+        gameGUI.updateMoney();
     }
 
     void startGame() {

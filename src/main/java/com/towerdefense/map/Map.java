@@ -91,8 +91,6 @@ public class Map {
             game.OpenCreateWeaponPopup(x, y);
             
             //Weapon weapon = new Weapon(x, y, (Layer) layerPane.getChildren().get(1));
-            
-            Settings.MONEY -= Settings.TOWER_COST;
         }
 
     }
