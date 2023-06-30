@@ -14,12 +14,12 @@ public class Settings {
     public static double ENEMY_MAX_FORCE = 0.001;
     public static double ENEMY_SPAWN_TIME = 6;
     public static double ENEMY_SLOW_DOWN_DISTANCE = 32;
-    public static int ENEMY_MAX_HEALTH = 10;
+    public static int ENEMY_MAX_HEALTH = 100;
 
     public static double WEAPON_MAX_SPEED = 2;
     public static double WEAPON_MAX_FORCE = 0.05;
 
-    public static double BULLET_MAX_SPEED = 30;
+    public static double BULLET_MAX_SPEED = 40;
     public static double BULLET_SPAWN_TIME = 0.2;
     public static double BULLET_RANDOM_SPAWN_TIME = 0.1;
     public static double BULLET_MAX_DISTANCE = 64 * 30;

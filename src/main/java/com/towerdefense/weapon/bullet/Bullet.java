@@ -62,8 +62,8 @@ public class Bullet {
             Vector2D locationMitte = new Vector2D(location.x, location.y);
             locationMitte.add(
                 new Vector2D(
-                    Settings.getResponsiveTileWidth(),
-                    Settings.getResponsiveTileWidth()
+                    Settings.getResponsiveTileWidth()/2,
+                    Settings.getResponsiveTileWidth()/2
                 )
             );
 
@@ -71,7 +71,7 @@ public class Bullet {
             double distance = subtract.magnitude();
             
             if(distance < Settings.getResponsiveTileWidth()*0.8){
-                System.out.println(distance);
+                enemy.damage(Settings.BULLET_Damage);
                 destroy();
             }
         }

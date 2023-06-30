@@ -57,6 +57,8 @@ public class Enemy extends Pane {
         this.centerY = height / 2;
 
         health = enemyType.getStartHealth();
+        healthBar = new HealthBar(this);
+        healthBar.setStartHealth(health);
 
         this.view = createView();
         setPrefSize(width, height);
@@ -64,8 +66,6 @@ public class Enemy extends Pane {
         getChildren().add(view);
         // add this node to layer
         layer.getChildren().add(this);
-
-        healthBar = new HealthBar(this);
     }
 
     public Node createView() {
@@ -153,6 +153,7 @@ public class Enemy extends Pane {
 
     public void damage(int hit) {
         health -= hit;
+        healthBar.updateHealthBar(health);
         if (health <= 0) {
             this.enemyHandler.destroyEnemy(this);
         }
