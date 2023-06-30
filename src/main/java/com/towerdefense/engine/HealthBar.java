@@ -16,7 +16,7 @@ public class HealthBar {
     private int maxHealthPixel;
     private double startHealth;
 
-    public HealthBar(Layer guiLayer){
+    public HealthBar(Layer guiLayer){ //healthbar for gui
         startHealth = 100;
         health = startHealth;
         maxHealthPixel = 200;
@@ -30,8 +30,8 @@ public class HealthBar {
         guiLayer.getChildren().add(foreground);
     }
 
-
-    public HealthBar(Pane guiLayer){
+ 
+    public HealthBar(Pane guiLayer){ //healthbar for enemies
         health = 100;
         maxHealthPixel = 100;
 

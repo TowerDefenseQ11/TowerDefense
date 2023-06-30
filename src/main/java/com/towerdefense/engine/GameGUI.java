@@ -1,7 +1,9 @@
 package com.towerdefense.engine;
 
 import com.towerdefense.Settings;
+import com.towerdefense.map.Map;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -12,13 +14,21 @@ public class GameGUI extends GUI{
 
     private HealthBar healthbar;
     private Text money;
+    private Game game;
 
     public GameGUI() {
         super();
     }
 
     void drawGui(){
-        healthbar = new HealthBar(this.getLayer()); 
+        Map tilemap = new Map(GuiHandler.getLayerPane(), game);
+        game = new Game(GuiHandler.getLayerPane());
+
+        Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        GuiHandler.getLayerPane().getChildren().addAll(topLayer);
+        topLayer.setPickOnBounds(false);
+
+        healthbar = new HealthBar(topLayer); 
         healthbar.setStartHealth(5);
         /*
         create money label
