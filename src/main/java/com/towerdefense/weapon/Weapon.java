@@ -101,7 +101,7 @@ public class Weapon {
     private void spawnBullets(){
         
         bulletSpawnTimeline = new Timeline(
-                 new KeyFrame(Duration.seconds(Settings.BULLET_SPAWN_TIME + Math.random() * 1.0), 
+                 new KeyFrame(Duration.seconds(Settings.BULLET_SPAWN_TIME + Math.random() * Settings.BULLET_RANDOM_SPAWN_TIME), 
                  new EventHandler<ActionEvent>() {
 
             @Override

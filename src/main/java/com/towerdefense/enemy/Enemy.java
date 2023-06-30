@@ -2,16 +2,18 @@ package com.towerdefense.enemy;
 
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.enemy.type.EnemyType;
+import com.towerdefense.engine.HealthBar;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.engine.Vector2D;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Enemy extends Region {
+public class Enemy extends Pane {
 
     private Vector2D location;
     private Vector2D velocity;
@@ -36,6 +38,7 @@ public class Enemy extends Region {
     private double maxForce;
     private double maxSpeed;
     private double health;
+    private HealthBar healthBar;
 
 
     public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
@@ -61,6 +64,8 @@ public class Enemy extends Region {
         getChildren().add(view);
         // add this node to layer
         layer.getChildren().add(this);
+
+        healthBar = new HealthBar(this);
     }
 
     public Node createView() {

@@ -3,6 +3,7 @@ package com.towerdefense.enemy.handler;
 import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.engine.GameGUI;
 import com.towerdefense.engine.GuiHandler;
+import com.towerdefense.engine.HealthBar;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.engine.Vector2D;
 import com.towerdefense.enemy.Enemy;
@@ -88,7 +89,10 @@ public class EnemyHandler {
 
         //todo: debug test healthbar
         GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
-        gameGUI.getHealthBar().updateHealthBar();
+        HealthBar healthBar = gameGUI.getHealthBar();
+        if(healthBar != null){
+            healthBar.updateHealthBar();
+        }
     }
 
     /*

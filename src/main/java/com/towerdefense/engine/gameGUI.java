@@ -1,5 +1,7 @@
 package com.towerdefense.engine;
 
+import com.towerdefense.Settings;
+
 import javafx.scene.layout.Pane;
 
 public class GameGUI extends GUI{
@@ -11,8 +13,11 @@ public class GameGUI extends GUI{
     }
 
     void drawGui(){
-        healthbar = new HealthBar(this.getLayer()); 
         Game game = new Game(GuiHandler.getLayerPane());
+        Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        topLayer.setPickOnBounds(false);
+        GuiHandler.getLayerPane().getChildren().addAll(topLayer);
+        healthbar = new HealthBar(topLayer); 
     }
     
     public HealthBar getHealthBar(){

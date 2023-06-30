@@ -1,5 +1,7 @@
 package com.towerdefense.map;
 
+import com.towerdefense.engine.CreateWeaponPopup;
+import com.towerdefense.engine.Game;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.Enemy;
@@ -52,30 +54,15 @@ public class Map {
 
     private String mapName = "pixel";
 
+    private Game game;
 
-    public Map(Pane layerPane){
+
+    public Map(Pane layerPane, Game game){
         this.layerPane = layerPane;
+        this.game = game;
 
         initTilemap();
         drawMap(layerPane);
-       
-        // Set up the event handlers
-        layerPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                // Check if the player has enough resources to place a tower
-                if (Settings.MONEY >= Settings.TOWER_COST) {
-                    // Create a new tower and deduct the cost from the player's resources
-                    //Tower tower = new Tower((int) event.getX(), (int) event.getY());
-                    int x = (int) Math.floor(event.getX() / 64.0) * 64;
-                    int y = (int) Math.floor(event.getY() / 64.0) * 64;
-                    
-                    //Weapon weapon = new Weapon(x, y, (Layer) layerPane.getChildren().get(1));
-                    
-                    Settings.MONEY -= Settings.TOWER_COST;
-                }
-            }
-        });
 
         /*
         updateResponsiveSize();
@@ -91,6 +78,24 @@ public class Map {
        
     }
 
+    /*
+     * handle click event on map to create new towers ot upgrade existing towers
+     */
+    private void handleClick(int x, int y){
+        if (Settings.MONEY >= Settings.TOWER_COST) {
+            // Create a new tower and deduct the cost from the player's resources
+            //Tower tower = new Tower((int) event.getX(), (int) event.getY());
+            //int x = (int) Math.round(Math.floor(event.getX() / Settings.getResponsiveTileWidth()) * Settings.getResponsiveTileWidth());
+            //int y = (int) Math.round(Math.floor(event.getY() / Settings.getResponsiveTileWidth()) * Settings.getResponsiveTileWidth());
+
+            game.OpenCreateWeaponPopup(x, y);
+            
+            //Weapon weapon = new Weapon(x, y, (Layer) layerPane.getChildren().get(1));
+            
+            Settings.MONEY -= Settings.TOWER_COST;
+        }
+
+    }
     private void initTilemap(){
         int s = 30;
         tiles = new Tile[s];
@@ -219,21 +224,31 @@ public class Map {
 
         updateMapBorders_Simple();
 
-        
 
+ 
         for(int y=0; y<size; y++){
+            final int currentY = y;
             for(int x=0; x<size; x++){
-                ImageView img = getTile(world[y][x]);
+                final int currentX = x;
+                int tileIndex = world[y][x];
+                ImageView img = getTile(tileIndex);
+
+                if(tileIndex == 20){
+                    img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            System.out.println("Tile pressed ");
+                            handleClick(currentX, currentY);
+                            event.consume();
+                        }
+                    });
+                }
+
+
                 tilePane.getChildren().add(img);
                 //tilePane.getChildren().add(new Weapon(x, y, null, null));
-                img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
-                    @Override
-                    public void handle(MouseEvent event) {
-                        System.out.println("Tile pressed ");
-                        event.consume();
-                    }
-               });
+                
             }
         }
 
