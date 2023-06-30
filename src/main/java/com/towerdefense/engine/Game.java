@@ -17,7 +17,6 @@ import javafx.util.Duration;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.Pane;
 
-import java.io.Serial;
 import java.util.List;
 
 /*
