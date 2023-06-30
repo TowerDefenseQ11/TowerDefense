@@ -1,5 +1,7 @@
 package com.towerdefense;
 
+import javafx.util.Duration;
+
 /*
  * store global settings
  */
@@ -15,6 +17,7 @@ public class Settings {
     public static double ENEMY_SPAWN_TIME = 6;
     public static double ENEMY_SLOW_DOWN_DISTANCE = 32;
     public static int ENEMY_MAX_HEALTH = 100;
+    public static final Duration FRAME_DURATION = Duration.millis(50);
 
     public static double WEAPON_MAX_SPEED = 2;
     public static double WEAPON_MAX_FORCE = 0.05;

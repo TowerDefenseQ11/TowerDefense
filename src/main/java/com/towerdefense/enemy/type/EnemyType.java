@@ -2,8 +2,8 @@ package com.towerdefense.enemy.type;
 
 public enum EnemyType {
 
-    ENEMY_1("Enemy1", 4.2, "EnemyTest.png",3,3,3),
-    ENEMY_2("Enemy2", 40, "EnemyTest.png",3,3,3);
+    ENEMY_1("Enemy1", 4.2, "EnemyTest.png",3,3,1),
+    ENEMY_2("Enemy2", 10, "EnemyTest.png",3,3,1);
 
     private final String displayName;
     private final double startHealth;

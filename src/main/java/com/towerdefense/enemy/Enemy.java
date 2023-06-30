@@ -8,6 +8,10 @@ import com.towerdefense.engine.HealthBar;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.engine.Vector2D;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -21,8 +25,7 @@ public class Enemy extends Pane {
     private Vector2D velocity;
     private Vector2D acceleration;
 
-    private Node view;
-    public ImageView imageView;
+    private ImageView view;
 
     // view dimensions
     private double width;
@@ -41,6 +44,8 @@ public class Enemy extends Pane {
     private double maxSpeed;
     private double health;
     private HealthBar healthBar;
+    private Image[] sprites = new Image[12];
+    private int currentImageIndex = 0;
 
 
     public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
@@ -66,12 +71,39 @@ public class Enemy extends Pane {
         setPrefSize(width, height);
         // add view to this node
         getChildren().add(view);
+        animateView();
         // add this node to layer
         layer.getChildren().add(this);
     }
 
-    public Node createView() {
-        return new ImageView(new Image(this.enemyType.getEnemyImage(), 64, 64, false, false));
+    private void animateView(){
+        sprites[0] = new Image("sprite_00.png");
+        sprites[1] = new Image("sprite_01.png");
+        sprites[2] = new Image("sprite_02.png");
+        sprites[3] = new Image("sprite_03.png");
+        sprites[4] = new Image("sprite_04.png");
+        sprites[5] = new Image("sprite_05.png");
+        sprites[6] = new Image("sprite_06.png");
+        sprites[7] = new Image("sprite_07.png");
+        sprites[8] = new Image("sprite_08.png");
+        sprites[9] = new Image("sprite_09.png");
+        sprites[10] = new Image("sprite_10.png");
+        sprites[11] = new Image("sprite_11.png");
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Settings.FRAME_DURATION, event -> {
+                    // Nächstes Bild anzeigen
+                    currentImageIndex = (currentImageIndex + 1) % sprites.length;
+                    view.setImage(sprites[currentImageIndex]);
+                })
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
+    public ImageView createView() {
+        //return new ImageView(new Image(this.enemyType.getEnemyImage(), 64, 64, false, false));
+        return new ImageView(new Image("sprite_00.png"));
     }
 
     public void applyForce(Vector2D force) {
@@ -175,8 +207,8 @@ public class Enemy extends Pane {
      * fit size and position to cell width
      */
     public void updateResponsiveSize() {
-        imageView.setFitWidth(Settings.getResponsiveTileWidth());
-        imageView.setFitHeight(Settings.getResponsiveTileWidth());
+        view.setFitWidth(Settings.getResponsiveTileWidth());
+        view.setFitHeight(Settings.getResponsiveTileWidth());
 
         this.width = Settings.getResponsiveTileWidth();
         this.height = Settings.getResponsiveTileWidth();
