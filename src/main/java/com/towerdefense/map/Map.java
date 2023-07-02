@@ -1,13 +1,9 @@
 package com.towerdefense.map;
 
-import com.towerdefense.engine.CreateWeaponPopup;
 import com.towerdefense.engine.Game;
-import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
-import com.towerdefense.enemy.Enemy;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.map.tile.Tile;
-import com.towerdefense.weapon.Weapon;
 import com.towerdefense.weapon.handler.WeaponHandler;
 
 import javafx.scene.image.Image;
@@ -16,8 +12,6 @@ import javafx.scene.image.ImageView;
 //import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.Pane;
-
-import java.lang.Math;
 
 import javafx.geometry.Pos;
 
@@ -62,11 +56,11 @@ public class Map {
         this.game = game;
 
         initTilemap();
-        drawMap(layerPane);
+        //drawMap(layerPane);
 
         
         //updateResponsiveSize();
-       
+        /* 
         this.layerPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
@@ -74,7 +68,7 @@ public class Map {
         this.layerPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
-        
+        */
        
     }
 

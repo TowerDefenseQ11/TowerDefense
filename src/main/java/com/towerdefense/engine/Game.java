@@ -55,7 +55,7 @@ public class Game {
     private Layer popupLayer;
 
     public Game(Pane layerPane) {
-        //Map tilemap = new Map(layerPane, this);
+        Map tilemap = new Map(layerPane, this);
 
         //create new game layer
         playfield = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
