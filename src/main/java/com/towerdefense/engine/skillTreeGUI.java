@@ -6,7 +6,7 @@ import javafx.scene.text.*;
 
 public class skillTreeGUI extends GUI{
 
-    public skillTreeGUI(Pane layerPane) {
+    public skillTreeGUI() {
         super();
     }
 

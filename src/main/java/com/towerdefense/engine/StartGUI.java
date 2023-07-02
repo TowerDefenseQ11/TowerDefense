@@ -82,7 +82,7 @@ public class StartGUI extends GUI
         skillTreeButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override public void handle(ActionEvent e)
             {
-                skillTreeGUI skillTree = new skillTreeGUI(GuiHandler.getLayerPane());
+                skillTreeGUI skillTree = new skillTreeGUI();
                 GuiHandler.switchGui(skillTree);
             }
         });

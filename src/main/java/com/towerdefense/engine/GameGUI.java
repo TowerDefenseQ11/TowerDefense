@@ -21,8 +21,7 @@ public class GameGUI extends GUI{
     }
 
     void drawGui(){
-        /* 
-        Map tilemap = new Map(GuiHandler.getLayerPane(), game);
+        //Map tilemap = new Map(GuiHandler.getLayerPane(), game);
         //game = new Game(GuiHandler.getLayerPane());
 
         Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -38,7 +37,6 @@ public class GameGUI extends GUI{
         money.setTranslateX(Settings.SCENE_WIDTH - 100);
         money.setTranslateY(35);
         GuiHandler.getLayerPane().getChildren().addAll(money);
-        */
     }
     
     public HealthBar getHealthBar(){
