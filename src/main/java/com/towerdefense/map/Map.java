@@ -60,7 +60,7 @@ public class Map {
 
         
         //updateResponsiveSize();
-        /* 
+        
         this.layerPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
@@ -68,7 +68,7 @@ public class Map {
         this.layerPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
-        */
+        
        
     }
 
@@ -217,7 +217,7 @@ public class Map {
         updateMapBorders_Simple();
 
 
-        
+        /* 
         for(int y=0; y<size; y++){
             final int currentY = y;
             for(int x=0; x<size; x++){
@@ -226,14 +226,14 @@ public class Map {
                 ImageView img = getTile(tileIndex);
 
                 if(tileIndex == 20){
-                    /*img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
                             System.out.println("Tile pressed ");
                             handleClick(currentX, currentY);
                             event.consume();
                         }
-                    });*/
+                    });
                 }
 
 
@@ -242,7 +242,9 @@ public class Map {
 
                 
             }
+            
         }
+        */
         
 
         /* 
