@@ -22,7 +22,7 @@ public class GameGUI extends GUI{
 
     void drawGui(){
         Map tilemap = new Map(GuiHandler.getLayerPane(), game);
-        game = new Game(GuiHandler.getLayerPane());
+        //game = new Game(GuiHandler.getLayerPane());
 
         Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         GuiHandler.getLayerPane().getChildren().addAll(topLayer);

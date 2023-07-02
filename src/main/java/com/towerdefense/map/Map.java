@@ -65,7 +65,7 @@ public class Map {
         drawMap(layerPane);
 
         
-        updateResponsiveSize();
+        //updateResponsiveSize();
        
         this.layerPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
