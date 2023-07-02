@@ -21,6 +21,7 @@ public class GameGUI extends GUI{
     }
 
     void drawGui(){
+        /* 
         Map tilemap = new Map(GuiHandler.getLayerPane(), game);
         //game = new Game(GuiHandler.getLayerPane());
 
@@ -30,14 +31,14 @@ public class GameGUI extends GUI{
 
         healthbar = new HealthBar(topLayer); 
         healthbar.setStartHealth(5);
-        /*
-        create money label
-        */
+
+        //create money label
         money = new Text("Money: "+Settings.MONEY);
         money.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 12));
         money.setTranslateX(Settings.SCENE_WIDTH - 100);
         money.setTranslateY(35);
         GuiHandler.getLayerPane().getChildren().addAll(money);
+        */
     }
     
     public HealthBar getHealthBar(){
