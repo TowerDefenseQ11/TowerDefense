@@ -56,7 +56,7 @@ public class Map {
         this.game = game;
 
         initTilemap();
-        //drawMap(layerPane);
+        drawMap(layerPane);
 
         
         //updateResponsiveSize();
@@ -217,7 +217,7 @@ public class Map {
         updateMapBorders_Simple();
 
 
- 
+        /* 
         for(int y=0; y<size; y++){
             final int currentY = y;
             for(int x=0; x<size; x++){
@@ -243,7 +243,8 @@ public class Map {
                 
             }
         }
-
+        */
+        
         /* 
         int targetIndex = 1;
         tilePane.getChildren().remove(targetIndex);
