@@ -56,11 +56,11 @@ public class Map {
         this.game = game;
 
         initTilemap();
-        drawMap(layerPane);
+        //drawMap(layerPane);
 
         
         //updateResponsiveSize();
-        
+        /* 
         this.layerPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
@@ -68,7 +68,7 @@ public class Map {
         this.layerPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
-        
+        */
        
     }
 
@@ -194,7 +194,6 @@ public class Map {
                 if(name != ""){
                     System.out.println(name);
                     tiles[i] = new Tile();
-                    //System.out.println(name);
                     tiles[i].image = new Image(name+".png", 64, 64, false, false);
                 }
             }
