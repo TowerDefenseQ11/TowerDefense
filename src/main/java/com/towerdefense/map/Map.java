@@ -93,7 +93,7 @@ public class Map {
         tiles = new Tile[s];
 
         try {
-            for(int i=0; i<s; i++){
+            for(int i=20; i<s; i++){
                 String name = "";
                 switch(i){
                     case 0: {
