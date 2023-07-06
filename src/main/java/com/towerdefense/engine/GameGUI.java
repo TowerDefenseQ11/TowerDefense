@@ -3,6 +3,9 @@ package com.towerdefense.engine;
 import com.towerdefense.Settings;
 import com.towerdefense.map.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -36,10 +39,41 @@ public class GameGUI extends GUI{
         money.setTranslateX(Settings.SCENE_WIDTH - 100);
         money.setTranslateY(35);
         GuiHandler.getLayerPane().getChildren().addAll(money);
+
+        /* 
+        //create dropdown menue
+        ObservableList<String> options = 
+        FXCollections.observableArrayList(
+        "Option 1",
+        "Option 2",
+        "End Game"
+        );
+        final ComboBox dropDownMenue = new ComboBox(options);
+        dropDownMenue.setTranslateX(550);
+        dropDownMenue.setTranslateY(0);
+
+
+        dropDownMenue.setOnAction(event -> {
+            String selectedOption = comboBox.getSelectionModel().getSelectedItem();
+            if (selectedOption.equals("Option 1")) {
+                // Aktion für Option 1
+                System.out.println("Option 1 ausgewählt");
+            } else if (selectedOption.equals("Option 2")) {
+                // Aktion für Option 2
+                System.out.println("Option 2 ausgewählt");
+            } else if (selectedOption.equals("Option 3")) {
+                // Aktion für Option 3
+                endGUI endGui = new endGUI();
+                GuiHandler.switch(endGui);
+            }
+        });
+        GuiHandler.getLayerPane().getChildren().addAll(dropDownMenue);
+        */
     }
+
     
     public HealthBar getHealthBar(){
-        return healthbar;
+       return healthbar;
     }
 
     public void updateMoney(){

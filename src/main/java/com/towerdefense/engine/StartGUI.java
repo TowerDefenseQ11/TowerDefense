@@ -64,6 +64,7 @@ public class StartGUI extends GUI
             /*
             create game with enemies and weapons
             */
+        
             GameGUI gameGUI = new GameGUI();
             GuiHandler.switchGui(gameGUI);
             }
@@ -82,16 +83,10 @@ public class StartGUI extends GUI
         skillTreeButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override public void handle(ActionEvent e)
             {
-                skillTreeGUI skillTree = new skillTreeGUI();
+                SkillTreeGUI skillTree = new SkillTreeGUI();
                 GuiHandler.switchGui(skillTree);
             }
         });
-        /*
-        style skillTreeButton
-        */
-        /*skillTreeButton.setFont();
-        startButton.setTranslate;
-        startButton.setTranslateY();*/
         
         this.getLayer().getChildren().addAll(startButton, skillTreeButton, title, text);
     }

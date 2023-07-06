@@ -8,9 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.*;
 
-public class endGUI extends GUI{
+public class EndGUI extends GUI{
 
-    public endGUI() {
+    public EndGUI() {
         super();
     }
 
@@ -20,9 +20,17 @@ public class endGUI extends GUI{
     {
         Text endText = new Text("Game Over");
         endText.setFont(Font.font("Arial", 20));
+        endText.setTranslateX(250);
+        endText.setTranslateY(200);
     
     
-        //Button startAgainButton = new Button("");
+        Button restartButton = new Button("Try Again");
+        restartButton.setFont(Font.font("Arial"));
+        restartButton.setTranslateX(0);
+        restartButton.setTranslateY(0);
+
+        
+
     }
     
            

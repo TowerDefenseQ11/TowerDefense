@@ -149,5 +149,16 @@ public class Game {
                         }));
         enemySpawnTimeline.setCycleCount(Timeline.INDEFINITE);
         enemySpawnTimeline.play();
+        
+    }
+    
+    public void endGame(double health)
+    {
+
+        if (health == 0)
+        {
+            EndGUI endGui = new EndGUI();
+            GuiHandler.switchGui(endGui);
+        }
     }
 }
