@@ -131,7 +131,7 @@ public class Game {
                         weapon.setShooting(false);
                     }
                 }
-                endGame(health);
+               endGame(health);
 
             }
         };
@@ -154,7 +154,7 @@ public class Game {
     
     public void endGame(double health)
     {
-        if (health == 0)
+        if (health <= 0)
         {
             EndGUI endGui = new EndGUI();
             GuiHandler.switchGui(endGui);
