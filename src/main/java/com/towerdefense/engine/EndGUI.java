@@ -29,8 +29,13 @@ public class EndGUI extends GUI{
         restartButton.setTranslateX(0);
         restartButton.setTranslateY(0);
 
-        
-
+        restartButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override public void handle(ActionEvent e)
+            {
+                StartGUI startGUI = new StartGUI();
+                GuiHandler.switchGui(startGUI);
+            }
+        });
     }
     
            

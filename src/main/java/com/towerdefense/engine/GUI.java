@@ -8,7 +8,7 @@ import javafx.scene.text.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-abstract class GUI{
+public abstract class GUI{
     private Layer layer;
 
     public GUI(){

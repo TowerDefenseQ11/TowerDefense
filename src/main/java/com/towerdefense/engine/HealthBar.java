@@ -12,9 +12,9 @@ import javafx.scene.paint.Color;
 public class HealthBar {
     private Rectangle background;
     private Rectangle foreground;
-    public double health;
+    public static double health;
     private int maxHealthPixel;
-    public double startHealth;
+    private double startHealth;
 
     public HealthBar(Layer guiLayer){ //healthbar for gui
         startHealth = 100;
@@ -68,4 +68,7 @@ public class HealthBar {
         foreground.setWidth(width);
     }
 
+    public static double getHealth(){
+        return health;
+    }
 }
