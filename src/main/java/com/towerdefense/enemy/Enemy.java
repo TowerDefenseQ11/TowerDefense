@@ -137,7 +137,6 @@ public class Enemy extends Pane {
         GUI currentGUI = GuiHandler.getGUI();
         if (currentGUI instanceof GameGUI) {
             GameGUI gameGUI = (GameGUI) currentGUI;
-            // Führen Sie hier die gewünschten Operationen mit dem GameGUI-Objekt durch
             HealthBar healthBar = gameGUI.getHealthBar();
             if (healthBar != null) {
                 healthBar.updateHealthBar();

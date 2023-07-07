@@ -24,7 +24,7 @@ public class GameGUI extends GUI{
     }
 
     void drawGui(){
-        game = new Game(GuiHandler.getLayerPane(), HealthBar.getHealth());
+        game = new Game(GuiHandler.getLayerPane(), healthbar.getHealth());
 
         Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         GuiHandler.getLayerPane().getChildren().addAll(topLayer);
