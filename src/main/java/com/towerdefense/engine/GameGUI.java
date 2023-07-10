@@ -6,18 +6,25 @@ import com.towerdefense.waves.WaveCallback;
 import com.towerdefense.waves.handler.WaveHandler;
 
 
-
+import com.towerdefense.waves.types.WaveTypes;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+
+import java.util.EventListener;
 
 //import javafx.scene.layout.Pane;
 
-public class GameGUI extends GUI{
+public class GameGUI extends GUI {
 
     private HealthBar healthbar;
     private Text money;
@@ -27,30 +34,49 @@ public class GameGUI extends GUI{
         super();
     }
 
-    void drawGui(){
-        game = new Game(GuiHandler.getLayerPane(), HealthBar.getHealth());
+    void drawGui() {
+        game = new Game(GuiHandler.getLayerPane());
 
         Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         GuiHandler.getLayerPane().getChildren().addAll(topLayer);
         topLayer.setPickOnBounds(false);
 
-        healthbar = new HealthBar(topLayer); 
+        healthbar = new HealthBar(topLayer);
         healthbar.setStartHealth(5);
 
         //create money label
-        money = new Text("Money: "+Settings.MONEY);
+        money = new Text("Money: " + Settings.MONEY);
         money.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 12));
         money.setTranslateX(Settings.SCENE_WIDTH - 100);
         money.setTranslateY(35);
         GuiHandler.getLayerPane().getChildren().addAll(money);
 
-        WaveHandler waveHandler = new WaveHandler();
-        waveHandler.changeWave(null, new WaveCallback<Boolean>() {
-           @Override
-           public void wave(Boolean done){
-            Text waveText = new Text(WaveHandler.CURRENT_WAVE.getName());
 
-           }
+        WaveHandler waveHandler = new WaveHandler();
+        waveHandler.changeWave(WaveTypes.WAVE_1, new WaveCallback<Boolean>() {
+            @Override
+            public void wave(Boolean done) {
+                System.out.println("TEXT ANIMATION DEBUG");
+                Text waveText = new Text(WaveHandler.CURRENT_WAVE.getName());
+                waveText.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 30));
+                waveText.setTranslateX(Settings.SCENE_WIDTH/2);
+                waveText.setTranslateY(Settings.SCENE_WIDTH/2);
+
+                FadeTransition fadeTransition = new FadeTransition(Duration.millis(3000), waveText);
+                fadeTransition.setFromValue(0.0);
+                fadeTransition.setToValue(1.0);
+                fadeTransition.setCycleCount(1);
+                fadeTransition.setAutoReverse(false);
+                fadeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+
+                    }
+                });
+                fadeTransition.play();
+                GuiHandler.getLayerPane().getChildren().addAll(waveText);
+            }
         });
 
 
@@ -85,12 +111,12 @@ public class GameGUI extends GUI{
         */
     }
 
-    
-    public HealthBar getHealthBar(){
-       return healthbar;
+
+    public HealthBar getHealthBar() {
+        return healthbar;
     }
 
-    public void updateMoney(){
-        money.setText("Money: "+Settings.MONEY);
+    public void updateMoney() {
+        money.setText("Money: " + Settings.MONEY);
     }
 }

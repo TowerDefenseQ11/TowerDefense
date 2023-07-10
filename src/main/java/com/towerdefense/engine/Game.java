@@ -115,7 +115,7 @@ public class Game {
                 if (GuiHandler.getGUI() instanceof GameGUI) {
                     GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
                     endGame(gameGUI.getHealthBar().getHealth());
-                }else if (GuiHandler.getGUI() instanceof EndGUI)
+                } else if (GuiHandler.getGUI() instanceof EndGUI)
                     return;
                 //move enemies smoothly
                 enemyManager.updateMove();
@@ -135,11 +135,6 @@ public class Game {
                         weapon.setShooting(false);
                     }
                 }
-<<<<<<< HEAD
-               endGame(health);
-=======
->>>>>>> fb324a0ed224ba43eaa9bee6f58ee953714604d7
-
             }
         };
 
@@ -158,16 +153,6 @@ public class Game {
         enemySpawnTimeline.play();
 
     }
-<<<<<<< HEAD
-    
-    public void endGame(double health)
-    {
-        if (health <= 0)
-        {
-            EndGUI endGui = new EndGUI();
-            GuiHandler.switchGui(endGui);
-=======
-
 
     public void endGame(double health) {
         if (health <= 0) {
@@ -175,7 +160,7 @@ public class Game {
             endGUI.drawGui();
             GuiHandler.switchGui(endGUI);
             System.out.println("END GUI");
->>>>>>> fb324a0ed224ba43eaa9bee6f58ee953714604d7
+
         }
     }
 }
