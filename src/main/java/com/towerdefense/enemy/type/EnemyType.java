@@ -2,20 +2,22 @@ package com.towerdefense.enemy.type;
 
 public enum EnemyType {
 
-    ENEMY_1("Enemy1", 4.2, "EnemyTest.png",3,3,1),
-    ENEMY_2("Enemy2", 10, "EnemyTest.png",3,3,1);
+    ENEMY_1("Enemy1", 4.2, "enemy_1", 4, 3,3,1),
+    ENEMY_2("Enemy2", 10, "enemy_2", 12, 3,3,1);
 
     private final String displayName;
     private final double startHealth;
     private final double startSpawnTime;
     private final double startForce;
     private final double startSpeed;
-    private final String enemyImage;
+    private final String enemyFolder;
+    private final int enemyImageCount;
 
-    EnemyType(String displayName, double startHealth, String enemyImage, double startSpawnTime, double startForce, double startSpeed) {
+    EnemyType(String displayName, double startHealth, String enemyFolder,  int enemyImageCount, double startSpawnTime, double startForce, double startSpeed) {
         this.displayName = displayName;
         this.startHealth = startHealth;
-        this.enemyImage = enemyImage;
+        this.enemyFolder = enemyFolder;
+        this.enemyImageCount = enemyImageCount;
         this.startSpawnTime = startSpawnTime;
         this.startSpeed = startSpeed;
         this.startForce = startForce;
@@ -37,8 +39,11 @@ public enum EnemyType {
         return startHealth;
     }
 
-    public String getEnemyImage() {
-        return enemyImage;
+    public String getEnemyFolder() {
+        return enemyFolder;
+    }
+    public int getEnemyImageCount() {
+        return enemyImageCount;
     }
 
     public String getDisplayName() {
