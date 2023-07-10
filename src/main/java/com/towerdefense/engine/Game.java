@@ -112,6 +112,11 @@ public class Game {
 
             @Override
             public void handle(long now) {
+                if (GuiHandler.getGUI() instanceof GameGUI) {
+                    GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+                    endGame(gameGUI.getHealthBar().getHealth());
+                }else if (GuiHandler.getGUI() instanceof EndGUI)
+                    return;
                 //move enemies smoothly
                 enemyManager.updateMove();
 
@@ -130,9 +135,6 @@ public class Game {
                         weapon.setShooting(false);
                     }
                 }
-
-                GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
-                endGame(gameGUI.getHealthBar().getHealth());
 
             }
         };
@@ -155,7 +157,7 @@ public class Game {
 
 
     public void endGame(double health) {
-        if (health == 0) {
+        if (health <= 0) {
             EndGUI endGUI = new EndGUI();
             endGUI.drawGui();
             GuiHandler.switchGui(endGUI);
