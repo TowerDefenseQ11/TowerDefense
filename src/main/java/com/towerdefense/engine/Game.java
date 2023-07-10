@@ -54,7 +54,7 @@ public class Game {
     private Layer playfield;
     private Layer popupLayer;
 
-    public Game(Pane layerPane, double health) {
+    public Game(Pane layerPane) {
         Map tilemap = new Map(layerPane, this);
 
         //create new game layer
@@ -85,7 +85,7 @@ public class Game {
 
 
         //start game loop
-        startGame(health);
+        startGame();
 
     }
 
@@ -105,7 +105,7 @@ public class Game {
         gameGUI.updateMoney();
     }
 
-    void startGame(double health) {
+    void startGame() {
 
         // start game
         AnimationTimer gameLoop = new AnimationTimer() {
@@ -130,7 +130,9 @@ public class Game {
                         weapon.setShooting(false);
                     }
                 }
-                endGame(GuiHandler.);
+
+                GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+                endGame(gameGUI.getHealthBar().getHealth());
 
             }
         };
