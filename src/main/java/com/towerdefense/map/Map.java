@@ -56,11 +56,11 @@ public class Map {
         this.game = game;
 
         initTilemap();
-        //drawMap(layerPane);
+        drawMap(layerPane);
 
         
-        //updateResponsiveSize();
-        /* 
+        updateResponsiveSize();
+
         this.layerPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
@@ -68,7 +68,7 @@ public class Map {
         this.layerPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             updateResponsiveSize();
         });
-        */
+
        
     }
 
@@ -216,7 +216,7 @@ public class Map {
         updateMapBorders_Simple();
 
 
-        /* 
+
         for(int y=0; y<size; y++){
             final int currentY = y;
             for(int x=0; x<size; x++){
@@ -243,7 +243,7 @@ public class Map {
             }
             
         }
-        */
+
         
 
         /* 

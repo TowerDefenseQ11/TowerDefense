@@ -54,7 +54,7 @@ public class Game {
     private Layer playfield;
     private Layer popupLayer;
 
-    public Game(Pane layerPane, double health) {
+    public Game(Pane layerPane) {
         Map tilemap = new Map(layerPane, this);
 
         //create new game layer
@@ -78,25 +78,24 @@ public class Game {
         weaponHandler.addWeapon(5, 6);
         weaponHandler.addWeapon(5, 7);
         */
-        
+
         popupLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(popupLayer);
         popupLayer.setPickOnBounds(false);
 
 
-
         //start game loop
-        startGame(health);
+        startGame();
 
     }
 
-    public void OpenCreateWeaponPopup(int x, int y){
+    public void OpenCreateWeaponPopup(int x, int y) {
         popupLayer.setPickOnBounds(true);
         popupLayer.getChildren().clear();
         CreateWeaponPopup popup = new CreateWeaponPopup(x, y, popupLayer, this);
     }
 
-    public void createWeapon(int x, int y){
+    public void createWeapon(int x, int y) {
         System.out.println(x + "; " + y);
         popupLayer.setPickOnBounds(false);
         popupLayer.getChildren().clear();
@@ -106,13 +105,18 @@ public class Game {
         gameGUI.updateMoney();
     }
 
-    void startGame(double health) {
+    void startGame() {
 
         // start game
         AnimationTimer gameLoop = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
+                if (GuiHandler.getGUI() instanceof GameGUI) {
+                    GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+                    endGame(gameGUI.getHealthBar().getHealth());
+                }else if (GuiHandler.getGUI() instanceof EndGUI)
+                    return;
                 //move enemies smoothly
                 enemyManager.updateMove();
 
@@ -124,14 +128,17 @@ public class Game {
                     Enemy target = enemyManager.getNearestEnemy(weapon.getLocation());
                     if (
                             target != null &&
-                            Vector2D.subtract(target.getLocation(), weapon.getLocation()).magnitude() < Settings.BULLET_MAX_DISTANCE
+                                    Vector2D.subtract(target.getLocation(), weapon.getLocation()).magnitude() < Settings.BULLET_MAX_DISTANCE
                     ) {
                         weapon.rotateTo(target.getLocation());
                     } else {
                         weapon.setShooting(false);
                     }
                 }
+<<<<<<< HEAD
                endGame(health);
+=======
+>>>>>>> fb324a0ed224ba43eaa9bee6f58ee953714604d7
 
             }
         };
@@ -149,8 +156,9 @@ public class Game {
                         }));
         enemySpawnTimeline.setCycleCount(Timeline.INDEFINITE);
         enemySpawnTimeline.play();
-        
+
     }
+<<<<<<< HEAD
     
     public void endGame(double health)
     {
@@ -158,6 +166,16 @@ public class Game {
         {
             EndGUI endGui = new EndGUI();
             GuiHandler.switchGui(endGui);
+=======
+
+
+    public void endGame(double health) {
+        if (health <= 0) {
+            EndGUI endGUI = new EndGUI();
+            endGUI.drawGui();
+            GuiHandler.switchGui(endGUI);
+            System.out.println("END GUI");
+>>>>>>> fb324a0ed224ba43eaa9bee6f58ee953714604d7
         }
     }
 }
