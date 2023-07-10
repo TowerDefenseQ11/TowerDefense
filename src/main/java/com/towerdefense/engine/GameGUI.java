@@ -2,6 +2,10 @@ package com.towerdefense.engine;
 
 import com.towerdefense.Settings;
 import com.towerdefense.map.Map;
+import com.towerdefense.waves.WaveCallback;
+import com.towerdefense.waves.handler.WaveHandler;
+
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +28,7 @@ public class GameGUI extends GUI{
     }
 
     void drawGui(){
-        game = new Game(GuiHandler.getLayerPane());
+        game = new Game(GuiHandler.getLayerPane(), HealthBar.getHealth());
 
         Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         GuiHandler.getLayerPane().getChildren().addAll(topLayer);
@@ -39,6 +43,16 @@ public class GameGUI extends GUI{
         money.setTranslateX(Settings.SCENE_WIDTH - 100);
         money.setTranslateY(35);
         GuiHandler.getLayerPane().getChildren().addAll(money);
+
+        WaveHandler waveHandler = new WaveHandler();
+        waveHandler.changeWave(null, new WaveCallback<Boolean>() {
+           @Override
+           public void wave(Boolean done){
+            Text waveText = new Text(WaveHandler.CURRENT_WAVE.getName());
+
+           }
+        });
+
 
         /* 
         //create dropdown menue
