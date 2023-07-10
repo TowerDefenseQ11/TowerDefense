@@ -1,7 +1,10 @@
 package com.towerdefense.waves.handler;
 
+import com.towerdefense.waves.WaveCallback;
 import com.towerdefense.waves.types.EnemySpawningGroup;
 import com.towerdefense.waves.types.WaveTypes;
+
+import java.lang.invoke.CallSite;
 
 public class WaveHandler {
 
@@ -11,7 +14,7 @@ public class WaveHandler {
 
      public static WaveTypes CURRENT_WAVE;
      private EnemySpawningGroup[] enemySpawningGroups;
-     private static double wavePercent;
+     private static double CURRENT_WAVE_PERCENT;
 
 
      public WaveHandler () {
@@ -20,10 +23,15 @@ public class WaveHandler {
          this.enemySpawningGroups = CURRENT_WAVE.getEnemySpawningGroups();
      }
 
+     private boolean waveIsFinished() {
+         return false;
+     }
+
      /*
       *  Updates the wave and changes
       */
-     public void changeWave(WaveTypes wave) {
+     public void changeWave(WaveTypes wave, WaveCallback<Boolean> waveCallback) {
+         waveCallback.done();
         CURRENT_WAVE = wave;
         this.enemySpawningGroups = CURRENT_WAVE.getEnemySpawningGroups();
      }
@@ -35,6 +43,6 @@ public class WaveHandler {
      *  Updates the percent of a wave;
      */
      public static void changePercent(double currentPercent) {
-         wavePercent = currentPercent;
+         CURRENT_WAVE_PERCENT = currentPercent;
      }
 }
