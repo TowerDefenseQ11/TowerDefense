@@ -31,7 +31,7 @@ public class WaveHandler {
       *  Updates the wave and changes
       */
      public void changeWave(WaveTypes wave, WaveCallback<Boolean> waveCallback) {
-         waveCallback.done();
+         waveCallback.wave(true);
         CURRENT_WAVE = wave;
         this.enemySpawningGroups = CURRENT_WAVE.getEnemySpawningGroups();
      }
