@@ -1,7 +1,11 @@
 package com.towerdefense.engine;
 
+import com.towerdefense.Settings;
 import com.towerdefense.map.Map;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 //import javafx.scene.layout.Pane;
 import javafx.scene.text.*;
 import javafx.event.ActionEvent;
@@ -44,32 +48,31 @@ public class StartGUI extends GUI
         /*
         create start button
         */
-        Button startButton = new Button("START");
 
-         /*
-        style button
-        */
-        startButton.setDefaultButton(false);
-        startButton.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 35));
+        String path = "/startGUI/play.png";
+        Image img = new Image(
+            this.getClass().getResourceAsStream(path), 
+            64, 64, false, false
+        );
+
+        var startButton = new ImageView(img);
+
+        startButton.setFitWidth(Settings.getResponsiveTileWidth());
+        startButton.setFitHeight(Settings.getResponsiveTileWidth());
+
         startButton.setTranslateX(225);
         startButton.setTranslateY(400);
-        
 
-        /*
-        start game when clicking on the button
-        */
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-        
-            /*
-            create game with enemies and weapons
-            */
-        
-            GameGUI gameGUI = new GameGUI();
-            GuiHandler.switchGui(gameGUI);
+        startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                GameGUI gameGUI = new GameGUI();
+                GuiHandler.switchGui(gameGUI);
             }
         });
-    
+
+
+
         
         
         Button skillTreeButton = new Button("Skill Tree");
