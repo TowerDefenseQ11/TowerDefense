@@ -1,6 +1,7 @@
 package com.towerdefense.engine;
 
 import com.towerdefense.Settings;
+import com.towerdefense.weapon.type.TowerType;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
@@ -29,14 +30,14 @@ public class CreateWeaponPopup {
 
         //setupImage("createWeapon", backgroundView, 0, 0);
 
-        setupImage("createWeapon", topView, 0, 1);
-        setupImage("createWeapon", rightView, 1, 0);
-        setupImage("createWeapon", bottomView, 0, -1);
-        setupImage("createWeapon", leftView, -1, 0);
+        setupImage("createWeapon", topView, 0, 1, TowerType.TOWER_1);
+        setupImage("createWeapon", rightView, 1, 0, TowerType.TOWER_2);
+        setupImage("createWeapon", bottomView, 0, -1, TowerType.TOWER_1);
+        setupImage("createWeapon", leftView, -1, 0, TowerType.TOWER_2);
         
     }
 
-    private void setupImage(String name, ImageView imgView, int offsetX, int offsetY){
+    private void setupImage(String name, ImageView imgView, int offsetX, int offsetY, TowerType towerType){
         String path = "/tower_popup/"+name+".png";
         Image img = new Image(
             this.getClass().getResourceAsStream(path), 
@@ -56,7 +57,7 @@ public class CreateWeaponPopup {
             @Override
             public void handle(MouseEvent event) {
                 //todo: add weapont type
-                createWeapon();
+                createWeapon(towerType);
                 event.consume();
             }
         });
@@ -64,8 +65,7 @@ public class CreateWeaponPopup {
         layer.getChildren().add(imgView);
     }
 
-    private void createWeapon(){
-        System.out.println("create wepon");
-        game.createWeapon(this.x, this.y);
+    private void createWeapon(TowerType towerType){
+        game.createWeapon(this.x, this.y, towerType);
     }
 }

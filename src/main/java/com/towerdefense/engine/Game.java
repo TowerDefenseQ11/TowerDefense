@@ -86,11 +86,11 @@ public class Game {
     }
 
     //todo: Put in Weapon Handler
-    public void createWeapon(int x, int y) {
+    public void createWeapon(int x, int y, TowerType towerType) {
         System.out.println(x + "; " + y);
         popupLayer.setPickOnBounds(false);
         popupLayer.getChildren().clear();
-        weaponHandler.addWeapon(x, y, TowerType.TOWER_2);
+        weaponHandler.addWeapon(x, y, towerType);
         Settings.MONEY -= Settings.TOWER_COST;
         GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
         gameGUI.updateMoney();

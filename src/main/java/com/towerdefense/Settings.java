@@ -14,7 +14,7 @@ public class Settings {
 
     public static double ENEMY_MAX_SPEED = 0.1;
     public static double ENEMY_MAX_FORCE = 0.001;
-    public static double ENEMY_SPAWN_TIME = 6;
+    public static double ENEMY_SPAWN_TIME = 10;
     public static double ENEMY_SLOW_DOWN_DISTANCE = 32;
     public static int ENEMY_MAX_HEALTH = 100;
     public static final Duration FRAME_DURATION = Duration.millis(50);

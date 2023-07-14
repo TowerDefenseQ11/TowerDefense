@@ -66,29 +66,36 @@ public class Weapon {
 
         //layer.getChildren().add(backgroundView);
         layer.getChildren().add(imageView);
-        animateView();
-
+        setupAnimation();
         spawnBullets();
+        playAnimation();
     }
 
-    private void animateView(){
+    private void setupAnimation(){
         String folderName = "/"+towerType.getTowerFolder()+"/";
-        int lastIndex = 4;
-        sprites = new Image[lastIndex];
+        sprites = new Image[towerType.getTowerImageCount()];
 
-        for(int i=0; i<lastIndex; i++){
+        for(int i=0; i<towerType.getTowerImageCount(); i++){
             String zero = i>=10 ? "" : "0";
             String path = folderName+"sprite_"+zero+i+".png";
             sprites[i] = new Image(
                 this.getClass().getResourceAsStream(path), 64, 64, false, false
             );
         }
+    }
 
+    private void playAnimation(){
         Timeline timeline = new Timeline(
                 new KeyFrame(Settings.FRAME_DURATION, event -> {
-                    // Nächstes Bild anzeigen
-                    currentImageIndex = (currentImageIndex + 1) % sprites.length;
-                    imageView.setImage(sprites[currentImageIndex]);
+                    if(isShooting){
+                        // load next frame
+                        currentImageIndex = (currentImageIndex + 1) % sprites.length;
+                        imageView.setImage(sprites[currentImageIndex]);
+
+                        if(currentImageIndex == towerType.getShootFrameIndex()){
+                            new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield, enemyManager);
+                        }
+                    }
                 })
         );
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -103,7 +110,7 @@ public class Weapon {
         Vector2D desired = Vector2D.subtract(target, location); 
         angle = desired.heading2D();
 
-        if(lastTarget != null){
+        /*if(lastTarget != null){
             desired.normalize();
             desired.multiply(maxSpeed);
             Vector2D steer = Vector2D.subtract(desired, velocity);
@@ -112,7 +119,7 @@ public class Weapon {
             velocity.add(steer);
             velocity.limit(maxSpeed);
             angle = velocity.heading2D();
-        }
+        }*/
 
         
         imageView.setRotate(Math.toDegrees(angle)+90);
@@ -138,8 +145,8 @@ public class Weapon {
                 if(!isShooting){
                     return;
                 }
+
                 
-                new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield, enemyManager);
             }
         }));
         bulletSpawnTimeline.setCycleCount(Timeline.INDEFINITE);
