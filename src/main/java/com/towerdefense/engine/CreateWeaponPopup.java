@@ -37,7 +37,11 @@ public class CreateWeaponPopup {
     }
 
     private void setupImage(String name, ImageView imgView, int offsetX, int offsetY){
-        Image img = new Image(name+".png", 64, 64, false, false);
+        String path = "/tower_popup/"+name+".png";
+        Image img = new Image(
+            this.getClass().getResourceAsStream(path), 
+            64, 64, false, false
+        );
 
         imgView = new ImageView(img);
 

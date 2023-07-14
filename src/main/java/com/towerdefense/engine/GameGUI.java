@@ -21,10 +21,9 @@ public class GameGUI extends GUI {
     }
 
     void drawGui() {
-        game = new Game(GuiHandler.getLayerPane());
+        game = new Game(this.getLayer());
 
         Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-        GuiHandler.getLayerPane().getChildren().addAll(topLayer);
         topLayer.setPickOnBounds(false);
 
         healthbar = new HealthBar(topLayer);
@@ -35,11 +34,11 @@ public class GameGUI extends GUI {
         money.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 12));
         money.setTranslateX(Settings.SCENE_WIDTH - 100);
         money.setTranslateY(35);
-        GuiHandler.getLayerPane().getChildren().addAll(money);
 
 
         WaveHandler waveHandler = new WaveHandler();
 
+        this.getLayer().getChildren().addAll(topLayer, money);
 
         /* 
         //create dropdown menue
@@ -70,6 +69,8 @@ public class GameGUI extends GUI {
         });
         GuiHandler.getLayerPane().getChildren().addAll(dropDownMenue);
         */
+
+
     }
 
 

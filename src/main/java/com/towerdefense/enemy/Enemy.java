@@ -40,7 +40,7 @@ public class Enemy extends Pane {
     private double maxSpeed;
     private double health;
     private HealthBar healthBar;
-    private Image[] sprites = new Image[12];
+    private Image[] sprites;
     private int currentImageIndex = 0;
 
     public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
@@ -72,18 +72,21 @@ public class Enemy extends Pane {
     }
 
     private void animateView(){
-        sprites[0] = new Image("sprite_00.png");
-        sprites[1] = new Image("sprite_01.png");
-        sprites[2] = new Image("sprite_02.png");
-        sprites[3] = new Image("sprite_03.png");
-        sprites[4] = new Image("sprite_04.png");
-        sprites[5] = new Image("sprite_05.png");
-        sprites[6] = new Image("sprite_06.png");
-        sprites[7] = new Image("sprite_07.png");
-        sprites[8] = new Image("sprite_08.png");
-        sprites[9] = new Image("sprite_09.png");
-        sprites[10] = new Image("sprite_10.png");
-        sprites[11] = new Image("sprite_11.png");
+        String folderName = "/"+enemyType.getEnemyFolder()+"/";
+        int lastIndex = enemyType.getEnemyImageCount();
+        sprites = new Image[lastIndex];
+
+        for(int i=0; i<lastIndex; i++){
+            String zero = i>=10 ? "" : "0";
+            String path = folderName+"sprite_"+zero+i+".png";
+            sprites[i] = new Image(
+                this.getClass().getResourceAsStream(path), 64, 64, false, false
+            );
+        }
+        
+       
+        
+        
 
         Timeline timeline = new Timeline(
                 new KeyFrame(Settings.FRAME_DURATION, event -> {
@@ -97,8 +100,14 @@ public class Enemy extends Pane {
     }
 
     public ImageView createView() {
-        //return new ImageView(new Image(this.enemyType.getEnemyImage(), 64, 64, false, false));
-        return new ImageView(new Image("sprite_00.png"));
+        String folderName = "/"+enemyType.getEnemyFolder()+"/";
+
+        String path = folderName+"sprite_00.png";
+        Image img = new Image(
+            this.getClass().getResourceAsStream(path), 64, 64, false, false
+        );
+        
+        return new ImageView(img);
     }
 
     public void applyForce(Vector2D force) {
@@ -126,21 +135,17 @@ public class Enemy extends Pane {
      * Move sprite towards next target
      */
     public void seek() {
-    if (posIndex >= mapPos.length) {
-        // End of path reached
-        GUI currentGUI = GuiHandler.getGUI();
-        if (currentGUI instanceof GameGUI) {
-            GameGUI gameGUI = (GameGUI) currentGUI;
+        if (posIndex >= mapPos.length) {
+            //end of path reached
+            GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
             HealthBar healthBar = gameGUI.getHealthBar();
-            if (healthBar != null) {
+            if(healthBar != null){
                 healthBar.updateHealthBar();
             }
             this.enemyHandler.destroyEnemy(this);
             return;
         }
-    }
     
-
         int x = mapPos[posIndex][0] * 64 + 32;
         int y = mapPos[posIndex][1] * 64 + 32;
 

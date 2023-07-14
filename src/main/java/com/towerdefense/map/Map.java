@@ -1,6 +1,10 @@
 package com.towerdefense.map;
 
 import com.towerdefense.engine.Game;
+
+import java.io.File;
+import java.io.IOException;
+
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.map.tile.Tile;
@@ -17,6 +21,17 @@ import javafx.geometry.Pos;
 
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
+
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.Comparator;
+import java.io.FilenameFilter;
+import java.nio.file.Paths;
+
+
 
 /*
  * create tilemap background with correct borders of path
@@ -92,7 +107,31 @@ public class Map {
         int s = 30;
         tiles = new Tile[s];
 
+        String subfolderPath = "/map";
         try {
+            Path resourceDir = Paths.get(this.getClass().getResource(subfolderPath).toURI());
+
+            int[] index = { 0 }; //array to fix error: local variable index defined in an enclosing scope must be final
+            // Iterate over all files in the subfolder
+            Files.walk(resourceDir, 1)
+                .filter(Files::isRegularFile)
+                .sorted(Comparator.comparing(Path::getFileName))
+                .forEachOrdered(file -> {
+                    try {
+                        // Load each image file
+                        Image image = new Image(file.toUri().toString());
+                        tiles[index[0]] = new Tile();
+                        tiles[index[0]].image = image;
+                        index[0] ++;
+                        System.out.println(file.toUri().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            
+
+        }catch (Exception e){}
+        /*try {
             for(int i=20; i<s; i++){
                 String name = "";
                 switch(i){
@@ -201,7 +240,9 @@ public class Map {
 
         }catch(Exception e){
             e.printStackTrace();
-        }
+        }*/
+
+
     }
 
     private void drawMap(Pane layerPane){
@@ -224,7 +265,7 @@ public class Map {
                 int tileIndex = world[y][x];
                 ImageView img = getTile(tileIndex);
 
-                if(tileIndex == 20){
+                if(tileIndex == 0){
                     img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
@@ -261,6 +302,7 @@ public class Map {
     }
 
     private ImageView getTile(int index){
+        System.out.println("tile index: "+index);
         return new ImageView(tiles[index].image);
     }
 
@@ -357,24 +399,24 @@ public class Map {
                     int top = getWorldTile(x, y-1);
 
                     if(left == 0 && right == 0){
-                        world[y][x] = 26; //botom top
+                        world[y][x] = 6; //botom top
                     }
                     else if(top == 0 && bottom == 0){
-                        world[y][x] = 25; //left right
+                        world[y][x] = 3; //left right
                     }
 
                     else if(bottom == 0 && right == 0){
-                        world[y][x] = 23; //left top
+                        world[y][x] = 4; //left top
                     }
                     else if(bottom == 0 && left == 0){
-                        world[y][x] = 24; //right top
+                        world[y][x] = 5; //right top
                     }
 
                     else if(top == 0 && left == 0){
-                        world[y][x] = 21; //bottom right
+                        world[y][x] = 2; //bottom right
                     }
                     else if(top == 0 && right == 0){
-                        world[y][x] = 22; //bottom left
+                        world[y][x] = 1; //bottom left
                     }
 
                 }
@@ -407,7 +449,7 @@ public class Map {
         for(int y=0; y<size; y++){
             for(int x=0; x<size; x++){
                 if(world[y][x] == 0){
-                    world[y][x] = 20;
+                    world[y][x] = 0;
                 }
             }
         }

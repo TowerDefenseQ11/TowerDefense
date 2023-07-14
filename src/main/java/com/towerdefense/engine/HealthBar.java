@@ -50,6 +50,7 @@ public class HealthBar {
     }
 
     public void setStartHealth(double startHealth) {
+        this.startHealth = startHealth;
         health = startHealth;
     }
 
