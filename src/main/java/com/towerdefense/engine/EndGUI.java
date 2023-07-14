@@ -36,6 +36,8 @@ public class EndGUI extends GUI{
                 GuiHandler.switchGui(startGUI);
             }
         });
+
+        this.getLayer().getChildren().addAll(endText, restartButton);
     }
     
            

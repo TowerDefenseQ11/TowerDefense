@@ -141,21 +141,17 @@ public class Enemy extends Pane {
      * Move sprite towards next target
      */
     public void seek() {
-    if (posIndex >= mapPos.length) {
-        // End of path reached
-        GUI currentGUI = GuiHandler.getGUI();
-        if (currentGUI instanceof GameGUI) {
-            GameGUI gameGUI = (GameGUI) currentGUI;
+        if (posIndex >= mapPos.length) {
+            //end of path reached
+            GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
             HealthBar healthBar = gameGUI.getHealthBar();
-            if (healthBar != null) {
+            if(healthBar != null){
                 healthBar.updateHealthBar();
             }
             this.enemyHandler.destroyEnemy(this);
             return;
         }
-    }
     
-
         int x = mapPos[posIndex][0] * 64 + 32;
         int y = mapPos[posIndex][1] * 64 + 32;
 
