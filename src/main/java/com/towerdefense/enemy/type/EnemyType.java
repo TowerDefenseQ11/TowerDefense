@@ -2,7 +2,7 @@ package com.towerdefense.enemy.type;
 
 public enum EnemyType {
 
-    ENEMY_1("Enemy1", 4.2, "enemy_1", 4, 3,3,1),
+    ENEMY_1("Enemy1", 4.2, "enemy_2", 4, 3,3,1),
     ENEMY_2("Enemy2", 10, "enemy_2", 12, 3,3,1);
 
     private final String displayName;

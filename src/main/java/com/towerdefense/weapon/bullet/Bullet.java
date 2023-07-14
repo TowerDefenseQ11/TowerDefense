@@ -4,6 +4,7 @@ import com.towerdefense.engine.Layer;
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.Enemy;
 import com.towerdefense.enemy.handler.EnemyHandler;
+import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.engine.Vector2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,7 +31,9 @@ public class Bullet {
         location = new Vector2D(x, y);
         startLocation = new Vector2D(x, y);
 
-        image = new Image("bullet.png", (int) Settings.getResponsiveTileWidth(), (int) Settings.getResponsiveTileWidth(), false, false);
+        image = new Image(
+            this.getClass().getResourceAsStream("/tower_1/bullet.png"),
+            (int) Settings.getResponsiveTileWidth(), (int) Settings.getResponsiveTileWidth(), false, false);
         imageView = new ImageView(image);
         imageView.relocate(x, y);
         imageView.setRotate(angle);

@@ -45,7 +45,7 @@ public class Enemy extends Pane {
     private double maxSpeed;
     private double health;
     private HealthBar healthBar;
-    private Image[] sprites = new Image[12];
+    private Image[] sprites;
     private int currentImageIndex = 0;
 
 
@@ -86,7 +86,7 @@ public class Enemy extends Pane {
             String zero = i>=10 ? "" : "0";
             String path = folderName+"sprite_"+zero+i+".png";
             sprites[i] = new Image(
-                this.getClass().getResourceAsStream(path)
+                this.getClass().getResourceAsStream(path), 64, 64, false, false
             );
         }
         
@@ -110,7 +110,7 @@ public class Enemy extends Pane {
 
         String path = folderName+"sprite_00.png";
         Image img = new Image(
-            this.getClass().getResourceAsStream(path)
+            this.getClass().getResourceAsStream(path), 64, 64, false, false
         );
         
         return new ImageView(img);

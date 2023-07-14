@@ -1,7 +1,6 @@
 package com.towerdefense.weapon;
 
 import java.util.Random;
-
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.weapon.bullet.Bullet;
@@ -14,6 +13,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 
 /*
@@ -37,6 +37,8 @@ public class Weapon {
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
 
     private int x, y;
+    private Image[] sprites;
+    private int currentImageIndex = 0;
 
 
     private EnemyHandler enemyManager;
@@ -51,20 +53,46 @@ public class Weapon {
 
         location = new Vector2D(x, y);
 
-        Image background = new Image("Tower1Base.png", 64, 64, false, false);
-        backgroundView = new ImageView(background);
-        backgroundView.relocate(x, y);
+        //Image background = null; new Image("Tower1Base.png", 64, 64, false, false);
+        //backgroundView = new ImageView(background);
+        //backgroundView.relocate(x, y);
 
-        image = new Image("Tower1Top.png", 64, 64, false, false); //weapon_1
+        image = new Image(
+            this.getClass().getResourceAsStream("/tower_1/sprite_00.png"),
+            64, 64, false, false); //weapon_1
         imageView = new ImageView(image);
         imageView.relocate(x, y);
         imageView.setRotate(angle);
 
-        layer.getChildren().add(backgroundView);
+        //layer.getChildren().add(backgroundView);
         layer.getChildren().add(imageView);
-        
+        animateView();
 
         spawnBullets();
+    }
+
+    private void animateView(){
+        String folderName = "/"+"tower_1"+"/";
+        int lastIndex = 4;
+        sprites = new Image[lastIndex];
+
+        for(int i=0; i<lastIndex; i++){
+            String zero = i>=10 ? "" : "0";
+            String path = folderName+"sprite_"+zero+i+".png";
+            sprites[i] = new Image(
+                this.getClass().getResourceAsStream(path), 64, 64, false, false
+            );
+        }
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Settings.FRAME_DURATION, event -> {
+                    // Nächstes Bild anzeigen
+                    currentImageIndex = (currentImageIndex + 1) % sprites.length;
+                    imageView.setImage(sprites[currentImageIndex]);
+                })
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
     /*
