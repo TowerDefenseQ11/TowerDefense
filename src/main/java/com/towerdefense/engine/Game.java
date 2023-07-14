@@ -3,11 +3,11 @@ package com.towerdefense.engine;
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.map.Map;
+import com.towerdefense.waves.handler.WaveHandler;
 import com.towerdefense.weapon.Weapon;
 import com.towerdefense.weapon.handler.WeaponHandler;
 import com.towerdefense.enemy.Enemy;
 import com.towerdefense.enemy.handler.EnemyHandler;
-import com.towerdefense.engine.CreateWeaponPopup;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -49,13 +49,14 @@ public class Game {
 
     };
 
-    private EnemyHandler enemyManager;
+    private EnemyHandler enemyHandler;
     private WeaponHandler weaponHandler;
     private Layer playfield;
     private Layer popupLayer;
+    public static WaveHandler waveHandler;
 
     public Game(Pane layerPane) {
-        Map tilemap = new Map(layerPane, this);
+        new Map(layerPane, this);
 
         //create new game layer
         playfield = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -63,38 +64,27 @@ public class Game {
         playfield.setPickOnBounds(false);
 
         //add first enemy
-        enemyManager = new EnemyHandler(playfield, mapPos);
-        enemyManager.addEnemy(EnemyType.ENEMY_1);
-
-        //add demo weapons
-        weaponHandler = new WeaponHandler(playfield, enemyManager);
-        /* 
-        weaponHandler.addWeapon(0, 5);
-        weaponHandler.addWeapon(1, 5);
-        weaponHandler.addWeapon(2, 5);
-        weaponHandler.addWeapon(3, 5);
-
-        weaponHandler.addWeapon(5, 5);
-        weaponHandler.addWeapon(5, 6);
-        weaponHandler.addWeapon(5, 7);
-        */
+        enemyHandler = new EnemyHandler(playfield, mapPos);
+        enemyHandler.addEnemy(EnemyType.ENEMY_1);
+        weaponHandler = new WeaponHandler(playfield, enemyHandler);
 
         popupLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(popupLayer);
         popupLayer.setPickOnBounds(false);
-
-
+        waveHandler = new WaveHandler();
         //start game loop
         startGame();
 
     }
 
-    public void OpenCreateWeaponPopup(int x, int y) {
+    //todo: Put in Weapon Handler
+    public void openCreateWeaponPopup(int x, int y) {
         popupLayer.setPickOnBounds(true);
         popupLayer.getChildren().clear();
         CreateWeaponPopup popup = new CreateWeaponPopup(x, y, popupLayer, this);
     }
 
+    //todo: Put in Weapon Handler
     public void createWeapon(int x, int y) {
         System.out.println(x + "; " + y);
         popupLayer.setPickOnBounds(false);
@@ -118,14 +108,14 @@ public class Game {
                 }else if (GuiHandler.getGUI() instanceof EndGUI)
                     return;
                 //move enemies smoothly
-                enemyManager.updateMove();
+                enemyHandler.updateMove();
 
                 //rotate all weapons 
                 List<Weapon> weapons = weaponHandler.getAllWeapons();
                 for (int i = 0; i < weapons.size(); i++) {
                     Weapon weapon = weapons.get(i);
                     //get nearest enemy of weapon to rotate to
-                    Enemy target = enemyManager.getNearestEnemy(weapon.getLocation());
+                    Enemy target = enemyHandler.getNearestEnemy(weapon.getLocation());
                     if (
                             target != null &&
                                     Vector2D.subtract(target.getLocation(), weapon.getLocation()).magnitude() < Settings.BULLET_MAX_DISTANCE
@@ -141,18 +131,17 @@ public class Game {
 
         gameLoop.start();
 
+
         Timeline enemySpawnTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(Settings.ENEMY_SPAWN_TIME),
+                new KeyFrame(Duration.millis(1000),
                         new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                //spawn new enemy
-                                enemyManager.addEnemy(EnemyType.ENEMY_2);
+                               waveHandler.handleSpawnOfEnemy(enemyHandler);
                             }
                         }));
         enemySpawnTimeline.setCycleCount(Timeline.INDEFINITE);
         enemySpawnTimeline.play();
-
     }
 
 

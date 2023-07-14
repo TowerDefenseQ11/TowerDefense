@@ -97,7 +97,7 @@ public class Map {
             //int x = (int) Math.round(Math.floor(event.getX() / Settings.getResponsiveTileWidth()) * Settings.getResponsiveTileWidth());
             //int y = (int) Math.round(Math.floor(event.getY() / Settings.getResponsiveTileWidth()) * Settings.getResponsiveTileWidth());
 
-            game.OpenCreateWeaponPopup(x, y);
+            game.openCreateWeaponPopup(x, y);
             
             //Weapon weapon = new Weapon(x, y, (Layer) layerPane.getChildren().get(1));
         }

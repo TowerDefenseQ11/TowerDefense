@@ -2,13 +2,8 @@ package com.towerdefense.enemy;
 
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.enemy.type.EnemyType;
-import com.towerdefense.engine.GUI;
-import com.towerdefense.engine.GameGUI;
-import com.towerdefense.engine.GuiHandler;
-import com.towerdefense.engine.HealthBar;
-import com.towerdefense.engine.Layer;
+import com.towerdefense.engine.*;
 import com.towerdefense.Settings;
-import com.towerdefense.engine.Vector2D;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -47,7 +42,6 @@ public class Enemy extends Pane {
     private HealthBar healthBar;
     private Image[] sprites;
     private int currentImageIndex = 0;
-
 
     public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
         this.enemyHandler = enemyHandler;
@@ -206,6 +200,7 @@ public class Enemy extends Pane {
         healthBar.updateHealthBar(health);
         if (health <= 0) {
             this.enemyHandler.destroyEnemy(this);
+            Game.waveHandler.handleDeathOfEnemy();
         }
     }
 
@@ -225,4 +220,5 @@ public class Enemy extends Pane {
         this.centerX = width / 2;
         this.centerY = height / 2;
     }
+
 }
