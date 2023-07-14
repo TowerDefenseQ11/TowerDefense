@@ -48,7 +48,6 @@ public class Enemy extends Pane {
     private Image[] sprites = new Image[12];
     private int currentImageIndex = 0;
 
-
     public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
         this.enemyHandler = enemyHandler;
         this.maxSpeed = enemyType.getStartSpeed();
@@ -220,4 +219,5 @@ public class Enemy extends Pane {
         this.centerX = width / 2;
         this.centerY = height / 2;
     }
+
 }
