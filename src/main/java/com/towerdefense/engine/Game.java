@@ -53,6 +53,7 @@ public class Game {
     private WeaponHandler weaponHandler;
     private Layer playfield;
     private Layer popupLayer;
+    public static WaveHandler waveHandler;
 
     public Game(Pane layerPane) {
         new Map(layerPane, this);
@@ -70,7 +71,7 @@ public class Game {
         popupLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(popupLayer);
         popupLayer.setPickOnBounds(false);
-
+        waveHandler = new WaveHandler();
         //start game loop
         startGame();
 
@@ -129,12 +130,13 @@ public class Game {
 
         gameLoop.start();
 
+
         Timeline enemySpawnTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(1),
+                new KeyFrame(Duration.millis(1000),
                         new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                               new WaveHandler().handleSpawnOfEnemy(enemyHandler);
+                               waveHandler.handleSpawnOfEnemy(enemyHandler);
                             }
                         }));
         enemySpawnTimeline.setCycleCount(Timeline.INDEFINITE);

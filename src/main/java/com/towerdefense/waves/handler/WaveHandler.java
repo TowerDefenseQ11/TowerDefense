@@ -8,6 +8,8 @@ import com.towerdefense.engine.GuiHandler;
 import com.towerdefense.waves.types.EnemySpawningGroup;
 import com.towerdefense.waves.types.WaveTypes;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.text.Font;
@@ -48,15 +50,21 @@ public class WaveHandler {
      *  Updates the wave and changes
      */
     public void changeWave(WaveTypes wave) {
-        CURRENT_WAVE = wave;
 
-        this.currentEnemySpawningGroups = CURRENT_WAVE.getEnemySpawningGroups();
-        for (EnemySpawningGroup enemySpawningGroup : this.currentEnemySpawningGroups) {
-            this.enemyCount += enemySpawningGroup.getAmount();
-        }
+        CURRENT_WAVE = wave;
+        currentEnemySpawningGroups = CURRENT_WAVE.getEnemySpawningGroups();
+        enemyCache = new HashMap<>();
+
         if (waveIsFinished())
             start();
-        this.enemyStartCount = enemyCount;
+
+        for (EnemySpawningGroup enemySpawningGroup : currentEnemySpawningGroups) {
+            enemyCount += enemySpawningGroup.getAmount();
+            enemyCache.put(enemySpawningGroup.getEnemyType(), enemySpawningGroup.getAmount());
+        }
+        enemyCount--;
+        enemyStartCount = enemyCount;
+
 
     }
 
@@ -67,7 +75,7 @@ public class WaveHandler {
         waveText.setTranslateX(Settings.SCENE_WIDTH / 2);
         waveText.setTranslateY(Settings.SCENE_WIDTH / 2);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(3000), waveText);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), waveText);
         fadeTransition.setFromValue(0.0);
         fadeTransition.setToValue(1.0);
         fadeTransition.setCycleCount(1);
@@ -88,54 +96,43 @@ public class WaveHandler {
         GuiHandler.getLayerPane().getChildren().addAll(waveText);
     }
 
-    double duration = 0;
+
+    long duration = 0;
 
     public void handleSpawnOfEnemy(EnemyHandler enemyHandler) {
         if (enemyCache == null)
             return;
 
-        ArrayList<EnemyType> enemyTypeCache = new ArrayList<>();
+        duration++;
         this.enemyCache.forEach((enemyType, integer) -> {
-            if (integer <= 0)
-                return;
-            enemyTypeCache.add(enemyType);
+            if (integer > 0) {
+                if (duration >= (enemyType.getStartSpawnTime())) {
+                    enemyCache.replace(enemyType, integer - 1);
+                    enemyHandler.addEnemy(enemyType);
+                    duration = 0L;
+                }
+            }
         });
-
-        if (enemyTypeCache.isEmpty()) {
-            return;
-        }
-
-        Random random = new Random();
-        int randomInt = random.nextInt(enemyTypeCache.size() - 1);
-        EnemyType enemyType = enemyTypeCache.get(randomInt);
-        int amount = enemyCache.get(enemyType);
-        this.duration = enemyType.getStartSpawnTime();
-
-        if (duration <= 0) {
-            enemyHandler.addEnemy(enemyType);
-            this.enemyCount--;
-        } else duration--;
-
-        this.enemyCache.put(enemyType, amount);
     }
 
     /*
      *  Updates the percent of a wave;
      */
     public boolean handleDeathOfEnemy() {
+        System.out.println("ENEMIES:" + this.enemyCount);
         if (!waveIsFinished()) {
             this.enemyCount--;
             CURRENT_WAVE_PERCENT = (double) this.enemyStartCount / enemyCount;
             return true;
         } else {
-            String nameOfWave = CURRENT_WAVE.getName();
+            String nameOfWave = CURRENT_WAVE.toString();
             int nextWave = 0;
             try {
                 nextWave = Integer.parseInt(nameOfWave.split("_")[1]);
             } catch (Exception e) {
                 System.out.println("Next wave not found because of name");
             }
-
+            nextWave++;
             if (nextWave != 0) {
                 WaveTypes waveTypes;
                 try {
