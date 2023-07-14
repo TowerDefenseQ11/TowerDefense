@@ -159,7 +159,6 @@ public class Game {
     public void endGame(double health) {
         if (health <= 0) {
             EndGUI endGUI = new EndGUI();
-            endGUI.drawGui();
             GuiHandler.switchGui(endGUI);
             System.out.println("END GUI");
         }
