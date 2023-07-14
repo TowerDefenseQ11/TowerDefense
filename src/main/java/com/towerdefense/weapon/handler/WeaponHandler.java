@@ -4,6 +4,7 @@ import com.towerdefense.Settings;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.weapon.Weapon;
+import com.towerdefense.weapon.type.TowerType;
 
 import java.util.List;
 import java.util.Random;
@@ -22,13 +23,13 @@ public class WeaponHandler {
         this.enemyManager = enemyManager;
     }
 
-    public void addWeapon(int x, int y) {
+    public void addWeapon(int x, int y, TowerType towerType) {
         // create sprite and add to layer
         //x *= 64;
         //y *= 64;
         x *= Settings.getResponsiveTileWidth();
         y *= Settings.getResponsiveTileWidth();
-        Weapon weapon = new Weapon(x, y, playfield, enemyManager);
+        Weapon weapon = new Weapon(x, y, playfield, enemyManager, towerType);
 
         // register vehicle
         allWeapons.add(weapon);

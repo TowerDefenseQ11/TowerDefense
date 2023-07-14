@@ -6,6 +6,7 @@ import com.towerdefense.map.Map;
 import com.towerdefense.waves.handler.WaveHandler;
 import com.towerdefense.weapon.Weapon;
 import com.towerdefense.weapon.handler.WeaponHandler;
+import com.towerdefense.weapon.type.TowerType;
 import com.towerdefense.enemy.Enemy;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import javafx.animation.KeyFrame;
@@ -89,7 +90,7 @@ public class Game {
         System.out.println(x + "; " + y);
         popupLayer.setPickOnBounds(false);
         popupLayer.getChildren().clear();
-        weaponHandler.addWeapon(x, y);
+        weaponHandler.addWeapon(x, y, TowerType.TOWER_2);
         Settings.MONEY -= Settings.TOWER_COST;
         GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
         gameGUI.updateMoney();

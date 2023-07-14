@@ -1,20 +1,23 @@
 package com.towerdefense.weapon;
 
-import java.util.Random;
 import com.towerdefense.Settings;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.weapon.bullet.Bullet;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.engine.Vector2D;
+import com.towerdefense.weapon.type.TowerType;
+
+import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+
+
 
 /*
  * TowerDefense weapon that destroys enemies
@@ -32,24 +35,21 @@ public class Weapon {
     private boolean isShooting;
     private Random random = new Random();
     private Timeline bulletSpawnTimeline;
-
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
-
     private int x, y;
     private Image[] sprites;
     private int currentImageIndex = 0;
-
-
     private EnemyHandler enemyManager;
+    private TowerType towerType;
 
-    public Weapon(int x, int y, Layer layer, EnemyHandler enemyManager){
+    public Weapon(int x, int y, Layer layer, EnemyHandler enemyManager, TowerType towerType){
         this.x = x;
         this.y = y;
-
         this.playerfield = layer;
         this.enemyManager = enemyManager;
-        damage = 10;
+        this.towerType = towerType;
+        this.damage = 10;
 
         location = new Vector2D(x, y);
 
@@ -58,7 +58,7 @@ public class Weapon {
         //backgroundView.relocate(x, y);
 
         image = new Image(
-            this.getClass().getResourceAsStream("/tower_1/sprite_00.png"),
+            this.getClass().getResourceAsStream("/"+towerType.getTowerFolder()+"/sprite_00.png"),
             64, 64, false, false); //weapon_1
         imageView = new ImageView(image);
         imageView.relocate(x, y);
@@ -72,7 +72,7 @@ public class Weapon {
     }
 
     private void animateView(){
-        String folderName = "/"+"tower_1"+"/";
+        String folderName = "/"+towerType.getTowerFolder()+"/";
         int lastIndex = 4;
         sprites = new Image[lastIndex];
 
