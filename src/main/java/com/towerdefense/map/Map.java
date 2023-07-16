@@ -35,6 +35,8 @@ import java.util.Random;
 import java.io.FilenameFilter;
 import java.nio.file.Paths;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*
@@ -69,6 +71,8 @@ public class Map {
 
     private Game game;
     private Random random = new Random();
+
+    private List<int[]> mapPosList;
 
 
     public Map(Pane layerPane, Game game){
@@ -185,7 +189,14 @@ public class Map {
         int maxX = Settings.SCENE_WIDTH / (int) Settings.getResponsiveTileWidth();
         int y = 5; //maxX / 2; //middle
         int lastDir = 0;
-        System.out.println("y: "+y);
+
+        int[] start = {-1, 4};
+
+        mapPosList = new ArrayList<>();
+        mapPosList.add(
+            start
+        );
+        
 
         //path.add(new Point(x, y));
         world[y][x] = 1;
@@ -220,8 +231,22 @@ public class Map {
             //path.add(new Point(x, y));
             world[y][x] = 1;
             world[y-direction][x] = 1;
+
+            int[] point1 = {x, y-direction};
+            mapPosList.add(
+                point1
+            );
+            int[] point2 = {x, y};
+            mapPosList.add(
+                point2
+            );
+        
         }
         world[y][x+1] = 1;
+        int[] pointEnd = {x+1, y};
+        mapPosList.add(
+            pointEnd
+        );
     }
 
     private void updateMapBorders_Simple(){
@@ -275,9 +300,9 @@ public class Map {
     private int getWorldTile(int x, int y){
         int tile = 0;
         if( 
-            x > 0 &&
+            x >= 0 &&
             x < size &&
-            y > 0 &&
+            y >= 0 &&
             y < size
 
         ){
@@ -335,4 +360,7 @@ public class Map {
         this.enemyHandler = enemyHandler;
     }
 
+    public List<int[]> getMapPosList(){
+        return mapPosList;
+    }
 }

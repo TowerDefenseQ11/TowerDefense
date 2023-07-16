@@ -25,31 +25,7 @@ import java.util.List;
  */
 public class Game {
 
-    private int[][] mapPos = { //path for enemies to follow 
-            {-1, 4},
-            {0, 4},
-            {1, 4},
-            {2, 4},
-            {3, 4},
-            {3, 3},
-            {3, 2},
-            {3, 1},
-            {4, 1},
-            {5, 1},
-            {6, 1},
-            {6, 2},
-            {6, 3},
-            {6, 4},
-            {6, 5},
-            {6, 6},
-            {6, 7},
-            {7, 7},
-            {8, 7},
-            {9, 7},
-            {10, 7},
-
-    };
-
+    private List<int[]> mapPosList;
     private EnemyHandler enemyHandler;
     private WeaponHandler weaponHandler;
     private Layer playfield;
@@ -61,7 +37,8 @@ public class Game {
     private int money = Settings.MONEY;
 
     public Game(Pane layerPane) {
-        new Map(layerPane, this);
+        Map map = new Map(layerPane, this);
+        this.mapPosList = map.getMapPosList();
 
         //create new game layer
         playfield = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -69,7 +46,7 @@ public class Game {
         playfield.setPickOnBounds(false);
 
         //add first enemy
-        enemyHandler = new EnemyHandler(playfield, mapPos);
+        enemyHandler = new EnemyHandler(playfield, mapPosList);
         enemyHandler.addEnemy(EnemyType.ENEMY_1);
         weaponHandler = new WeaponHandler(playfield, enemyHandler);
 

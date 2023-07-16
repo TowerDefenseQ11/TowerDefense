@@ -27,12 +27,12 @@ public class EnemyHandler {
     //fixes java.util.ConcurrentModificationException
     private CopyOnWriteArrayList<Enemy> allEnemies = new CopyOnWriteArrayList<Enemy>(); 
     private List<Enemy> synlist = Collections.synchronizedList( allEnemies ); 
-    private int[][] mapPos;
+    private List<int[]> mapPosList;
 
-    public EnemyHandler(Layer playfield, int[][] mapPos) {
+    public EnemyHandler(Layer playfield, List<int[]>  mapPosList) {
         // playfield for enemies
         this.playfield = playfield;
-        this.mapPos = mapPos;
+        this.mapPosList = mapPosList;
     }
 
     public void syncEnemies(){
@@ -82,7 +82,7 @@ public class EnemyHandler {
      */
     public void addEnemy(EnemyType enemyType) {
         // create sprite and add to layer
-        Enemy enemy = new Enemy(playfield, this, mapPos, enemyType);
+        Enemy enemy = new Enemy(playfield, this, mapPosList, enemyType);
 
         // register vehicle
         allEnemies.add(enemy);

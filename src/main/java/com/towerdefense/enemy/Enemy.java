@@ -3,6 +3,9 @@ package com.towerdefense.enemy;
 import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.engine.*;
+
+import java.util.List;
+
 import com.towerdefense.Settings;
 
 import javafx.animation.Animation;
@@ -30,7 +33,7 @@ public class Enemy extends Pane {
     private double centerY;
     private double radius;
     private double angle;
-    private int[][] mapPos;
+    private List<int[]> mapPosList;
     private int posIndex = 0;
     private Layer playerfield;
 
@@ -44,14 +47,14 @@ public class Enemy extends Pane {
     private int currentImageIndex = 0;
     private Timeline timeline;
 
-    public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
+    public Enemy(Layer layer, EnemyHandler enemyHandler, List<int[]> mapPosList, EnemyType enemyType) {
         this.enemyHandler = enemyHandler;
         this.maxSpeed = enemyType.getStartSpeed();
         this.maxForce = enemyType.getStartForce();
         this.enemyType = enemyType;
-        this.mapPos = mapPos;
+        this.mapPosList = mapPosList;
         this.playerfield = layer;
-        this.location = new Vector2D(mapPos[0][0] * 64 + 32, mapPos[0][1] * 64 + 32);
+        this.location = new Vector2D(mapPosList.get(0)[0] * 64 + 32, mapPosList.get(0)[1] * 64 + 32);
         this.velocity = new Vector2D(0, 0);
         this.acceleration = new Vector2D(0, 0);
         this.width = 50;
@@ -136,23 +139,23 @@ public class Enemy extends Pane {
      * Move sprite towards next target
      */
     public void seek() {
-        if (posIndex >= mapPos.length) {
+        if (posIndex >= mapPosList.size()) {
             //end of path reached
             if(!(GuiHandler.getGUI() instanceof GameGUI)){
                 return;
             }
 
             GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
-            HealthBar healthBar = gameGUI.getHealthBar();
-            if(healthBar != null){
-                healthBar.updateHealthBar();
+            HealthBar gameHealthBar = gameGUI.getHealthBar();
+            if(gameHealthBar != null){
+                gameHealthBar.updateHealthBar();
             }
             this.enemyHandler.destroyEnemy(this);
             return;
         }
     
-        int x = mapPos[posIndex][0] * 64 + 32;
-        int y = mapPos[posIndex][1] * 64 + 32;
+        int x = mapPosList.get(posIndex)[0] * 64 + 32;
+        int y = mapPosList.get(posIndex)[1] * 64 + 32;
 
         Vector2D target = new Vector2D(x, y);
         Vector2D desired = Vector2D.subtract(target, location);
