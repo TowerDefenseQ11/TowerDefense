@@ -1,19 +1,15 @@
 package com.towerdefense.enemy.handler;
 
 import com.towerdefense.enemy.type.EnemyType;
-import com.towerdefense.engine.GameGUI;
-import com.towerdefense.engine.GuiHandler;
-import com.towerdefense.engine.HealthBar;
+import com.towerdefense.engine.Game;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.engine.Vector2D;
 import com.towerdefense.enemy.Enemy;
-import javafx.scene.Scene;
 
 import java.util.Collections;
 import java.util.Random;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Iterator; 
 import java.util.concurrent.CopyOnWriteArrayList; 
 
@@ -28,11 +24,13 @@ public class EnemyHandler {
     private CopyOnWriteArrayList<Enemy> allEnemies = new CopyOnWriteArrayList<Enemy>(); 
     private List<Enemy> synlist = Collections.synchronizedList( allEnemies ); 
     private List<int[]> mapPosList;
+    private Game game;
 
-    public EnemyHandler(Layer playfield, List<int[]>  mapPosList) {
+    public EnemyHandler(Layer playfield, List<int[]>  mapPosList, Game game) {
         // playfield for enemies
         this.playfield = playfield;
         this.mapPosList = mapPosList;
+        this.game = game;
     }
 
     public void syncEnemies(){
@@ -149,6 +147,10 @@ public class EnemyHandler {
      */
     public void playEnemies(){
         allEnemies.forEach(Enemy::play);
+    }
+
+    public Game getGame(){
+        return game;
     }
 }
 

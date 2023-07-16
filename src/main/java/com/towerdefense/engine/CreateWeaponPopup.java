@@ -7,6 +7,10 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 /*
  * Creates a popup to select and create diffrent weapons at position (x, y) 
@@ -71,14 +75,27 @@ public class CreateWeaponPopup {
     }
 
     private void setupImage(String name, ImageView imgView, int offsetX, int offsetY, TowerType towerType){
-        imgView = createImage(name, imgView, offsetX, offsetY, 1);
+        /*imgView = createImage(name, imgView, offsetX, offsetY, 1);
         imgView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 createWeapon(towerType);
                 event.consume();
             }
-        });
+        });*/
+
+        var moneyLabel = new Text(""+towerType.getMoney());
+        moneyLabel.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 8));
+        moneyLabel.setTranslateX(
+            x*Settings.getResponsiveTileWidth() + offsetX*Settings.getResponsiveTileWidth() 
+            + 32 - 4
+        );
+        moneyLabel.setTranslateY(
+            y*Settings.getResponsiveTileWidth() + offsetY*Settings.getResponsiveTileWidth()
+            + 64 - 2
+        );
+        moneyLabel.setFill(Color.WHITE);
+        layer.getChildren().add(moneyLabel);
     }
 
     private void createWeapon(TowerType towerType){

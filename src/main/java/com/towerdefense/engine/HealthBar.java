@@ -56,13 +56,13 @@ public class HealthBar {
 
     public void updateHealthBar(){
         health--;
-        System.out.println(health + " / " + startHealth);
+        System.out.println(health + " / " + startHealth + " (game)");
         int width = (int) (health/startHealth * maxHealthPixel);
         foreground.setWidth(width);
     }
 
     public void updateHealthBar(double updateHealth){
-        System.out.println(health + " / " + startHealth);
+        System.out.println(health + " / " + startHealth + " (enemy)");
         health = updateHealth;
         int width = (int) (health/startHealth * maxHealthPixel);
         foreground.setWidth(width);

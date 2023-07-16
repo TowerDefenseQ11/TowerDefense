@@ -207,6 +207,7 @@ public class Enemy extends Pane {
         health -= hit;
         healthBar.updateHealthBar(health);
         if (health <= 0) {
+            enemyHandler.getGame().addMoney(enemyType.getMoney());
             this.enemyHandler.destroyEnemy(this);
             Game.waveHandler.handleDeathOfEnemy();
         }
@@ -233,8 +234,10 @@ public class Enemy extends Pane {
      * kill enemie: stop animation timeline
      */
     public void kill(){
+        System.out.println("kill enemy");
         timeline.stop();
         timeline = null;
+        this.enemyHandler.destroyEnemy(this);
     }
 
     /*

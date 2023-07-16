@@ -34,11 +34,12 @@ public class Game {
     private Timeline enemySpawnTimeline;
     private AnimationTimer gameLoop;
     private boolean isPlaying = true;
-    private int money = Settings.MONEY;
+    private int money;
 
     public Game(Pane layerPane) {
         Map map = new Map(layerPane, this);
         this.mapPosList = map.getMapPosList();
+        this.money = Settings.MONEY;
 
         //create new game layer
         playfield = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -46,7 +47,7 @@ public class Game {
         playfield.setPickOnBounds(false);
 
         //add first enemy
-        enemyHandler = new EnemyHandler(playfield, mapPosList);
+        enemyHandler = new EnemyHandler(playfield, mapPosList, this);
         enemyHandler.addEnemy(EnemyType.ENEMY_1);
         weaponHandler = new WeaponHandler(playfield, enemyHandler);
 
@@ -71,7 +72,7 @@ public class Game {
         System.out.println(x + "; " + y);
         hideTowerPopup();
         weaponHandler.addWeapon(x, y, towerType);
-        money -= towerType.getMoney();
+        this.money -= towerType.getMoney();
         GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
         gameGUI.updateMoney();
     }
@@ -192,6 +193,11 @@ public class Game {
     }
 
     public int getMoney(){
-        return money;
+        return this.money;
+    }
+    public void addMoney(int num){
+        this.money += num;
+        GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+        gameGUI.updateMoney();
     }
 }
