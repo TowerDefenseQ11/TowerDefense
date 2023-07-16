@@ -9,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -31,14 +33,17 @@ public class GameGUI extends GUI {
         Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         topLayer.setPickOnBounds(false);
 
+        var background = new Rectangle(0, 0, 250, 64);
+        background.setFill(Color.WHITE);
+
         healthbar = new HealthBar(topLayer);
         healthbar.setStartHealth(5);
 
         //create money label
         money = new Text("Money: " + game.getMoney());
         money.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 12));
-        money.setTranslateX(Settings.SCENE_WIDTH-240);
-        money.setTranslateY(35);
+        money.setTranslateX(64+32);
+        money.setTranslateY(35+16+8);
 
         var quitButton = createButton(
             "/GUI/gameGUI/quit.png", 
@@ -83,7 +88,7 @@ public class GameGUI extends GUI {
             }
         );
         
-        this.getLayer().getChildren().addAll(topLayer, money, quitButton, pauseButton);
+        this.getLayer().getChildren().addAll(background, topLayer, money, quitButton, pauseButton);
     }
 
 
