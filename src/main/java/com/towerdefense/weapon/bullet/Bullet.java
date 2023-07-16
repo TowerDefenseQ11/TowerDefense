@@ -32,7 +32,7 @@ public class Bullet {
         startLocation = new Vector2D(x, y);
 
         image = new Image(
-            this.getClass().getResourceAsStream("/tower_1/bullet.png"),
+            this.getClass().getResourceAsStream("/towers/tower_1/bullet.png"),
             (int) Settings.getResponsiveTileWidth(), (int) Settings.getResponsiveTileWidth(), false, false);
         imageView = new ImageView(image);
         imageView.relocate(x, y);
@@ -54,6 +54,9 @@ public class Bullet {
     }
 
     private void checkEnemy(){
+        if( enemyManager.getAllEnemies() == null)
+            return;
+            
         for(Enemy enemy : enemyManager.getAllEnemies()){
             /*if (imageView.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
                 //System.out.println("bullet hit enemy");
@@ -107,7 +110,10 @@ public class Bullet {
         }
     }
 
-    private void destroy(){
+    /*
+     * destroy bullet
+     */
+    public void destroy(){
         loop.stop();
         playerfield.getChildren().remove(imageView);
     }

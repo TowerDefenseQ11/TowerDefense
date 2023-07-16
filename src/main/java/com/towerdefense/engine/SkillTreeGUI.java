@@ -66,8 +66,7 @@ public class SkillTreeGUI extends GUI{
             create game with enemies and weapons
             */
         
-            GameGUI gameGUI = new GameGUI();
-            GuiHandler.switchGui(gameGUI);
+            GuiHandler.switchGui(new GameGUI());
             }
         });
 

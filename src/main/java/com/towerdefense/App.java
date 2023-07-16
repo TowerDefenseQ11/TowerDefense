@@ -36,8 +36,7 @@ public class App extends Application {
          //start & create Game
         //Game game = new Game(layerPane);
         GuiHandler.setLayerPane(layerPane);
-        StartGUI startGui = new StartGUI();
-        GuiHandler.switchGui(startGui);
+        GuiHandler.switchGui(new StartGUI());
 
     }
 

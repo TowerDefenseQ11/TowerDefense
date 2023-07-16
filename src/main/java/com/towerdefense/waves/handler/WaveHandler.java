@@ -7,6 +7,7 @@ import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.engine.GuiHandler;
 import com.towerdefense.waves.types.EnemySpawningGroup;
 import com.towerdefense.waves.types.WaveTypes;
+import javafx.scene.layout.Pane;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -34,9 +35,11 @@ public class WaveHandler {
     private int enemyCount;
     private int enemyStartCount;
     private HashMap<EnemyType, Integer> enemyCache;
+    private Pane layerPane;
 
 
-    public WaveHandler() {
+    public WaveHandler(Pane layerPane) {
+        this.layerPane = layerPane;
         CURRENT_WAVE = WaveTypes.WAVE_1;
         this.currentEnemySpawningGroups = CURRENT_WAVE.getEnemySpawningGroups();
         changeWave(CURRENT_WAVE);
@@ -93,7 +96,7 @@ public class WaveHandler {
             }
         });
         fadeTransition.play();
-        GuiHandler.getLayerPane().getChildren().addAll(waveText);
+        layerPane.getChildren().addAll(waveText);
     }
 
 

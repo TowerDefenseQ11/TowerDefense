@@ -20,6 +20,7 @@ public class CreateWeaponPopup {
     private ImageView rightView;
     private ImageView bottomView;
     private ImageView leftView;
+    private ImageView middleView;
     private Game game;
 
     public CreateWeaponPopup(int x, int y, Layer layer, Game game){
@@ -28,41 +29,56 @@ public class CreateWeaponPopup {
         this.layer = layer;
         this.game = game;
 
-        //setupImage("createWeapon", backgroundView, 0, 0);
-
+        setupImage("towerPopup", middleView, -1, -1);
         setupImage("createWeapon", topView, 0, 1, TowerType.TOWER_1);
         setupImage("createWeapon", rightView, 1, 0, TowerType.TOWER_2);
         setupImage("createWeapon", bottomView, 0, -1, TowerType.TOWER_1);
         setupImage("createWeapon", leftView, -1, 0, TowerType.TOWER_2);
+
         
     }
 
-    private void setupImage(String name, ImageView imgView, int offsetX, int offsetY, TowerType towerType){
-        String path = "/tower_popup/"+name+".png";
+    private ImageView createImage(String name, ImageView imgView, int offsetX, int offsetY, int sizeFaktor){
+        String path = "/GUI/gameGUI/towerPopup/"+name+".png";
         Image img = new Image(
             this.getClass().getResourceAsStream(path), 
-            64, 64, false, false
+            64*sizeFaktor, 64*sizeFaktor, false, false
         );
 
         imgView = new ImageView(img);
 
-        imgView.setFitWidth(Settings.getResponsiveTileWidth());
-        imgView.setFitHeight(Settings.getResponsiveTileWidth());
+        imgView.setFitWidth(Settings.getResponsiveTileWidth()*sizeFaktor);
+        imgView.setFitHeight(Settings.getResponsiveTileWidth()*sizeFaktor);
         imgView.relocate(
             x*Settings.getResponsiveTileWidth() + offsetX*Settings.getResponsiveTileWidth(), 
             y*Settings.getResponsiveTileWidth() + offsetY*Settings.getResponsiveTileWidth()
         );
 
+        layer.getChildren().add(imgView);
+
+        return imgView;
+    }
+
+    private void setupImage(String name, ImageView imgView, int offsetX, int offsetY){
+        imgView = createImage(name, imgView, offsetX, offsetY, 3);
         imgView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                //todo: add weapont type
+                game.hideTowerPopup();
+                event.consume();
+            }
+        });
+    }
+
+    private void setupImage(String name, ImageView imgView, int offsetX, int offsetY, TowerType towerType){
+        imgView = createImage(name, imgView, offsetX, offsetY, 1);
+        imgView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
                 createWeapon(towerType);
                 event.consume();
             }
         });
-
-        layer.getChildren().add(imgView);
     }
 
     private void createWeapon(TowerType towerType){

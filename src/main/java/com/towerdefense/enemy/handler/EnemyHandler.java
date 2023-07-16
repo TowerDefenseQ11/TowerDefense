@@ -128,6 +128,28 @@ public class EnemyHandler {
     public void updateResponsiveSize() {
         allEnemies.forEach(Enemy::updateResponsiveSize);
     }
+
+    /*
+     * kill all living enemies
+     */
+    public void killEnemies(){
+        allEnemies.forEach(Enemy::kill);
+        allEnemies = null;
+    }
+
+    /*
+     * stop all enemy timelines
+     */
+    public void pauseEnemies(){
+        allEnemies.forEach(Enemy::pause);
+    }
+
+    /*
+     * start all enemy timelines
+     */
+    public void playEnemies(){
+        allEnemies.forEach(Enemy::play);
+    }
 }
 
 

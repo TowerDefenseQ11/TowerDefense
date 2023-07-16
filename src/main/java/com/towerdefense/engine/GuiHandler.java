@@ -22,6 +22,7 @@ public class GuiHandler {
             Layer lastLayer = currentGUI.getLayer();
             layerPane.getChildren().remove(lastLayer);
         }
+        currentGUI = null;
         currentGUI = newGUI;
 
         Layer guiLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);

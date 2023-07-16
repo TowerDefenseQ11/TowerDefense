@@ -9,8 +9,8 @@ public class Settings {
 
     public static String TITLE = "Tower Defense";
     
-    public static double SCENE_WIDTH = 640;
-    public static double SCENE_HEIGHT = 640;
+    public static int SCENE_WIDTH = 640;
+    public static int SCENE_HEIGHT = 640;
 
     public static double ENEMY_MAX_SPEED = 0.1;
     public static double ENEMY_MAX_FORCE = 0.001;

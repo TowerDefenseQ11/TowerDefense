@@ -49,7 +49,7 @@ public class StartGUI extends GUI
         create start button
         */
 
-        String path = "/startGUI/play.png";
+        String path = "/GUI/startGUI/play.png";
         Image img = new Image(
             this.getClass().getResourceAsStream(path), 
             64, 64, false, false
@@ -60,14 +60,13 @@ public class StartGUI extends GUI
         startButton.setFitWidth(Settings.getResponsiveTileWidth());
         startButton.setFitHeight(Settings.getResponsiveTileWidth());
 
-        startButton.setTranslateX(225);
-        startButton.setTranslateY(400);
+        startButton.setTranslateX(Settings.SCENE_WIDTH/2 - Settings.getResponsiveTileWidth()/2);
+        startButton.setTranslateY(Settings.SCENE_HEIGHT/2 - Settings.getResponsiveTileWidth()/2);
 
         startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                GameGUI gameGUI = new GameGUI();
-                GuiHandler.switchGui(gameGUI);
+                GuiHandler.switchGui(new GameGUI());
             }
         });
 
@@ -86,8 +85,7 @@ public class StartGUI extends GUI
         skillTreeButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override public void handle(ActionEvent e)
             {
-                SkillTreeGUI skillTree = new SkillTreeGUI();
-                GuiHandler.switchGui(skillTree);
+                GuiHandler.switchGui(new SkillTreeGUI());
             }
         });
         

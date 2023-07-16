@@ -42,6 +42,7 @@ public class Enemy extends Pane {
     private HealthBar healthBar;
     private Image[] sprites;
     private int currentImageIndex = 0;
+    private Timeline timeline;
 
     public Enemy(Layer layer, EnemyHandler enemyHandler, int[][] mapPos, EnemyType enemyType) {
         this.enemyHandler = enemyHandler;
@@ -72,7 +73,7 @@ public class Enemy extends Pane {
     }
 
     private void animateView(){
-        String folderName = "/"+enemyType.getEnemyFolder()+"/";
+        String folderName = "/enemies/"+enemyType.getEnemyFolder()+"/";
         int lastIndex = enemyType.getEnemyImageCount();
         sprites = new Image[lastIndex];
 
@@ -88,7 +89,7 @@ public class Enemy extends Pane {
         
         
 
-        Timeline timeline = new Timeline(
+        timeline = new Timeline(
                 new KeyFrame(Settings.FRAME_DURATION, event -> {
                     // Nächstes Bild anzeigen
                     currentImageIndex = (currentImageIndex + 1) % sprites.length;
@@ -100,7 +101,7 @@ public class Enemy extends Pane {
     }
 
     public ImageView createView() {
-        String folderName = "/"+enemyType.getEnemyFolder()+"/";
+        String folderName = "/enemies/"+enemyType.getEnemyFolder()+"/";
 
         String path = folderName+"sprite_00.png";
         Image img = new Image(
@@ -137,6 +138,10 @@ public class Enemy extends Pane {
     public void seek() {
         if (posIndex >= mapPos.length) {
             //end of path reached
+            if(!(GuiHandler.getGUI() instanceof GameGUI)){
+                return;
+            }
+
             GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
             HealthBar healthBar = gameGUI.getHealthBar();
             if(healthBar != null){
@@ -221,4 +226,25 @@ public class Enemy extends Pane {
         this.centerY = height / 2;
     }
 
+    /*
+     * kill enemie: stop animation timeline
+     */
+    public void kill(){
+        timeline.stop();
+        timeline = null;
+    }
+
+    /*
+     * stop animation timeline
+     */
+    public void pause(){
+        timeline.pause();
+    }
+
+    /*
+     * start animation timeline
+     */
+    public void play(){
+        timeline.play();
+    }
 }
