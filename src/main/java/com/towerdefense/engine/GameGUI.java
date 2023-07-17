@@ -89,6 +89,9 @@ public class GameGUI extends GUI {
             }
         );
         
+        /*
+         * add objects to layer
+         */
         this.getLayer().getChildren().addAll(background, topLayer, money, quitButton, pauseButton);
     }
 

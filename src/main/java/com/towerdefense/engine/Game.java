@@ -134,7 +134,9 @@ public class Game {
         enemySpawnTimeline.play();
     }
 
-
+    /*
+     * end game when health is equal or below 0
+     */
     public void endGame(double health) {
         if (health <= 0) {
             GuiHandler.switchGui(new EndGUI());
@@ -195,6 +197,7 @@ public class Game {
     public int getMoney(){
         return this.money;
     }
+
     public void addMoney(int num){
         this.money += num;
         GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();

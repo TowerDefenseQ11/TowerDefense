@@ -1,5 +1,6 @@
 package com.towerdefense.engine;
 
+import com.towerdefense.Settings;
 import com.towerdefense.map.Map;
 
 import javafx.event.ActionEvent;
@@ -39,8 +40,8 @@ public class EndGUI extends GUI{
          * style restartButton
          */
         restartButton.setFont(Font.font("Arial",FontWeight.BOLD, 30));
-        restartButton.setTranslateX(225);
-        restartButton.setTranslateY(400);
+        restartButton.setTranslateX(Settings.SCENE_WIDTH / 3);
+        restartButton.setTranslateY(Settings.SCENE_HEIGHT / 1.5);
 
         /*
          * go back to StartGUI when clicking restartButton
@@ -58,7 +59,5 @@ public class EndGUI extends GUI{
          */
         this.getLayer().getChildren().addAll(endText, restartButton);
     }
-    
-           
 
 }

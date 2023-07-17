@@ -16,6 +16,9 @@ public class GuiHandler {
         layerPane = pane;
     }
     
+    /*
+     * remove current GUI & add new GUI
+     */
     public static void switchGui(GUI newGUI)
     {
         if(currentGUI != null){

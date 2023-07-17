@@ -36,8 +36,8 @@ public class StartGUI extends GUI
 
 
         /*
-        create start button
-        */
+         * create start button
+         */
         String path = "/GUI/startGUI/play.png";
         Image img = new Image(
             this.getClass().getResourceAsStream(path), 
@@ -75,8 +75,8 @@ public class StartGUI extends GUI
          *style skillTreeButton
          */
         skillTreeButton.setFont(Font.font("Arial", 20));
-        skillTreeButton.setTranslateX(400);
-        skillTreeButton.setTranslateY(550);
+        skillTreeButton.setTranslateX(Settings.SCENE_WIDTH / 1.25);
+        skillTreeButton.setTranslateY(Settings.SCENE_HEIGHT / 1.25);
 
         /*
          * show SkillTreeGUI when clicking SkillTreeButton
