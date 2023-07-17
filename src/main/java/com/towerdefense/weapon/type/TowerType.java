@@ -6,12 +6,12 @@ public enum TowerType {
     TOWER_2("Tower2", 20, "tower_2", 6, 5);
 
     private final String displayName;
-    private final double money;
+    private final int money;
     private final String towerFolder;
     private final int towerImageCount;
     private final int shootFrameIndex;
 
-    TowerType(String displayName, double money, String towerFolder, int towerImageCount, int shootFrameIndex){
+    TowerType(String displayName, int money, String towerFolder, int towerImageCount, int shootFrameIndex){
         this.displayName = displayName;
         this.money = money;
         this.towerFolder = towerFolder;
@@ -38,5 +38,9 @@ public enum TowerType {
      */
     public int getShootFrameIndex(){
         return shootFrameIndex;
+    }
+
+    public int getMoney(){
+        return money;
     }
 }

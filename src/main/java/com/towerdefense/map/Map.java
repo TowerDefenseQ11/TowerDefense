@@ -10,6 +10,7 @@ import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.map.tile.Tile;
 import com.towerdefense.weapon.handler.WeaponHandler;
 
+import javafx.scene.effect.Light.Point;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -26,11 +27,16 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 import java.io.FilenameFilter;
 import java.nio.file.Paths;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*
@@ -42,13 +48,13 @@ public class Map {
     private int size = 10;
     private int[][] world = {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
-        {0, 0, 0, 1, 0, 0, 1, 0, 0, 0},
-        {0, 0, 0, 1, 0, 0, 1, 0, 0, 0},
-        {1, 1, 1, 1, 0, 0, 1, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
@@ -64,12 +70,16 @@ public class Map {
     private String mapName = "pixel";
 
     private Game game;
+    private Random random = new Random();
+
+    private List<int[]> mapPosList;
 
 
     public Map(Pane layerPane, Game game){
         this.layerPane = layerPane;
         this.game = game;
 
+        generateRandomPath();
         initTilemap();
         drawMap(layerPane);
 
@@ -91,7 +101,7 @@ public class Map {
      * handle click event on map to create new towers ot upgrade existing towers
      */
     private void handleClick(int x, int y){
-        if (Settings.MONEY >= Settings.TOWER_COST) {
+        //if (Settings.MONEY >= Settings.TOWER_COST) {
             // Create a new tower and deduct the cost from the player's resources
             //Tower tower = new Tower((int) event.getX(), (int) event.getY());
             //int x = (int) Math.round(Math.floor(event.getX() / Settings.getResponsiveTileWidth()) * Settings.getResponsiveTileWidth());
@@ -100,11 +110,11 @@ public class Map {
             game.openCreateWeaponPopup(x, y);
             
             //Weapon weapon = new Weapon(x, y, (Layer) layerPane.getChildren().get(1));
-        }
+        //}
 
     }
     private void initTilemap(){
-        int s = 30;
+        int s = 7;
         tiles = new Tile[s];
 
         String subfolderPath = "/map";
@@ -119,7 +129,7 @@ public class Map {
                 .forEachOrdered(file -> {
                     try {
                         // Load each image file
-                        Image image = new Image(file.toUri().toString());
+                        Image image = new Image(file.toUri().toString(), 640, 640, false, false);
                         tiles[index[0]] = new Tile();
                         tiles[index[0]].image = image;
                         index[0] ++;
@@ -131,132 +141,14 @@ public class Map {
             
 
         }catch (Exception e){}
-        /*try {
-            for(int i=20; i<s; i++){
-                String name = "";
-                switch(i){
-                    case 0: {
-                        name = "a_empty";
-                        break;
-                    }
-                    case 1: {
-                        name = "a_path";
-                        break;
-                    }
-                    case 2: {
-                        name = "b_bottom";
-                        break;
-                    }
-                    case 3: {
-                        name = "b_left";
-                        break;
-                    }
-                    case 4: {
-                        name = "b_right";
-                        break;
-                    }
-                    case 5: {
-                        name = "b_top";
-                        break;
-                    }
-                    case 6: {
-                        name = "c_bottom_left";
-                        break;
-                    }
-                    case 7: {
-                        name = "c_bottom_right";
-                        break;
-                    }
-                    case 8: {
-                        name = "c_top_left";
-                        break;
-                    }
-                    case 9: {
-                        name = "c_top_right";
-                        break;
-                    }
-                    case 10: {
-                        name = "d_bottom_left";
-                        break;
-                    }
-                    case 11: {
-                        name = "d_bottom_right";
-                        break;
-                    }
-                    case 12: {
-                        name = "d_left_top";
-                        break;
-                    }
-                    case 13: {
-                        name = "d_right_top";
-                        break;
-                    }
-
-                    case 14: { //not used yet
-                        name = "simple_d_left_right";
-                        break;
-                    }
-
-
-
-                    case 20: {
-                        name = mapName+"_a_empty";
-                        break;
-                    }
-                    case 21: {
-                        name = mapName+"_d_bottom_right";
-                        break;
-                    }
-                    case 22: {
-                        name = mapName+"_d_bottom_left";
-                        break;
-                    }
-                    case 23: {
-                        name = mapName+"_d_left_top";
-                        break;
-                    }
-                    case 24: {
-                        name = mapName+"_d_right_top";
-                        break;
-                    }
-                    case 25: {
-                        name = mapName+"_d_left_right";
-                        break;
-                    }
-                    case 26: {
-                        name = mapName+"_d_top_bottom";
-                        break;
-                    }
-                    
-                    
-                }
-                if(name != ""){
-                    System.out.println(name);
-                    tiles[i] = new Tile();
-                    tiles[i].image = new Image(name+".png", 64, 64, false, false);
-                }
-            }
-            
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }*/
-
-
     }
 
     private void drawMap(Pane layerPane){
         tilePane = new TilePane();
         layerPane.getChildren().addAll(tilePane);
-        
-
-
         tilePane.setPrefColumns(size);
         tilePane.setPrefRows(size);
-
         updateMapBorders_Simple();
-
-
 
         for(int y=0; y<size; y++){
             final int currentY = y;
@@ -264,6 +156,7 @@ public class Map {
                 final int currentX = x;
                 int tileIndex = world[y][x];
                 ImageView img = getTile(tileIndex);
+                img.setSmooth(false);
 
                 if(tileIndex == 0){
                     img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -278,22 +171,9 @@ public class Map {
 
 
                 tilePane.getChildren().add(img);
-                //tilePane.getChildren().add(new Weapon(x, y, null, null));
-
-                
             }
             
         }
-
-        
-
-        /* 
-        int targetIndex = 1;
-        tilePane.getChildren().remove(targetIndex);
-        tilePane.getChildren().add(targetIndex, new Weapon(targetIndex, targetIndex, null, null));
-        */
-
-
 
         tilePane.setTileAlignment(Pos.TOP_LEFT);
         tilePane.setHgap(0);
@@ -302,84 +182,75 @@ public class Map {
     }
 
     private ImageView getTile(int index){
-        System.out.println("tile index: "+index);
         return new ImageView(tiles[index].image);
     }
 
-    private void updateMapBorders(){
-        if(tilePane == null){
-            return;
-        }
+    private void generateRandomPath() {
+        int x = 0;
+        int maxX = Settings.SCENE_WIDTH / (int) Settings.getResponsiveTileWidth();
+        int y = 5; //maxX / 2; //middle
+        int lastDir = 0;
 
-        for(int y=0; y<size; y++){
-            for(int x=0; x<size; x++){
-                
-                if(world[y][x] == 1){ //find each path cell
-                    //set neighbours
+        mapPosList = new ArrayList<>();
+        int[] start0 = {-1, y};
+        mapPosList.add(
+            start0
+        );
+        int[] start1 = {x, y};
+        mapPosList.add(
+            start1
+        );
+        
 
-                    int left = 0;
-                    int right = 0;
-                    int bottom = 0;
-                    int top = 0;
+        //path.add(new Point(x, y));
+        world[y][x] = 1;
 
-                    if(x > 0){
-                        left = world[y][x-1];
-                        if(left == 0)
-                            world[y][x-1] = 3;
-                    }
-                    
-
-                    if(x < size-1){
-                        right = world[y][x+1];
-                        if(right == 0)
-                            world[y][x+1] = 4;
-                    }
-                    
-
-                    if(y > 0){
-                        top = world[y-1][x];
-                        if(top == 0)
-                            world[y-1][x] = 5;
-                    }
-                    
-
-                    if(y < size-1){
-                        bottom = world[y+1][x];
-                        if(bottom == 0)
-                            world[y+1][x] = 2;
-                    }
-
-                    if(left==1 && top==1){
-                        //corner bottom right 7
-                        world[y+1][x+1] = 7;
-                        //corner top left 13
-                        world[y-1][x-1] = 13;
-                    }
-
-                    if(right==1 && top==1){
-                        //corner bottom left
-                        world[y+1][x-1] = 6;
-                        //corner top right 12
-                        world[y-1][x+1] = 12;
-                    }
-
-                    if(left==1 && bottom==1){
-                        //corner top right
-                        world[y-1][x+1] = 9;
-                        //corner bottom left 10
-                        world[y+1][x-1] = 10;
-                    }
-
-                    if(right==1 && bottom==1){
-                        //corner top left
-                        world[y-1][x-1] = 8;
-                        //corner bottom right 11
-                        world[y+1][x+1] = 11;
-                    }
+        while (x < maxX - 2) {
+            int direction = random.nextInt(3) - 1; // -1, 0, or 1
+            for (int i = 0; i < 15; i++) {
+                if(direction == 0){
+                    direction = random.nextInt(3) - 1;
                 }
-
             }
+
+            System.out.println(lastDir + " -> " + direction);
+           
+            if(lastDir != 0){ //lastDir=1; dir=-1
+                if(direction != lastDir){
+                    direction = 0; //smooth curves -> no "grouping" of tiles allowed
+                    System.out.println("dir=0");
+                }
+            }
+            
+            // Ensure the path stays within bounds
+            if (y+direction < 0 || y+direction >= maxX) {
+                direction=0;
+            } 
+
+            lastDir = direction;
+            
+            y += direction;
+            x += 1; //random.nextInt(2);
+            //x++;
+            //path.add(new Point(x, y));
+            world[y][x] = 1;
+            world[y-direction][x] = 1;
+
+            int[] point1 = {x, y-direction};
+            mapPosList.add(
+                point1
+            );
+            int[] point2 = {x, y};
+            mapPosList.add(
+                point2
+            );
+        
         }
+        world[y][x+1] = 1;
+        int[] pointEnd = {x+1, y};
+        mapPosList.add(
+            pointEnd
+        );
     }
 
     private void updateMapBorders_Simple(){
@@ -399,10 +270,10 @@ public class Map {
                     int top = getWorldTile(x, y-1);
 
                     if(left == 0 && right == 0){
-                        world[y][x] = 6; //botom top
+                        world[y][x] = 3;//6; //botom top
                     }
                     else if(top == 0 && bottom == 0){
-                        world[y][x] = 3; //left right
+                        world[y][x] = 6;//3; //left right
                     }
 
                     else if(bottom == 0 && right == 0){
@@ -433,9 +304,9 @@ public class Map {
     private int getWorldTile(int x, int y){
         int tile = 0;
         if( 
-            x > 0 &&
+            x >= 0 &&
             x < size &&
-            y > 0 &&
+            y >= 0 &&
             y < size
 
         ){
@@ -493,4 +364,7 @@ public class Map {
         this.enemyHandler = enemyHandler;
     }
 
+    public List<int[]> getMapPosList(){
+        return mapPosList;
+    }
 }

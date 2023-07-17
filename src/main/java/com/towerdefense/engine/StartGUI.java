@@ -35,19 +35,21 @@ public class StartGUI extends GUI
 
         /*
         create text under the button
+        */
         Text text = new Text("Press Enter to start");
 
+        /*
         style text
+        */
         text.setFont(Font.font("Arial", FontWeight.BOLD, 25));
         text.setTranslateX(175);
         text.setTranslateY(525);
-        */
 
         /*
         create start button
         */
 
-        String path = "/startGUI/play.png";
+        String path = "/GUI/startGUI/play.png";
         Image img = new Image(
             this.getClass().getResourceAsStream(path), 
             64, 64, false, false
@@ -58,22 +60,21 @@ public class StartGUI extends GUI
         startButton.setFitWidth(Settings.getResponsiveTileWidth());
         startButton.setFitHeight(Settings.getResponsiveTileWidth());
 
-        startButton.setTranslateX(225);
-        startButton.setTranslateY(400);
+        startButton.setTranslateX(Settings.SCENE_WIDTH/2 - Settings.getResponsiveTileWidth()/2);
+        startButton.setTranslateY(Settings.SCENE_HEIGHT/2 - Settings.getResponsiveTileWidth()/2);
 
         startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                GameGUI gameGUI = new GameGUI();
-                GuiHandler.switchGui(gameGUI);
+                GuiHandler.switchGui(new GameGUI());
             }
         });
 
-        /*
-        create skillTreeButton
-        */
-        Button skillTreeButton = new Button("Skill Tree");
 
+
+        
+        
+        Button skillTreeButton = new Button("Skill Tree");
         /* 
         style skillTreeButton
         */
@@ -81,18 +82,14 @@ public class StartGUI extends GUI
         skillTreeButton.setTranslateX(400);
         skillTreeButton.setTranslateY(550);
 
-        /*
-        switch to skillTreeGUI when clicking
-        */
         skillTreeButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override public void handle(ActionEvent e)
             {
-                SkillTreeGUI skillTree = new SkillTreeGUI();
-                GuiHandler.switchGui(skillTree);
+                GuiHandler.switchGui(new SkillTreeGUI());
             }
         });
         
-        this.getLayer().getChildren().addAll(startButton, skillTreeButton, title);
+        this.getLayer().getChildren().addAll(startButton, skillTreeButton, title, text);
     }
 
 }

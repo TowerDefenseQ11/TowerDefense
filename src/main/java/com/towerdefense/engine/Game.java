@@ -25,39 +25,21 @@ import java.util.List;
  */
 public class Game {
 
-    private int[][] mapPos = { //path for enemies to follow 
-            {-1, 4},
-            {0, 4},
-            {1, 4},
-            {2, 4},
-            {3, 4},
-            {3, 3},
-            {3, 2},
-            {3, 1},
-            {4, 1},
-            {5, 1},
-            {6, 1},
-            {6, 2},
-            {6, 3},
-            {6, 4},
-            {6, 5},
-            {6, 6},
-            {6, 7},
-            {7, 7},
-            {8, 7},
-            {9, 7},
-            {10, 7},
-
-    };
-
+    private List<int[]> mapPosList;
     private EnemyHandler enemyHandler;
     private WeaponHandler weaponHandler;
     private Layer playfield;
     private Layer popupLayer;
     public static WaveHandler waveHandler;
+    private Timeline enemySpawnTimeline;
+    private AnimationTimer gameLoop;
+    private boolean isPlaying = true;
+    private int money;
 
     public Game(Pane layerPane) {
-        new Map(layerPane, this);
+        Map map = new Map(layerPane, this);
+        this.mapPosList = map.getMapPosList();
+        this.money = Settings.MONEY;
 
         //create new game layer
         playfield = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
@@ -65,14 +47,14 @@ public class Game {
         playfield.setPickOnBounds(false);
 
         //add first enemy
-        enemyHandler = new EnemyHandler(playfield, mapPos);
+        enemyHandler = new EnemyHandler(playfield, mapPosList, this);
         enemyHandler.addEnemy(EnemyType.ENEMY_1);
         weaponHandler = new WeaponHandler(playfield, enemyHandler);
 
         popupLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         layerPane.getChildren().addAll(popupLayer);
         popupLayer.setPickOnBounds(false);
-        waveHandler = new WaveHandler();
+        waveHandler = new WaveHandler(layerPane);
         //start game loop
         startGame();
 
@@ -88,18 +70,25 @@ public class Game {
     //todo: Put in Weapon Handler
     public void createWeapon(int x, int y, TowerType towerType) {
         System.out.println(x + "; " + y);
-        popupLayer.setPickOnBounds(false);
-        popupLayer.getChildren().clear();
+        hideTowerPopup();
         weaponHandler.addWeapon(x, y, towerType);
-        Settings.MONEY -= Settings.TOWER_COST;
+        this.money -= towerType.getMoney();
         GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
         gameGUI.updateMoney();
+    }
+
+    /*
+     * hides tower popup
+     */
+    public void hideTowerPopup(){
+        popupLayer.setPickOnBounds(false);
+        popupLayer.getChildren().clear();
     }
 
     void startGame() {
 
         // start game
-        AnimationTimer gameLoop = new AnimationTimer() {
+        gameLoop = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
@@ -133,7 +122,7 @@ public class Game {
         gameLoop.start();
 
 
-        Timeline enemySpawnTimeline = new Timeline(
+        enemySpawnTimeline = new Timeline(
                 new KeyFrame(Duration.millis(1000),
                         new EventHandler<ActionEvent>() {
                             @Override
@@ -148,9 +137,67 @@ public class Game {
 
     public void endGame(double health) {
         if (health <= 0) {
-            EndGUI endGUI = new EndGUI();
-            GuiHandler.switchGui(endGUI);
-            System.out.println("END GUI");
+            GuiHandler.switchGui(new EndGUI());
         }
+    }
+
+    /*
+     * quit game: stop all timelines
+     */
+    public void quit(){
+        System.out.println("quit game");
+        gameLoop.stop();
+        gameLoop = null;
+
+        enemySpawnTimeline.stop();
+        enemySpawnTimeline = null;
+        
+        enemyHandler.killEnemies();
+        enemyHandler = null;
+        
+        weaponHandler.killTowers();
+        weaponHandler = null;
+    }
+
+    /*
+     * toggle pause and play game
+     */
+    public boolean pauseOrPlayButtonClicked(){
+        isPlaying = !isPlaying;
+        if(isPlaying){
+            play();
+        }else{
+            pause();
+        }
+        return isPlaying;
+    }
+
+    /*
+     * pause all animation timelines
+     */
+    private void pause(){
+        gameLoop.stop();
+        enemySpawnTimeline.pause();
+        enemyHandler.pauseEnemies();
+        weaponHandler.pauseTowers();
+    }
+
+    /*
+     * start all animation timelines
+     */
+    private void play(){
+        gameLoop.start();
+        enemySpawnTimeline.play();
+        enemyHandler.playEnemies();
+        weaponHandler.playTowers();
+    }
+
+    public int getMoney(){
+        return this.money;
+    }
+    public void addMoney(int num){
+        this.money += num;
+        GameGUI gameGUI = (GameGUI) GuiHandler.getGUI();
+        gameGUI.updateMoney();
     }
 }

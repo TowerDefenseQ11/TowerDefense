@@ -13,7 +13,7 @@ import java.io.IOException;
 import javafx.scene.layout.Pane;
 
 
-/**
+/*
  * Tower Defense JavaFX application
  */
 public class App extends Application {
@@ -32,16 +32,15 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-    
-         //start & create Game
-        //Game game = new Game(layerPane);
+        /*
+         * set StartGUI
+         */
         GuiHandler.setLayerPane(layerPane);
-        StartGUI startGui = new StartGUI();
-        GuiHandler.switchGui(startGui);
+        GuiHandler.switchGui(new StartGUI());
 
     }
 
-    
+
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }

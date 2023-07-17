@@ -50,4 +50,32 @@ public class WeaponHandler {
             weapon.updateResponsiveSize();
         });
     }
+
+    /*
+     * kill all towers
+     */
+    public void killTowers(){
+        allWeapons.forEach(weapon -> {
+            weapon.kill();
+        });
+        allWeapons = null;
+    }
+
+    /*
+     * pause all tower timelines
+     */
+    public void pauseTowers(){
+        allWeapons.forEach(weapon -> {
+            weapon.pause();
+        });
+    }
+
+    /*
+     * start all tower timelines
+     */
+    public void playTowers(){
+        allWeapons.forEach(weapon -> {
+            weapon.play();
+        });
+    }
 }

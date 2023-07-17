@@ -34,7 +34,6 @@ public class Weapon {
     private Layer playerfield;
     private boolean isShooting;
     private Random random = new Random();
-    private Timeline bulletSpawnTimeline;
     private double maxForce = Settings.WEAPON_MAX_FORCE;
     private double maxSpeed = Settings.WEAPON_MAX_SPEED;
     private int x, y;
@@ -42,6 +41,9 @@ public class Weapon {
     private int currentImageIndex = 0;
     private EnemyHandler enemyManager;
     private TowerType towerType;
+    private Timeline timeline;
+    private Timeline bulletSpawnTimeline;
+    private Bullet currentBullet;
 
     public Weapon(int x, int y, Layer layer, EnemyHandler enemyManager, TowerType towerType){
         this.x = x;
@@ -57,22 +59,20 @@ public class Weapon {
         //backgroundView = new ImageView(background);
         //backgroundView.relocate(x, y);
 
-        image = new Image(
-            this.getClass().getResourceAsStream("/"+towerType.getTowerFolder()+"/sprite_00.png"),
-            64, 64, false, false); //weapon_1
+        setupAnimation();
+        image = sprites[0];
         imageView = new ImageView(image);
         imageView.relocate(x, y);
         imageView.setRotate(angle);
 
         //layer.getChildren().add(backgroundView);
         layer.getChildren().add(imageView);
-        setupAnimation();
         spawnBullets();
         playAnimation();
     }
 
     private void setupAnimation(){
-        String folderName = "/"+towerType.getTowerFolder()+"/";
+        String folderName = "/towers/"+towerType.getTowerFolder()+"/";
         sprites = new Image[towerType.getTowerImageCount()];
 
         for(int i=0; i<towerType.getTowerImageCount(); i++){
@@ -85,7 +85,7 @@ public class Weapon {
     }
 
     private void playAnimation(){
-        Timeline timeline = new Timeline(
+        timeline = new Timeline(
                 new KeyFrame(Settings.FRAME_DURATION, event -> {
                     if(isShooting){
                         // load next frame
@@ -93,7 +93,7 @@ public class Weapon {
                         imageView.setImage(sprites[currentImageIndex]);
 
                         if(currentImageIndex == towerType.getShootFrameIndex()){
-                            new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield, enemyManager);
+                            currentBullet = new Bullet((int) location.x, (int) location.y, (int) Math.toDegrees(angle), playerfield, enemyManager);
                         }
                     }
                 })
@@ -170,6 +170,36 @@ public class Weapon {
         backgroundView.relocate(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
 
         location = new Vector2D(x*Settings.getResponsiveTileWidth(), y*Settings.getResponsiveTileWidth());
+    }
+
+    /*
+     * kill tower: stop all animation timelines
+     */
+    public void kill(){
+        timeline.stop();
+        timeline = null;
+        bulletSpawnTimeline.stop();
+        bulletSpawnTimeline = null;
+
+        if(currentBullet != null){
+            currentBullet.destroy();
+        }
+    }
+
+    /*
+     * pause tower and bullet animation timelines
+     */
+    public void pause(){
+        timeline.pause();
+        bulletSpawnTimeline.pause();
+    }
+
+    /*
+     * start tower and bullet animation timlines
+     */
+    public void play(){
+        timeline.play();
+        bulletSpawnTimeline.play();
     }
 
 }

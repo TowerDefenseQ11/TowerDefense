@@ -3,6 +3,13 @@ package com.towerdefense.engine;
 import com.towerdefense.Settings;
 
 import com.towerdefense.waves.handler.WaveHandler;
+
+import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -25,53 +32,64 @@ public class GameGUI extends GUI {
         Layer topLayer = new Layer(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         topLayer.setPickOnBounds(false);
 
+        var background = new Rectangle(0, 0, 250, 64);
+        background.setFill(Color.WHITE);
+
         healthbar = new HealthBar(topLayer);
         healthbar.setStartHealth(5);
 
         /*
-        create money label
-        */
-        money = new Text("Money: " + Settings.MONEY);
+         * create money label
+         */
+        money = new Text("Money: " + game.getMoney());
         money.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 12));
-        money.setTranslateX(Settings.SCENE_WIDTH - 100);
-        money.setTranslateY(35);
+        money.setTranslateX(64+32);
+        money.setTranslateY(35+16+8);
 
-
-        WaveHandler waveHandler = new WaveHandler();
-
-        this.getLayer().getChildren().addAll(topLayer, money);
-
-        /* 
-        //create dropdown menue
-        ObservableList<String> options = 
-        FXCollections.observableArrayList(
-        "Option 1",
-        "Option 2",
-        "End Game"
-        );
-        final ComboBox dropDownMenue = new ComboBox(options);
-        dropDownMenue.setTranslateX(550);
-        dropDownMenue.setTranslateY(0);
-
-
-        dropDownMenue.setOnAction(event -> {
-            String selectedOption = comboBox.getSelectionModel().getSelectedItem();
-            if (selectedOption.equals("Option 1")) {
-                // Aktion für Option 1
-                System.out.println("Option 1 ausgewählt");
-            } else if (selectedOption.equals("Option 2")) {
-                // Aktion für Option 2
-                System.out.println("Option 2 ausgewählt");
-            } else if (selectedOption.equals("Option 3")) {
-                // Aktion für Option 3
-                endGUI endGui = new endGUI();
-                GuiHandler.switch(endGui);
+        var quitButton = createButton(
+            "/GUI/gameGUI/quit.png", 
+            Settings.SCENE_WIDTH-80,
+            0,
+            new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    game.quit();
+                    game = null;
+                    GuiHandler.switchGui(new EndGUI());
+                }
             }
-        });
-        GuiHandler.getLayerPane().getChildren().addAll(dropDownMenue);
-        */
+        );
 
+        Image quitImg = new Image(
+            this.getClass().getResourceAsStream("/GUI/gameGUI/quit.png"), 
+            64, 64, false, false
+        );
+        Image playImg = new Image(
+            this.getClass().getResourceAsStream("/GUI/gameGUI/play.png"), 
+            64, 64, false, false
+        );
 
+        ImageView pauseButton = new ImageView(quitImg);
+        pauseButton.setFitWidth(Settings.getResponsiveTileWidth());
+        pauseButton.setFitHeight(Settings.getResponsiveTileWidth());
+        pauseButton.setTranslateX(Settings.SCENE_WIDTH-160);
+        pauseButton.setTranslateY(0);
+        pauseButton.addEventHandler(
+            MouseEvent.MOUSE_CLICKED, 
+            new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    boolean isPlaying = game.pauseOrPlayButtonClicked();
+                    if(isPlaying){
+                        pauseButton.setImage(quitImg);
+                    }else{
+                        pauseButton.setImage(playImg);
+                    }
+                }
+            }
+        );
+        
+        this.getLayer().getChildren().addAll(background, topLayer, money, quitButton, pauseButton);
     }
 
     public HealthBar getHealthBar() {
@@ -79,6 +97,22 @@ public class GameGUI extends GUI {
     }
 
     public void updateMoney() {
-        money.setText("Money: " + Settings.MONEY);
+        money.setText("Money: " + game.getMoney());
     }
+
+    private ImageView createButton(String imgPath, int x, int y, EventHandler<MouseEvent> event){
+        Image img = new Image(
+            this.getClass().getResourceAsStream(imgPath), 
+            64, 64, false, false
+        );
+        ImageView button = new ImageView(img);
+        button.setFitWidth(Settings.getResponsiveTileWidth());
+        button.setFitHeight(Settings.getResponsiveTileWidth());
+        button.setTranslateX(x);
+        button.setTranslateY(y);
+        button.addEventHandler(MouseEvent.MOUSE_CLICKED, event);
+
+        return button;
+
+    } 
 }

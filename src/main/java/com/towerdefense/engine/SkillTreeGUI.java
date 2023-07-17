@@ -14,27 +14,33 @@ public class SkillTreeGUI extends GUI{
 
     void drawGui(){
         /*
-         create title
+         * create title
          */
         Text title = new Text("Skill Tree");
+
         /*
-        style title
-        */
+         * style title
+         */
         title.setFont(Font.font("Arial",FontWeight.EXTRA_BOLD, 30));
         title.setTranslateX(250);
         title.setTranslateY(100);
 
+
         /*
-        create button
-        */
+         * create button
+         */
         Button backButton = new Button ("BACK");
+
         /*
-        style button
+         * style button
          */
         backButton.setFont(Font.font("Arial, 20"));
         backButton.setTranslateX(0);
         backButton.setTranslateY(0);
 
+        /*
+         * go back to startGUI when clicking backButton
+         */
         backButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override public void handle(ActionEvent e)
             {
@@ -43,34 +49,33 @@ public class SkillTreeGUI extends GUI{
             }
         });
 
-       /*
-        create start button
-        */
+
+        /*
+         * create start button
+         */
         Button startButton = new Button("START");
 
-         /*
-        style button
-        */
+        /*
+         * style button
+         */
         startButton.setDefaultButton(false);
         startButton.setFont(Font.font("Arial", 20));
         startButton.setTranslateX(550);
         startButton.setTranslateY(0);
         
         /*
-        start game when clicking on the button
-        */
+         * start game when clicking startButton
+         */
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-        
-            /*
-            create game with enemies and weapons
-            */
-        
-            GameGUI gameGUI = new GameGUI();
-            GuiHandler.switchGui(gameGUI);
+                GuiHandler.switchGui(new GameGUI());
             }
         });
 
+
+        /*
+         * add objects to layer
+         */
         this.getLayer().getChildren().addAll(title, backButton, startButton);
     }
     

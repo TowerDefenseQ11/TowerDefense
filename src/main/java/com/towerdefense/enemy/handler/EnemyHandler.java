@@ -1,19 +1,15 @@
 package com.towerdefense.enemy.handler;
 
 import com.towerdefense.enemy.type.EnemyType;
-import com.towerdefense.engine.GameGUI;
-import com.towerdefense.engine.GuiHandler;
-import com.towerdefense.engine.HealthBar;
+import com.towerdefense.engine.Game;
 import com.towerdefense.engine.Layer;
 import com.towerdefense.engine.Vector2D;
 import com.towerdefense.enemy.Enemy;
-import javafx.scene.Scene;
 
 import java.util.Collections;
 import java.util.Random;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Iterator; 
 import java.util.concurrent.CopyOnWriteArrayList; 
 
@@ -27,12 +23,14 @@ public class EnemyHandler {
     //fixes java.util.ConcurrentModificationException
     private CopyOnWriteArrayList<Enemy> allEnemies = new CopyOnWriteArrayList<Enemy>(); 
     private List<Enemy> synlist = Collections.synchronizedList( allEnemies ); 
-    private int[][] mapPos;
+    private List<int[]> mapPosList;
+    private Game game;
 
-    public EnemyHandler(Layer playfield, int[][] mapPos) {
+    public EnemyHandler(Layer playfield, List<int[]>  mapPosList, Game game) {
         // playfield for enemies
         this.playfield = playfield;
-        this.mapPos = mapPos;
+        this.mapPosList = mapPosList;
+        this.game = game;
     }
 
     public void syncEnemies(){
@@ -82,7 +80,7 @@ public class EnemyHandler {
      */
     public void addEnemy(EnemyType enemyType) {
         // create sprite and add to layer
-        Enemy enemy = new Enemy(playfield, this, mapPos, enemyType);
+        Enemy enemy = new Enemy(playfield, this, mapPosList, enemyType);
 
         // register vehicle
         allEnemies.add(enemy);
@@ -127,6 +125,32 @@ public class EnemyHandler {
      */
     public void updateResponsiveSize() {
         allEnemies.forEach(Enemy::updateResponsiveSize);
+    }
+
+    /*
+     * kill all living enemies
+     */
+    public void killEnemies(){
+        allEnemies.forEach(Enemy::kill);
+        allEnemies = null;
+    }
+
+    /*
+     * stop all enemy timelines
+     */
+    public void pauseEnemies(){
+        allEnemies.forEach(Enemy::pause);
+    }
+
+    /*
+     * start all enemy timelines
+     */
+    public void playEnemies(){
+        allEnemies.forEach(Enemy::play);
+    }
+
+    public Game getGame(){
+        return game;
     }
 }
 
