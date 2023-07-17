@@ -129,7 +129,7 @@ public class Map {
                 .forEachOrdered(file -> {
                     try {
                         // Load each image file
-                        Image image = new Image(file.toUri().toString());
+                        Image image = new Image(file.toUri().toString(), 640, 640, false, false);
                         tiles[index[0]] = new Tile();
                         tiles[index[0]].image = image;
                         index[0] ++;
@@ -156,6 +156,7 @@ public class Map {
                 final int currentX = x;
                 int tileIndex = world[y][x];
                 ImageView img = getTile(tileIndex);
+                img.setSmooth(false);
 
                 if(tileIndex == 0){
                     img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -190,11 +191,14 @@ public class Map {
         int y = 5; //maxX / 2; //middle
         int lastDir = 0;
 
-        int[] start = {-1, 4};
-
         mapPosList = new ArrayList<>();
+        int[] start0 = {-1, y};
         mapPosList.add(
-            start
+            start0
+        );
+        int[] start1 = {x, y};
+        mapPosList.add(
+            start1
         );
         
 

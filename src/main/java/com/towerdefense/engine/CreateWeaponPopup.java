@@ -34,10 +34,10 @@ public class CreateWeaponPopup {
         this.game = game;
 
         setupImage("towerPopup", middleView, -1, -1);
-        setupImage("createWeapon", topView, 0, 1, TowerType.TOWER_1);
-        setupImage("createWeapon", rightView, 1, 0, TowerType.TOWER_2);
-        setupImage("createWeapon", bottomView, 0, -1, TowerType.TOWER_1);
-        setupImage("createWeapon", leftView, -1, 0, TowerType.TOWER_2);
+        setupImage("towerSelectionTop", topView, -1, -1, TowerType.TOWER_1);
+        setupImage("towerSelectionRight", rightView, -1, -1, TowerType.TOWER_2);
+        setupImage("towerSelectionBottom", bottomView, -1, -1, TowerType.TOWER_1);
+        //setupImage("createWeapon", leftView, -1, 0, TowerType.TOWER_2);
 
         
     }
@@ -75,14 +75,14 @@ public class CreateWeaponPopup {
     }
 
     private void setupImage(String name, ImageView imgView, int offsetX, int offsetY, TowerType towerType){
-        /*imgView = createImage(name, imgView, offsetX, offsetY, 1);
+        imgView = createImage(name, imgView, offsetX, offsetY, 3);
         imgView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 createWeapon(towerType);
                 event.consume();
             }
-        });*/
+        });
 
         var moneyLabel = new Text(""+towerType.getMoney());
         moneyLabel.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 8));

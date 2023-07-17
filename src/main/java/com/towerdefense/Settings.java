@@ -15,7 +15,7 @@ public class Settings {
     public static double ENEMY_MAX_SPEED = 0.1;
     public static double ENEMY_MAX_FORCE = 0.001;
     public static double ENEMY_SPAWN_TIME = 10;
-    public static double ENEMY_SLOW_DOWN_DISTANCE = 32;
+    public static double ENEMY_SLOW_DOWN_DISTANCE = 1;
     public static int ENEMY_MAX_HEALTH = 100;
     public static final Duration FRAME_DURATION = Duration.millis(50);
 
@@ -36,7 +36,7 @@ public class Settings {
 
     public static void setResponsiveTileWidth(double width){
         responsiveTileWidth = width;
-        ENEMY_SLOW_DOWN_DISTANCE = width / 2;
+        //ENEMY_SLOW_DOWN_DISTANCE = width / 2;
 
     }
     public static double getResponsiveTileWidth(){

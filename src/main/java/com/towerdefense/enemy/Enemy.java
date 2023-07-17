@@ -4,6 +4,7 @@ import com.towerdefense.enemy.handler.EnemyHandler;
 import com.towerdefense.enemy.type.EnemyType;
 import com.towerdefense.engine.*;
 
+import java.io.Console;
 import java.util.List;
 
 import com.towerdefense.Settings;
@@ -47,6 +48,9 @@ public class Enemy extends Pane {
     private int currentImageIndex = 0;
     private Timeline timeline;
 
+    private ImageView debugDesiredPositionImgView1;
+    private ImageView debugDesiredPositionImgView2;
+
     public Enemy(Layer layer, EnemyHandler enemyHandler, List<int[]> mapPosList, EnemyType enemyType) {
         this.enemyHandler = enemyHandler;
         this.maxSpeed = enemyType.getStartSpeed();
@@ -54,13 +58,13 @@ public class Enemy extends Pane {
         this.enemyType = enemyType;
         this.mapPosList = mapPosList;
         this.playerfield = layer;
-        this.location = new Vector2D(mapPosList.get(0)[0] * 64 + 32, mapPosList.get(0)[1] * 64 + 32);
+        this.location = new Vector2D(mapPosList.get(0)[0] * 64, mapPosList.get(0)[1] * 64);
         this.velocity = new Vector2D(0, 0);
         this.acceleration = new Vector2D(0, 0);
         this.width = 50;
         this.height = 25;
-        this.centerX = width / 2;
-        this.centerY = height / 2;
+        this.centerX = 0; //width / 2;
+        this.centerY = 0; //height / 2;
 
         health = enemyType.getStartHealth();
         healthBar = new HealthBar(this);
@@ -73,6 +77,8 @@ public class Enemy extends Pane {
         animateView();
         // add this node to layer
         layer.getChildren().add(this);
+
+
     }
 
     private void animateView(){
@@ -107,6 +113,15 @@ public class Enemy extends Pane {
         String folderName = "/enemies/"+enemyType.getEnemyFolder()+"/";
 
         String path = folderName+"sprite_00.png";
+        Image img = new Image(
+            this.getClass().getResourceAsStream(path), 64, 64, false, false
+        );
+        
+        return new ImageView(img);
+    }
+
+    public ImageView createDebugImage() {
+        String path = "/towers/tower_1/bullet.png";
         Image img = new Image(
             this.getClass().getResourceAsStream(path), 64, 64, false, false
         );
@@ -153,9 +168,11 @@ public class Enemy extends Pane {
             this.enemyHandler.destroyEnemy(this);
             return;
         }
-    
-        int x = mapPosList.get(posIndex)[0] * 64 + 32;
-        int y = mapPosList.get(posIndex)[1] * 64 + 32;
+        
+        //x = index * 64 
+        int x = mapPosList.get(posIndex)[0] * (int) Settings.getResponsiveTileWidth();
+        //y = index * 64
+        int y = mapPosList.get(posIndex)[1] * (int) Settings.getResponsiveTileWidth();
 
         Vector2D target = new Vector2D(x, y);
         Vector2D desired = Vector2D.subtract(target, location);
@@ -164,12 +181,17 @@ public class Enemy extends Pane {
         double d = desired.magnitude();
         desired.normalize();
 
+        //debugDesiredPosition(location, target);
+
         // reached target
         if (d < Settings.ENEMY_SLOW_DOWN_DISTANCE) {
+            System.out.println(d + "<" + Settings.ENEMY_SLOW_DOWN_DISTANCE);
             posIndex++;
         } else {
             desired.multiply(maxSpeed);
         }
+
+    
 
         // The usual steering = desired - velocity
         Vector2D steer = Vector2D.subtract(desired, velocity);
@@ -177,12 +199,30 @@ public class Enemy extends Pane {
         applyForce(steer);
     }
 
+    private void debugDesiredPosition(Vector2D v1, Vector2D v2){
+        if(debugDesiredPositionImgView1 == null){
+            debugDesiredPositionImgView1 = createDebugImage();
+            playerfield.getChildren().add(debugDesiredPositionImgView1);
+        }
+         if(debugDesiredPositionImgView2 == null){
+            debugDesiredPositionImgView2 = createDebugImage();
+            playerfield.getChildren().add(debugDesiredPositionImgView2);
+        }
+
+        debugDesiredPositionImgView1.relocate(
+            v1.x, v1.y
+        );
+        debugDesiredPositionImgView2.relocate(
+            v2.x, v2.y
+        );
+    }
+
     /**
      * Update node position
      */
     public void display() {
         relocate(location.x - centerX, location.y - centerY);
-        setRotate(Math.toDegrees(angle));
+        view.setRotate(Math.toDegrees(angle));
     }
 
     public Vector2D getVelocity() {

@@ -123,7 +123,7 @@ public class Game {
 
 
         enemySpawnTimeline = new Timeline(
-                new KeyFrame(Duration.millis(1000),
+                new KeyFrame(Duration.millis(10),
                         new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
