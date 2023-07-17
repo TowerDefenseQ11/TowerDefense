@@ -88,12 +88,15 @@ Inheritance diagram for com.towerdefense.enemy.Enemy:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4d9f50514d75ba7d666998e1abfb1099"><td class="memItemLeft" align="right" valign="top"><a id="a4d9f50514d75ba7d666998e1abfb1099" name="a4d9f50514d75ba7d666998e1abfb1099"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Enemy</b> (<a class="el" href="classcom_1_1towerdefense_1_1engine_1_1Layer.html">Layer</a> layer, <a class="el" href="classcom_1_1towerdefense_1_1enemy_1_1handler_1_1EnemyHandler.html">EnemyHandler</a> enemyHandler, int[][] mapPos, <a class="el" href="enumcom_1_1towerdefense_1_1enemy_1_1type_1_1EnemyType.html">EnemyType</a> enemyType)</td></tr>
-<tr class="separator:a4d9f50514d75ba7d666998e1abfb1099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10dc0646a1e6e5987e5f85b0bcf8b863"><td class="memItemLeft" align="right" valign="top"><a id="a10dc0646a1e6e5987e5f85b0bcf8b863" name="a10dc0646a1e6e5987e5f85b0bcf8b863"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Enemy</b> (<a class="el" href="classcom_1_1towerdefense_1_1engine_1_1Layer.html">Layer</a> layer, <a class="el" href="classcom_1_1towerdefense_1_1enemy_1_1handler_1_1EnemyHandler.html">EnemyHandler</a> enemyHandler, List&lt; int[]&gt; mapPosList, <a class="el" href="enumcom_1_1towerdefense_1_1enemy_1_1type_1_1EnemyType.html">EnemyType</a> enemyType)</td></tr>
+<tr class="separator:a10dc0646a1e6e5987e5f85b0bcf8b863"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e7c0a563cd52c612a0c6574a6f7efe1"><td class="memItemLeft" align="right" valign="top"><a id="a9e7c0a563cd52c612a0c6574a6f7efe1" name="a9e7c0a563cd52c612a0c6574a6f7efe1"></a>
 ImageView&#160;</td><td class="memItemRight" valign="bottom"><b>createView</b> ()</td></tr>
 <tr class="separator:a9e7c0a563cd52c612a0c6574a6f7efe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e84e7c9a99c74664aded6e77c34c9e4"><td class="memItemLeft" align="right" valign="top"><a id="a6e84e7c9a99c74664aded6e77c34c9e4" name="a6e84e7c9a99c74664aded6e77c34c9e4"></a>
+ImageView&#160;</td><td class="memItemRight" valign="bottom"><b>createDebugImage</b> ()</td></tr>
+<tr class="separator:a6e84e7c9a99c74664aded6e77c34c9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff20ab1c42b25fd9227cef7afabcf4c2"><td class="memItemLeft" align="right" valign="top"><a id="aff20ab1c42b25fd9227cef7afabcf4c2" name="aff20ab1c42b25fd9227cef7afabcf4c2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>applyForce</b> (<a class="el" href="classcom_1_1towerdefense_1_1engine_1_1Vector2D.html">Vector2D</a> force)</td></tr>
 <tr class="separator:aff20ab1c42b25fd9227cef7afabcf4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +128,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>damage</b> (int hit)<
 <tr class="memitem:a98e38b4001feb8bf21a867df2c6c227e"><td class="memItemLeft" align="right" valign="top"><a id="a98e38b4001feb8bf21a867df2c6c227e" name="a98e38b4001feb8bf21a867df2c6c227e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateResponsiveSize</b> ()</td></tr>
 <tr class="separator:a98e38b4001feb8bf21a867df2c6c227e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e253b0b9390417ba24b887ca7ed9749"><td class="memItemLeft" align="right" valign="top"><a id="a1e253b0b9390417ba24b887ca7ed9749" name="a1e253b0b9390417ba24b887ca7ed9749"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>kill</b> ()</td></tr>
+<tr class="separator:a1e253b0b9390417ba24b887ca7ed9749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced894c576445e38f3dc66c76738700b"><td class="memItemLeft" align="right" valign="top"><a id="aced894c576445e38f3dc66c76738700b" name="aced894c576445e38f3dc66c76738700b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>pause</b> ()</td></tr>
+<tr class="separator:aced894c576445e38f3dc66c76738700b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c9074da01f24b4fef306ffdb7b419c6"><td class="memItemLeft" align="right" valign="top"><a id="a7c9074da01f24b4fef306ffdb7b419c6" name="a7c9074da01f24b4fef306ffdb7b419c6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>play</b> ()</td></tr>
+<tr class="separator:a7c9074da01f24b4fef306ffdb7b419c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5589a646aa0140216d861c3165b47bee" name="a5589a646aa0140216d861c3165b47bee"></a>
