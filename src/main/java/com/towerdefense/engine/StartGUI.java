@@ -16,39 +16,28 @@ public class StartGUI extends GUI
     public StartGUI(){
         super();
     }
+
     /*
-    show gui
-    */
+     *show gui
+     */
     public void drawGui()
     {
         /*
-        create title
-        */
+         * create title
+         */
         Text title = new Text("Tower Defense");
 
         /*
-        style title
-        */
+         *style title
+         */
         title.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 50));
         title.setTranslateX(110);
         title.setTranslateY(175);
 
-        /*
-        create text under the button
-        */
-        Text text = new Text("Press Enter to start");
-
-        /*
-        style text
-        */
-        text.setFont(Font.font("Arial", FontWeight.BOLD, 25));
-        text.setTranslateX(175);
-        text.setTranslateY(525);
 
         /*
         create start button
         */
-
         String path = "/GUI/startGUI/play.png";
         Image img = new Image(
             this.getClass().getResourceAsStream(path), 
@@ -60,9 +49,15 @@ public class StartGUI extends GUI
         startButton.setFitWidth(Settings.getResponsiveTileWidth());
         startButton.setFitHeight(Settings.getResponsiveTileWidth());
 
+        /*
+         * set location of startButton
+         */
         startButton.setTranslateX(Settings.SCENE_WIDTH/2 - Settings.getResponsiveTileWidth()/2);
         startButton.setTranslateY(Settings.SCENE_HEIGHT/2 - Settings.getResponsiveTileWidth()/2);
 
+        /*
+         * start Game & show GameGUI when clicking on the button
+         */
         startButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -71,17 +66,21 @@ public class StartGUI extends GUI
         });
 
 
-
-        
-        
+        /*
+         * create skillTreeButton
+         */           
         Button skillTreeButton = new Button("Skill Tree");
+
         /* 
-        style skillTreeButton
-        */
+         *style skillTreeButton
+         */
         skillTreeButton.setFont(Font.font("Arial", 20));
         skillTreeButton.setTranslateX(400);
         skillTreeButton.setTranslateY(550);
 
+        /*
+         * show SkillTreeGUI when clicking SkillTreeButton
+         */
         skillTreeButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override public void handle(ActionEvent e)
             {
@@ -89,7 +88,11 @@ public class StartGUI extends GUI
             }
         });
         
-        this.getLayer().getChildren().addAll(startButton, skillTreeButton, title, text);
+
+        /*
+         * add objects to layer
+         */
+        this.getLayer().getChildren().addAll(startButton, skillTreeButton, title);
     }
 
 }
