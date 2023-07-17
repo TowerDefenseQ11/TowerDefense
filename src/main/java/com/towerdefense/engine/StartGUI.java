@@ -35,15 +35,13 @@ public class StartGUI extends GUI
 
         /*
         create text under the button
-        */
         Text text = new Text("Press Enter to start");
 
-        /*
         style text
-        */
         text.setFont(Font.font("Arial", FontWeight.BOLD, 25));
         text.setTranslateX(175);
         text.setTranslateY(525);
+        */
 
         /*
         create start button
@@ -71,11 +69,11 @@ public class StartGUI extends GUI
             }
         });
 
-
-
-        
-        
+        /*
+        create skillTreeButton
+        */
         Button skillTreeButton = new Button("Skill Tree");
+
         /* 
         style skillTreeButton
         */
@@ -83,6 +81,9 @@ public class StartGUI extends GUI
         skillTreeButton.setTranslateX(400);
         skillTreeButton.setTranslateY(550);
 
+        /*
+        switch to skillTreeGUI when clicking
+        */
         skillTreeButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override public void handle(ActionEvent e)
             {
@@ -91,7 +92,7 @@ public class StartGUI extends GUI
             }
         });
         
-        this.getLayer().getChildren().addAll(startButton, skillTreeButton, title, text);
+        this.getLayer().getChildren().addAll(startButton, skillTreeButton, title);
     }
 
 }

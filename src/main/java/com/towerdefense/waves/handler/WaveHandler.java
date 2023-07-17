@@ -71,9 +71,9 @@ public class WaveHandler {
     private void start() {
         System.out.println("TEXT ANIMATION DEBUG");
         Text waveText = new Text(WaveHandler.CURRENT_WAVE.getName());
-        waveText.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 30));
-        waveText.setTranslateX(Settings.SCENE_WIDTH / 2);
-        waveText.setTranslateY(Settings.SCENE_WIDTH / 2);
+        waveText.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        waveText.setTranslateX(Settings.SCENE_WIDTH / 15);
+        waveText.setTranslateY(Settings.SCENE_WIDTH / 1.05);
 
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), waveText);
         fadeTransition.setFromValue(0.0);

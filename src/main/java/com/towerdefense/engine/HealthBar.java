@@ -40,7 +40,7 @@ public class HealthBar {
         guiLayer.getChildren().add(background);
 
 
-        foreground = new Rectangle(
+        foreground = new Rectangle( //fill of healthbar
             -16, 
             -8,
             maxHealthPixel, 5

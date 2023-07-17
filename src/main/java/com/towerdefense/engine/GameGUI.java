@@ -2,13 +2,12 @@ package com.towerdefense.engine;
 
 import com.towerdefense.Settings;
 
-
 import com.towerdefense.waves.handler.WaveHandler;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-//import javafx.scene.layout.Pane;
+import javafx.scene.layout.Pane;
 
 public class GameGUI extends GUI {
 
@@ -29,7 +28,9 @@ public class GameGUI extends GUI {
         healthbar = new HealthBar(topLayer);
         healthbar.setStartHealth(5);
 
-        //create money label
+        /*
+        create money label
+        */
         money = new Text("Money: " + Settings.MONEY);
         money.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 12));
         money.setTranslateX(Settings.SCENE_WIDTH - 100);
@@ -72,7 +73,6 @@ public class GameGUI extends GUI {
 
 
     }
-
 
     public HealthBar getHealthBar() {
         return healthbar;

@@ -19,15 +19,15 @@ public class EndGUI extends GUI{
     void drawGui()
     {
         Text endText = new Text("Game Over");
-        endText.setFont(Font.font("Arial", 20));
-        endText.setTranslateX(250);
+        endText.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 50));
+        endText.setTranslateX(175);
         endText.setTranslateY(200);
     
     
         Button restartButton = new Button("Try Again");
-        restartButton.setFont(Font.font("Arial"));
-        restartButton.setTranslateX(0);
-        restartButton.setTranslateY(0);
+        restartButton.setFont(Font.font("Arial",FontWeight.BOLD, 30));
+        restartButton.setTranslateX(225);
+        restartButton.setTranslateY(400);
 
         restartButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override public void handle(ActionEvent e)
